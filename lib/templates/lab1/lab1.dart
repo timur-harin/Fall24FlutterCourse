@@ -68,8 +68,10 @@ class LAb1HomePage extends StatelessWidget {
   }
 
   Widget exercise2() {
-    return const FlutterLogo(
-      size: 100,
+    return const Icon(
+      Icons.flutter_dash,
+      size: 200,
+      color: Colors.blueAccent,
     );
   }
 
