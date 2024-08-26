@@ -57,33 +57,82 @@ class LAb1HomePage extends StatelessWidget {
   }
 
   Widget exercise1() {
-    return const FlutterLogo(
-      size: 100,
-    );
+    return const Text("Hello Flutter!",
+        style: TextStyle(
+          fontSize: 40,
+          color: Colors.blueAccent,
+          fontWeight: FontWeight.w700,
+        ));
   }
 
   Widget exercise2() {
-    return const FlutterLogo(
-      size: 100,
+    return const Icon(
+      Icons.adb_outlined,
+      size: 60,
+      color: Colors.green
     );
   }
 
   Widget exercise3() {
     // Example for image from internet 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'
-    return const FlutterLogo(
-      size: 100,
+    return Container(
+      width: 200,
+      height: 200,
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: NetworkImage(
+              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+          ),
+          fit: BoxFit.fill,
+        ),
+      ),
     );
   }
 
   Widget exercise4() {
-    return const FlutterLogo(
-      size: 100,
+    return Center(
+      child: TextButton(
+          onPressed: () {
+            print('Pressed!');
+          },
+          child: const Text('press me pls')),
     );
   }
 
   Widget exercise5() {
-    return const FlutterLogo(
-      size: 100,
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(10.0),
+          margin: const EdgeInsets.all(10.0),
+          decoration: BoxDecoration(
+            color: Colors.purpleAccent,
+            border: Border.all(color: Colors.purple, width: 2.0),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          child: const Text(
+            'Home icon',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+            ),
+          ),
+        ),
+        Container(
+          padding: const EdgeInsets.all(10.0),
+          margin: const EdgeInsets.all(10.0),
+          decoration: BoxDecoration(
+            color: Colors.blueGrey,
+            border: Border.all(color: Colors.black26, width: 3.0),
+            borderRadius: BorderRadius.circular(30.0),
+          ),
+          child: const Icon(
+            Icons.home,
+            size: 40,
+            color: Colors.black26,
+          ),
+        ),
+      ],
     );
   }
 }
