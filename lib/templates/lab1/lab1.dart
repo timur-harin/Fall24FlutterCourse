@@ -21,7 +21,7 @@ class LAb1HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('Lab 1'),
+        title: const Text('Lab 1')
       ),
       body: myWidget(),
     );
@@ -57,33 +57,67 @@ class LAb1HomePage extends StatelessWidget {
   }
 
   Widget exercise1() {
-    return const FlutterLogo(
-      size: 100,
+    return const Text(
+      "Hello Flutter!",
+      style: TextStyle(
+        fontSize: 40,
+        color: Colors.red,
+        fontWeight: FontWeight.bold,
+      )
     );
   }
 
   Widget exercise2() {
-    return const FlutterLogo(
-      size: 100,
+    return const Icon(
+      Icons.star,
+      size: 48,
+      color: Colors.yellow,
     );
   }
 
   Widget exercise3() {
     // Example for image from internet 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'
-    return const FlutterLogo(
-      size: 100,
+    return Image.network(
+      'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+      width: 128,
+      height: 128
     );
   }
 
   Widget exercise4() {
-    return const FlutterLogo(
-      size: 100,
+    return ElevatedButton(
+      onPressed: () {
+        print("Pressed.");
+      },
+      child: Text('Click me'),
     );
   }
 
   Widget exercise5() {
-    return const FlutterLogo(
-      size: 100,
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(10), // add padding
+          margin: const EdgeInsets.all(10), // add margin
+          decoration: BoxDecoration( // add decoration
+            border: Border.all(width: 1),
+            color: Colors.lime,
+          ),
+          child: const Text('Hello'),
+        ),
+        Container(
+          padding: const EdgeInsets.all(10), // add padding
+          margin: const EdgeInsets.all(10), // add margin
+          decoration: BoxDecoration( // add decoration
+            border: Border.all(width: 1),
+            color: Colors.grey[200],
+          ),
+          child: const Icon(
+            Icons.star,
+            size: 32,
+            color: Colors.red),
+        ),
+      ],
     );
   }
 }
