@@ -87,8 +87,14 @@ class LAb1HomePage extends StatelessWidget {
   }
 
   Widget exercise4() {
-    return const FlutterLogo(
-      size: 100,
+    return TextButton(
+      onPressed: () {
+        print('Pressed');
+      },
+      child: const Text(
+      'Press Me',
+      style: TextStyle(fontSize: 20),
+      ),
     );
   }
 
