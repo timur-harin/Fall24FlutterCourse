@@ -99,8 +99,43 @@ class LAb1HomePage extends StatelessWidget {
   }
 
   Widget exercise5() {
-    return const FlutterLogo(
-      size: 100,
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(10.0),
+          margin: const EdgeInsets.all(10.0),
+          decoration: BoxDecoration(
+            color: Colors.blue[50],
+            border: Border.all(
+              color: Colors.blue,
+              width: 2.0,
+            ),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          child: const Text(
+            'Tweet!',
+            style: TextStyle(fontSize: 18),
+          ),
+        ),
+        Container(
+          padding: const EdgeInsets.all(10.0),
+          margin: const EdgeInsets.all(10.0),
+          decoration: BoxDecoration(
+            color: Colors.green[50],
+            border: Border.all(
+              color: Colors.green,
+              width: 2.0,
+            ),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          child: const Icon(
+            Icons.energy_savings_leaf_rounded,
+            size: 50,
+            color: Colors.green,
+          ),
+        ),
+      ],
     );
   }
+
 }
