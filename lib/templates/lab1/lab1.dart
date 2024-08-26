@@ -57,33 +57,63 @@ class LAb1HomePage extends StatelessWidget {
   }
 
   Widget exercise1() {
-    return const FlutterLogo(
-      size: 100,
+    return const Text(
+      'Hello Flutter!',
+      style: TextStyle(
+        fontSize: 18,
+        color: Colors.green,
+        fontWeight: FontWeight.bold,
+      ),
     );
   }
 
   Widget exercise2() {
-    return const FlutterLogo(
-      size: 100,
+    return const Icon(
+      Icons.star,
+      size: 64.0,
+      color: Colors.green,
     );
   }
 
   Widget exercise3() {
-    // Example for image from internet 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'
-    return const FlutterLogo(
-      size: 100,
+    return Image.network(
+      'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+      fit: BoxFit.contain,
+      width: 100.0,
+      height: 100.0,
     );
   }
 
   Widget exercise4() {
-    return const FlutterLogo(
-      size: 100,
+    return TextButton(
+      // ignore: avoid_print
+      onPressed: () => print('Pressed'),
+      child: const Text('Print "Pressed"'),
     );
   }
 
   Widget exercise5() {
-    return const FlutterLogo(
-      size: 100,
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
+          decoration: const BoxDecoration(
+            color: Colors.green,
+            borderRadius: BorderRadius.all(Radius.circular(16.0)),
+          ),
+          child: const Text('Container with Text widget'),
+        ),
+        Container(
+          margin: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
+          decoration: const BoxDecoration(
+            color: Colors.green,
+            shape: BoxShape.circle,
+          ),
+          child: const Icon(Icons.flare_rounded),
+        ),
+      ],
     );
   }
 }
