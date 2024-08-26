@@ -57,33 +57,70 @@ class LAb1HomePage extends StatelessWidget {
   }
 
   Widget exercise1() {
-    return const FlutterLogo(
-      size: 100,
-    );
+    return const Text(
+      "Hello Flutter!", 
+      style: TextStyle(
+        fontSize: 40,
+        color: Colors.blue,
+        fontWeight: FontWeight.bold 
+      ),);
   }
 
   Widget exercise2() {
-    return const FlutterLogo(
-      size: 100,
+    return const Icon(
+      Icons.rocket_launch,
+      size: 50,
+      color: Colors.blue
     );
   }
 
   Widget exercise3() {
-    // Example for image from internet 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'
-    return const FlutterLogo(
-      size: 100,
+    return Image.network(
+      'https://www.mos.ru/upload/newsfeed/newsfeed/belka-i-strelka-posle-poleta.jpg',
+      width: 200,
+      // height: 100,
+      fit: BoxFit.cover,
     );
   }
 
   Widget exercise4() {
-    return const FlutterLogo(
-      size: 100,
-    );
+    return TextButton(
+      onPressed: () {
+        print('Pressed');
+      },
+      child: const Text('pup'),
+      );
   }
 
   Widget exercise5() {
-    return const FlutterLogo(
-      size: 100,
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.blueAccent, width: 2),
+            color: Colors.blue,
+          ),
+          child: const Text(
+            'Hello, Flutter!',
+            style: TextStyle(fontSize: 20),
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.blueAccent, width: 2),
+            color: Colors.blue,
+          ),
+          child: const Icon(
+            Icons.rocket_sharp,
+            size: 50,
+            color: Colors.white,
+          ),
+        ),
+      ],
     );
   }
 }
