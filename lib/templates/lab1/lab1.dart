@@ -57,8 +57,13 @@ class LAb1HomePage extends StatelessWidget {
   }
 
   Widget exercise1() {
-    return const FlutterLogo(
-      size: 100,
+    return const Text(
+      "Hello Flutter!",
+      style: TextStyle(
+        fontSize: 30,
+        color: Colors.blue,
+        fontWeight: FontWeight.bold,
+      ),
     );
   }
 
