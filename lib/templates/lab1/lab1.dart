@@ -8,6 +8,7 @@ class Lab1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: LAb1HomePage(),
     );
   }
@@ -57,31 +58,75 @@ class LAb1HomePage extends StatelessWidget {
   }
 
   Widget exercise1() {
-    return const Text
+    return const Text("Hello, Flutter!",
+        style: TextStyle(
+            color: Colors.cyan, fontSize: 22, fontWeight: FontWeight.w600));
   }
 
   Widget exercise2() {
-    return const FlutterLogo(
-      size: 100,
+    return const Icon(
+      Icons.home,
+      color: Colors.pink,
+      size: 24.0,
+      semanticLabel: 'Icon for task 2',
     );
   }
 
   Widget exercise3() {
     // Example for image from internet 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'
-    return const FlutterLogo(
-      size: 100,
+    return Image.network(
+      'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+      width: 200,
+      height: 200,
+      fit: BoxFit.cover,
     );
   }
 
   Widget exercise4() {
-    return const FlutterLogo(
-      size: 100,
-    );
+    return TextButton(
+        onPressed: () {
+          print("Pressed");
+        },
+        child: const Text("Press Me"));
   }
 
   Widget exercise5() {
-    return const FlutterLogo(
-      size: 100,
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(8.0),
+          margin: const EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            color: Colors.blueAccent,
+            borderRadius: BorderRadius.circular(8.0),
+            border: Border.all(
+              color: Colors.amber,
+              width: 3.0,
+            ),
+          ),
+          child: const Text(
+            'I am just pressed ctrl+p and apply \n modifiers that i randomly choose',
+            style: TextStyle(color: Colors.white, fontSize: 12),
+          ),
+        ),
+        Container(
+          padding: const EdgeInsets.all(16.0),
+          margin: const EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            color: Colors.greenAccent,
+            borderRadius: BorderRadius.circular(8.0),
+            border: Border.all(
+              color: Colors.green,
+              width: 2.0,
+            ),
+          ),
+          child: const Icon(
+            Icons.android,
+            color: Colors.white,
+            size: 24.0,
+          ),
+        )
+      ],
     );
   }
 }
