@@ -98,9 +98,10 @@ class LAb1HomePage extends StatelessWidget {
         Container(
           margin: const EdgeInsets.all(16.0),
           padding: const EdgeInsets.all(16.0),
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             color: Colors.green,
-            borderRadius: BorderRadius.all(Radius.circular(16.0)),
+            borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+            border: Border.all(),
           ),
           child: const Text('Container with Text widget'),
         ),
@@ -110,6 +111,13 @@ class LAb1HomePage extends StatelessWidget {
           decoration: const BoxDecoration(
             color: Colors.green,
             shape: BoxShape.circle,
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                color: Colors.red,
+                blurRadius: 8.0,
+                offset: Offset(0, 3),
+              )
+            ],
           ),
           child: const Icon(Icons.flare_rounded),
         ),
