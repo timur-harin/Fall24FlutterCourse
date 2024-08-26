@@ -57,33 +57,40 @@ class LAb1HomePage extends StatelessWidget {
   }
 
   Widget exercise1() {
-    return const FlutterLogo(
-      size: 100,
+    return Text(
+        'Hello Flutter!',
+        style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700, color: Colors.lightBlue),
     );
   }
 
   Widget exercise2() {
-    return const FlutterLogo(
-      size: 100,
+    return Icon(
+      Icons.arrow_circle_left,
+      color: Colors.red,
+      size: 48.0
     );
   }
 
   Widget exercise3() {
     // Example for image from internet 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'
-    return const FlutterLogo(
-      size: 100,
-    );
+    return Image.network('https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg');
   }
 
   Widget exercise4() {
-    return const FlutterLogo(
-      size: 100,
-    );
+    return TextButton(onPressed: () {print('Pressed');},
+     child: Text('Button'));
   }
 
   Widget exercise5() {
-    return const FlutterLogo(
-      size: 100,
+    return Column(children: [Container(
+      child: Text(
+        'Hello, Again!'
+      ), padding: EdgeInsets.all(17.0)
+    ),
+    Container (
+      child: Icon(Icons.thumb_up, color: Colors.green),
+      margin: EdgeInsets.all(5.0),
+    )]
     );
   }
 }
