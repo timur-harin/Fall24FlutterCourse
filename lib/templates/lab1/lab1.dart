@@ -76,9 +76,13 @@ class LAb1HomePage extends StatelessWidget {
   }
 
   Widget exercise3() {
-    // Example for image from internet 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'
-    return const FlutterLogo(
-      size: 100,
+      const String imageUrl = 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg';
+
+    return const Image(
+      image: NetworkImage(imageUrl),
+      width: 200,
+      height: 180,
+      fit: BoxFit.cover,
     );
   }
 
