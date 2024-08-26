@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// import 'package:freezed_annotation/freezed_annotation.dart';
 
 void main() => runApp(const Lab1());
 
@@ -57,33 +58,41 @@ class LAb1HomePage extends StatelessWidget {
   }
 
   Widget exercise1() {
-    return const FlutterLogo(
-      size: 100,
-    );
+    return Text("Hello Flutter!", style: TextStyle(fontSize: 40, color: Colors.red, fontWeight: FontWeight.bold));
   }
 
   Widget exercise2() {
-    return const FlutterLogo(
-      size: 100,
-    );
+    return Icon(Icons.home, size: 50, color: Colors.blue);
   }
 
   Widget exercise3() {
     // Example for image from internet 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'
-    return const FlutterLogo(
-      size: 100,
-    );
+    return Image.network('https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg', width: 70, height: 70, fit: BoxFit.cover);
   }
 
   Widget exercise4() {
-    return const FlutterLogo(
-      size: 100,
-    );
+    return TextButton(onPressed: () {
+      print('Pressed');
+    }, 
+    child: Text('Tap me'),);
   }
 
   Widget exercise5() {
-    return const FlutterLogo(
-      size: 100,
+    return Column(
+      children: [
+        Container(
+          child: Text("I am the first child"),
+          padding: EdgeInsets.all(10),
+          margin: EdgeInsets.all(10),
+          decoration: BoxDecoration(color: Colors.pink),
+        ),
+        Container(
+          child: Icon(Icons.home),
+          padding: EdgeInsets.all(10),
+          margin: EdgeInsets.all(10),
+          decoration: BoxDecoration(color: Colors.blue)
+        )
+      ],
     );
   }
 }
