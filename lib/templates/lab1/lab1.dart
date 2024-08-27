@@ -57,33 +57,73 @@ class LAb1HomePage extends StatelessWidget {
   }
 
   Widget exercise1() {
-    return const FlutterLogo(
-      size: 100,
-    );
-  }
+  return const Text(
+    'Hello Flutter!',
+    style: TextStyle(
+      fontSize: 24.0,
+      color: Colors.blue,
+      fontWeight: FontWeight.bold,
+    ),
+  );
+}
 
   Widget exercise2() {
-    return const FlutterLogo(
-      size: 100,
-    );
-  }
+  return const Icon(
+    Icons.home,
+    size: 100.0,
+    color: Colors.green,
+  );
+}
 
   Widget exercise3() {
-    // Example for image from internet 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'
-    return const FlutterLogo(
-      size: 100,
-    );
-  }
+  return const Image(
+    image: NetworkImage('https://avatars.mds.yandex.net/i?id=8ad703201bb24b7e67bfbdfa350e27221cdc38e9-11920434-images-thumbs&n=13'),
+    width: 200.0,
+    height: 150.0,
+    fit: BoxFit.cover,
+  );
+}
 
   Widget exercise4() {
-    return const FlutterLogo(
-      size: 100,
-    );
-  }
+  return TextButton(
+    onPressed: () {
+      print('Pressed');
+    },
+    child: const Text('Press Me'),
+  );
+}
 
   Widget exercise5() {
-    return const FlutterLogo(
-      size: 100,
-    );
-  }
+  return Column(
+    children: [
+      Container(
+        padding: const EdgeInsets.all(16.0),
+        margin: const EdgeInsets.only(bottom: 10.0),
+        decoration: BoxDecoration(
+          color: Colors.lightBlueAccent,
+          border: Border.all(color: Colors.blue, width: 2.0),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: const Text(
+          'Hello, Flutter!',
+          style: TextStyle(fontSize: 18.0, color: Colors.white),
+        ),
+      ),
+      Container(
+        padding: const EdgeInsets.all(16.0),
+        margin: const EdgeInsets.only(top: 10.0),
+        decoration: BoxDecoration(
+          color: Colors.orangeAccent,
+          border: Border.all(color: Colors.orange, width: 2.0),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: const Icon(
+          Icons.thumb_up,
+          size: 30.0,
+          color: Colors.white,
+        ),
+      ),
+    ],
+  );
+}
 }
