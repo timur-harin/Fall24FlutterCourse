@@ -57,33 +57,58 @@ class LAb1HomePage extends StatelessWidget {
   }
 
   Widget exercise1() {
-    return const FlutterLogo(
-      size: 100,
+    return const Text(
+      "HelloWorld!",
+      style: TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+        color: Colors.green
+      )
     );
   }
 
   Widget exercise2() {
-    return const FlutterLogo(
-      size: 100,
+    return const Icon(
+      Icons.replay_outlined,
+      color: Color(0xFFCCCCCC),
+      size: 100
     );
   }
 
   Widget exercise3() {
     // Example for image from internet 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'
-    return const FlutterLogo(
-      size: 100,
+    return Image.network(
+      "https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg",
+      width: 100,
+      height: 60,
+      fit: BoxFit.cover,
+      alignment: Alignment.topCenter
     );
   }
 
   Widget exercise4() {
-    return const FlutterLogo(
-      size: 100,
+    return TextButton(
+      onPressed: () { print('Button is pressed'); },
+      child: const Text("Pressed")
     );
   }
 
   Widget exercise5() {
-    return const FlutterLogo(
-      size: 100,
+    return Column(
+      children: [
+        // first container has padding, second - margin, so we can see difference
+        Container(
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(border: Border.all(color: Colors.blue)),
+          child: const Text("Home")
+        ),
+        Container(
+          // padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(border: Border.all(color: Colors.blue)),
+          margin: const EdgeInsets.all(10),
+          child: const Icon(Icons.home)
+        )
+      ]
     );
   }
 }
