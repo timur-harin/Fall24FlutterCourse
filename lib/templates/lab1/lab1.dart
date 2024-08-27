@@ -70,12 +70,24 @@ class LAb1HomePage extends StatelessWidget {
   }
 
   Widget exercise4() {
-    return TextButton(onPressed: () {print("Pressed");}, child: Text("Press the button"));
+    return TextButton(onPressed: () {print("Pressed");}, child: const Text("Press the button"));
   }
 
   Widget exercise5() {
-    return const FlutterLogo(
-      size: 100,
-    );
+    return Column(children: [
+      Container(
+        padding: const EdgeInsets.all(13),
+        margin: const EdgeInsets.symmetric(horizontal: 13),
+        decoration: const BoxDecoration(color: Colors.red),
+        child: const Text("Container 1 in Column"),
+      ),
+      Container(
+        padding: const EdgeInsets.all(10),
+        margin: const EdgeInsets.symmetric(horizontal: 10),
+        decoration: const BoxDecoration(color: Colors.white),
+        child: const Icon(Icons.mood, size: 60, color: Colors.red),
+      )
+    ],)
+    ;
   }
 }
