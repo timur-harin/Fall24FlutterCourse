@@ -57,33 +57,66 @@ class LAb1HomePage extends StatelessWidget {
   }
 
   Widget exercise1() {
-    return const FlutterLogo(
-      size: 100,
+    return const Text("Hello Flutter!",
+    style: TextStyle(fontSize: 16, color: Colors.blue, fontWeight: FontWeight.bold),
     );
   }
 
   Widget exercise2() {
-    return const FlutterLogo(
-      size: 100,
+    return const Icon(
+      Icons.favorite,
+      color: Colors.red,
+      size: 24.0
     );
   }
 
   Widget exercise3() {
-    // Example for image from internet 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'
-    return const FlutterLogo(
-      size: 100,
+    return Image.network(
+      'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+      width: 300,
+      height: 300,
+      fit: BoxFit.cover,
     );
   }
 
   Widget exercise4() {
-    return const FlutterLogo(
-      size: 100,
+    return TextButton(
+      onPressed: () { 
+        print("Pressed");
+      },
+      child: const Text('Press me'),
     );
   }
 
   Widget exercise5() {
-    return const FlutterLogo(
-      size: 100,
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(20.0), 
+          margin: const EdgeInsets.only(left: 20.0), 
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.pink, width: 5.0), 
+            color: const Color.fromARGB(255, 200, 122, 98), 
+          ),
+          child: const Text(
+            'Wow',
+            style: TextStyle(fontSize: 30),
+          ),
+        ),
+        Container(
+          padding: const EdgeInsets.all(24.0),
+          margin: const EdgeInsets.only(top: 10.0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15.0), 
+            color: Colors.green.shade300, 
+          ),
+          child: const Icon(
+            Icons.favorite,
+            size: 60,
+            color: Colors.white,
+          ),
+        ),
+      ],
     );
   }
 }
