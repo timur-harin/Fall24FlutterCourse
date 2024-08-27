@@ -57,33 +57,58 @@ class LAb1HomePage extends StatelessWidget {
   }
 
   Widget exercise1() {
-    return const FlutterLogo(
-      size: 100,
-    );
+    return const Text(
+      "Hello Flutter!", style: 
+      TextStyle(fontSize: 20, color: Colors.black, 
+                fontWeight: FontWeight.bold)
+      );
   }
 
   Widget exercise2() {
-    return const FlutterLogo(
-      size: 100,
-    );
+    return const Icon(
+      Icons.pallet, size: 150, color: Color.fromARGB(255, 31, 0, 117)
+      );
   }
 
   Widget exercise3() {
     // Example for image from internet 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'
-    return const FlutterLogo(
-      size: 100,
-    );
+    //
+    return Image.network(
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPEUWiBWszJdp_fmVauQELNoBaDEdSFk_crs-CPaP2vnDj3cKupiarbTGsVSYFzXy4pPg&usqp=CAU', 
+      width: 250, height: 250,fit: BoxFit.cover
+      );
   }
 
   Widget exercise4() {
-    return const FlutterLogo(
-      size: 100,
-    );
+    return TextButton(
+      onPressed: () {
+        print("Pressed");
+      }, 
+      child: const Text(
+        'Press me', style: TextStyle(
+          fontSize: 20, color: Colors.black, 
+          fontWeight: FontWeight.bold)));
   }
 
   Widget exercise5() {
-    return const FlutterLogo(
-      size: 100,
-    );
+    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+      Container(
+        margin: EdgeInsets.all(15), 
+        padding: EdgeInsets.all(15), 
+        decoration: BoxDecoration(
+          color: Colors.lightBlue, 
+          border: Border.all(color: Colors.blue, width: 5),
+          borderRadius: BorderRadius.circular(7)
+        ), 
+        child: Text('Flutter', style: TextStyle(color: Colors.white, fontSize: 20))),
+      Container(
+        margin: EdgeInsets.all(15), 
+        padding: EdgeInsets.all(15), 
+        decoration: BoxDecoration(
+          color: Colors.yellow, 
+          border: Border.all(color: Colors.orange, width: 7)
+        ), 
+        child: Icon(Icons.apartment, size: 100, color: Colors.red)),
+    ]);
   }
 }
