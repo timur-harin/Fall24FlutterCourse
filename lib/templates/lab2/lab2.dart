@@ -1,4 +1,12 @@
-class Book {
+// Mixin named Readable
+mixin Readable {
+  // Method to print out a message indicating the book is being read
+  void read() {
+    print('The book is being read.');
+  }
+}
+
+class Book with Readable {
   String title;
   String author;
   int numberOfPages;
@@ -11,7 +19,7 @@ class Book {
   }
 }
 
-class FictionBook extends Book {
+class FictionBook extends Book with Readable {
   String genre;
 
   // Constructor to initialize title, author, numberOfPages, and genre
@@ -40,4 +48,7 @@ void main() {
   // Creating an instance of FictionBook
   var fictionBook = FictionBook('Dune', 'Frank Herbert', 412, 'Science Fiction');
   fictionBook.bookDetails();
+
+  // Call mixin method
+  fictionBook.read();
 }
