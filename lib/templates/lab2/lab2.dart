@@ -61,12 +61,7 @@ void main() {
   Book book = Book(title: 'Cool Book', author: 'Me', numberOfPages: 123);
   book.bookDetails();
 
-  FictionBook fBook = FictionBook(
-    title: 'Cool Fictional Book',
-    author: 'Also Me',
-    numberOfPages: 321,
-    genre: 'Physiology',
-  );
+  FictionBook fBook = FictionBook(title: 'Cool Fictional Book', author: 'Also Me', numberOfPages: 321, genre: 'Physiology');
   fBook.bookDetails();
 
   book.read();
