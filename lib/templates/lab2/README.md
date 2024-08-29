@@ -17,7 +17,7 @@ Create a class named FictionBook that inherits from the Book class created in Ta
 
 ## Mixins
 
-Create a mixin named JsonSerializable with a method toJson which returns a Map representation of the class. Apply this mixin to the Book class so that calling toJson on a Book instance returns a Map with keys title, author, and numberOfPages.
+Define a mixin named Readable that provides a method read. The read method should print out a message indicating that the book is being read.
 
 ## Function
 
