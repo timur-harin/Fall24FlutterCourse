@@ -80,7 +80,7 @@ void main() {
 
   print("\nCalculation area of rectangle with length = 4.2 and width = 3.4: "
           "${calculateArea(length: 4.2, width: 3.4)}");
-  print("Calculation area of circle with radius = 2.6"
+  print("Calculation area of circle with radius = 2.6: "
       "${calculateArea(length: 4.2, shape: 'circle')}");
   print("Test calculation with incorrect inputs:");
   print("Default answer with incorrect inputs: ${calculateArea()}\n");
