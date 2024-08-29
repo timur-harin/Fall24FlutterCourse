@@ -5,7 +5,7 @@ class Book with Readable {
   Book(this.title, this.author, this.numberOfPages);
 
   void bookDetails() {
-    print('Book Details: \n'
+    print('Book Details:\n'
         'Title: $title\n'
         'Author: $author\n'
         'Number of Pages: $numberOfPages\n');
@@ -20,7 +20,7 @@ class FictionBook extends Book with Readable {
 
   @override
   void bookDetails() {
-    print('Book Details: \n'
+    print('Book Details:\n'
         'Title: $title\n'
         'Author: $author\n'
         'Number of Pages: $numberOfPages\n'
