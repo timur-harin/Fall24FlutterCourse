@@ -1,5 +1,3 @@
-// Mixin named Readable
-import 'dart:ffi';
 import 'dart:math';
 
 mixin Readable {
@@ -35,12 +33,24 @@ class FictionBook extends Book with Readable {
   }
 }
 
-mixin JsonSerializable {
-  // your code here
-}
-
 class User{
-  // your code here
+  // Properties
+  String name;
+  int? age;
+  String? email;
+
+  // Constructor to initialize all properties
+  User({required this.name, this.age, this.email});
+
+  // Method to print user details
+  void printUserDetails() {
+    String ageString = age?.toString() ?? 'N/A';
+    String emailString = email ?? 'N/A';
+
+    print('Name: $name');
+    print('Age: $ageString');
+    print('Email: $emailString');
+  }
 }
 
 double calculateArea({required double length, required double width, String shape = "rectangle"}) {
@@ -67,6 +77,8 @@ void main() {
   // Call mixin method
   fictionBook.read();
 
+  print('---------------------');
+
 
   // Example usage of the calculateArea function
 
@@ -77,4 +89,25 @@ void main() {
   // Calculating the area of a circle
   double circleArea = calculateArea(length: 4.0, width: 0.0, shape: "circle");
   print("Area of the circle: $circleArea");
+
+  print('---------------------');
+
+  // Example usage of the User class
+
+  // Creating a User with all details
+  var literallyMe = User(name: 'Evgeny', age: 19, email: 'e.bobkunov@innopolis.university');
+  literallyMe.printUserDetails();
+
+  print('---------------------');
+
+  // Creating a User with only name and age
+  var friend = User(name: 'Anna', age: 20);
+  friend.printUserDetails();
+
+  print('---------------------');
+
+  // Creating a User with only name
+  var classmate = User(name: 'Sonya');
+  classmate.printUserDetails();
+
 }
