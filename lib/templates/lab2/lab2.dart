@@ -1,18 +1,8 @@
-class Book with JsonSerializable {
+class Book with Readable {
   String title;
   String author;
   int numberOfPages;
   Book(this.title, this.author, this.numberOfPages);
-
-  // Implementing the toJson method from the mixin
-  @override
-  Map<String, dynamic> toJson() {
-    return {
-      'title': title,
-      'author': author,
-      'numberOfPages': numberOfPages,
-    };
-  }
 
   void bookDetails() {
     print('Title: $title, Author: $author, Pages: $numberOfPages');
@@ -30,8 +20,10 @@ class FictionBook extends Book {
   }
 }
 
-mixin JsonSerializable {
-  Map<String, dynamic> toJson();
+mixin Readable {
+  void read(String title) {
+    print('The book "$title" is being read.');
+  }
 }
 
 class User {
@@ -70,9 +62,8 @@ void main() {
   FictionBook newFictionBook = FictionBook('Harry Potter and the Chamber of Secrets', 'J. K. Rowling', 480, 'Fantasy');
   newFictionBook.bookDetails();
 
-  // Calling of toJson method
-  Map<String, dynamic> bookJson = newBook.toJson();
-  print(bookJson);
+  // Calling of method from the Readable mixin
+  newBook.read(newBook.title);
 
   // Creating User with all properties
   User fullUser = User(name: 'Egor', age: 19, email: 'e.valikov@innopolis.university');
