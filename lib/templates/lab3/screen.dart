@@ -41,7 +41,7 @@ class HydrationScreen extends ConsumerWidget {
                 ? 'Congratulations! Daily goal is achieved!'
                 : ''),
             const SizedBox(height: 8),
-            HydrationWidget(waterIntakeLevel: waterIntake/3)
+            HydrationWidget(waterIntakeLevel: waterIntake / 3)
           ],
         ),
       ),
