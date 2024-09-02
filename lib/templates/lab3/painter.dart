@@ -20,9 +20,9 @@ class WaterProgressPainter extends CustomPainter {
       ..style = PaintingStyle.fill;
 
     canvas.drawRect(
-       Rect.fromLTRB(0, size.height - waterLevel, size.width, size.height),
-       paint,
-     );
+      Rect.fromLTRB(0, size.height - waterLevel, size.width, size.height),
+      paint,
+    );
   }
 
   @override

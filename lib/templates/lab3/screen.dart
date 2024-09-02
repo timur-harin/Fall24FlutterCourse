@@ -10,13 +10,15 @@ class HydrationScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final waterIntake = ref.watch(waterIntakeProvider);
     return Scaffold(
-      appBar: AppBar( 
-      actions: [
-        IconButton(onPressed: ()
-        {
-          ref.read(waterIntakeProvider.notifier).reset();
-        }, icon: const Icon(Icons.lock_reset_rounded))
-      ],),
+      appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () {
+                ref.read(waterIntakeProvider.notifier).reset();
+              },
+              icon: const Icon(Icons.lock_reset_rounded))
+        ],
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -28,8 +30,7 @@ class HydrationScreen extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(onPressed: () {
         ref.read(waterIntakeProvider.notifier).increment(1);
-      }
-      ),
+      }),
     );
   }
 }
