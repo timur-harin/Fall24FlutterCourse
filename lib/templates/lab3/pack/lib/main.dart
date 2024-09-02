@@ -2,11 +2,9 @@ library pack;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'hydration.dart';
 
 void main() {
   runApp(
-    // TODO to enable riverpod - add ProviderScope
     ProviderScope(
       child: WaterBalanceApp(),
     ),
