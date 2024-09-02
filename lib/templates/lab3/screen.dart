@@ -1,3 +1,5 @@
+import 'package:fall_24_flutter_course/templates/lab3/hydration.dart';
+import 'package:fall_24_flutter_course/templates/lab3/notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -6,21 +8,27 @@ class HydrationScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // TODO - Add ref.watch and use provider to get the water intake
-    // final waterIntake =
+    final waterIntake = ref.watch(waterIntakeProvider);
+    final waterIntakeNotifier = ref.watch(waterIntakeProvider.notifier);
     return Scaffold(
-      // TODO add AppBar with Icon to reset the water intake as actions parameter of AppBar
+      appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: waterIntakeNotifier.reset,
+              icon: const Icon(Icons.cancel),
+          )
+        ],
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            // TODO - Add text to display the water intake
-            // TODO add HydrationWidget to display the water intake and put waterIntake into it
-            // Add more UI components if necessary
+            Text("Water intake: $waterIntake"),
+            HydrationWidget(waterIntakeLevel: waterIntake)
           ],
         ),
       ),
-      // TODO - Add floating action button to increment the water intake using ref.read(waterIntakeProvider.notifier).increment(x)
+      floatingActionButton: FloatingActionButton(onPressed: () => waterIntakeNotifier.increment(0.1)),
     );
   }
 }

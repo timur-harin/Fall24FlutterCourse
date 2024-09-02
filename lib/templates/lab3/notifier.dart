@@ -1,15 +1,14 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'storage.dart';
 
-final localStorageServiceProvider = Provider<LocalStorageService>((ref) {
-  return LocalStorageService();
-});
+final localStorageServiceProvider =
+  Provider<LocalStorageService>((ref) => LocalStorageService());
 
 final waterIntakeProvider =
-    StateNotifierProvider<WaterIntakeNotifier, double>((ref) {
-  final localStorageService = ref.watch(localStorageServiceProvider);
-  return WaterIntakeNotifier(localStorageService);
-});
+  StateNotifierProvider<WaterIntakeNotifier, double>((ref) {
+    final localStorageService = ref.watch(localStorageServiceProvider);
+    return WaterIntakeNotifier(localStorageService);
+  });
 
 class WaterIntakeNotifier extends StateNotifier<double> {
   final LocalStorageService _localStorageService;
@@ -19,16 +18,16 @@ class WaterIntakeNotifier extends StateNotifier<double> {
   }
 
   void _loadWaterIntake() async {
-    // TODO - Load the water intake from _localStorageService using await
-    // state =
+    state = await _localStorageService.getWaterIntake();
   }
 
   void increment(double amount) async {
     state += amount;
-    // TODO - Save the water intake into _localStorageService using saveWaterIntake
+    await _localStorageService.saveWaterIntake(state);
   }
 
   void reset() async {
-    // TODO - reset state and save it into _localStorageService using saveWaterIntake
+    state = 0.0;
+    _localStorageService.saveWaterIntake(state);
   }
 }
