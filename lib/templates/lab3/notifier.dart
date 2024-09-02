@@ -24,7 +24,6 @@ class WaterIntakeNotifier extends StateNotifier<double> {
 
   void increment(double amount) async {
     state += amount;
-    if(state  > 5.0) state = 5.0;
     await _localStorageService.saveWaterIntake(state);
   }
 
