@@ -1,0 +1,25 @@
+name: my_flutter_package
+description: A new Flutter package.
+
+publish_to: 'none'
+
+version: 0.0.1
+homepage: https://example.com
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=2.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_riverpod: ^2.3.0
+  shared_preferences: ^2.3.2
+
+  cupertino_icons: ^1.0.2
+  provider: ^6.0.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+

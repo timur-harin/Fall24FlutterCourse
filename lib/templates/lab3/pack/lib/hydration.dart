@@ -1,5 +1,7 @@
-import 'package:fall_24_flutter_course/templates/lab3/painter.dart';
+library pack;
+
 import 'package:flutter/material.dart';
+import 'painter.dart';
 
 class HydrationWidget extends StatefulWidget {
   final double waterIntakeLevel;
