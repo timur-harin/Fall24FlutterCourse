@@ -35,7 +35,7 @@ class HydrationScreen extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => {
-          if(waterIntake < 5.0)
+          if(waterIntake < 4.99)
             ref.read(waterIntakeProvider.notifier).increment(0.1)
         },
         child: const Icon(Icons.add)
