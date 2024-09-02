@@ -18,7 +18,7 @@ class HydrationWidgetState extends State<HydrationWidget> {
     final size = MediaQuery.of(context).size;
     return SizedBox(
       width: size.width,
-      height: size.height - 200,
+      height: size.height - 132,
       child: WaterPainterWidget(waterIntakeLevel: widget.waterIntakeLevel),
     );
   }

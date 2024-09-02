@@ -2,6 +2,7 @@ library pack;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'screen.dart';
 
 void main() {
   runApp(
@@ -21,22 +22,8 @@ class WaterBalanceApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      // Set the home screen widget
-      home: HydrationHome(), // Replace with your actual home widget
+      home: HydrationScreen(),
     );
   }
 }
 
-class HydrationHome extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Water Balance'),
-      ),
-      body: Center(
-        child: Text('Welcome to Water Balance!'),
-      ),
-    );
-  }
-}

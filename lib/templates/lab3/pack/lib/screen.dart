@@ -15,9 +15,8 @@ class HydrationScreen extends ConsumerWidget {
         title: const Text('Hydration Tracker'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.refresh),
+            icon: const Icon(Icons.add),
             onPressed: () {
-              // Reset water intake when icon is pressed
               ref.read(waterIntakeProvider.notifier).reset();
             },
           ),
@@ -27,7 +26,6 @@ class HydrationScreen extends ConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            // Display the current water intake
             Text(
               'Current Water Intake:',
               style: Theme.of(context).textTheme.headlineLarge,
@@ -36,15 +34,12 @@ class HydrationScreen extends ConsumerWidget {
               '${waterIntake.toStringAsFixed(2)} liters',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            // Add HydrationWidget to display the water intake
-            // Pass waterIntake to the HydrationWidget
             HydrationWidget(waterIntakeLevel: waterIntake),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Increment water intake by 0.5 liters when button is pressed
           ref.read(waterIntakeProvider.notifier).increment(0.5);
         },
         child: const Icon(Icons.add),
