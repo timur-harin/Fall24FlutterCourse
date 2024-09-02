@@ -57,33 +57,71 @@ class LAb1HomePage extends StatelessWidget {
   }
 
   Widget exercise1() {
-    return const FlutterLogo(
-      size: 100,
+    return const Text(
+      'Hello Flutter!',
+      style: TextStyle(
+        fontSize: 12,
+        color: Colors.blueGrey,
+        fontWeight: FontWeight.bold,
+      ),
     );
   }
 
   Widget exercise2() {
-    return const FlutterLogo(
-      size: 100,
+    return const Icon(
+      Icons.ice_skating_outlined,
+      size: 30,
+      color: Colors.blueGrey
     );
   }
 
   Widget exercise3() {
-    // Example for image from internet 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'
-    return const FlutterLogo(
-      size: 100,
+    return Image.network(
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmCy16nhIbV3pI1qLYHMJKwbH2458oiC9EmA&s',
+      fit: BoxFit.cover,
+      width: 100.0,
+      height: 100.0,
     );
   }
 
   Widget exercise4() {
-    return const FlutterLogo(
-      size: 100,
+    return TextButton(
+      onPressed: () => print('Pressed'),
+      child: const Text('This button prints "Pressed" message to the console!'),
     );
   }
 
   Widget exercise5() {
-    return const FlutterLogo(
-      size: 100,
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
+          decoration: ShapeDecoration(
+            color: Colors.white,
+            shape: Border.all(
+              color: Colors.red,
+              width: 8.0,
+            ) + Border.all(
+              color: Colors.green,
+              width: 8.0,
+            ) + Border.all(
+              color: Colors.blue,
+              width: 8.0,
+            ),
+          ),
+          child: const Text('Container with Text widget'),
+        ),
+        Container(
+          margin: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
+          decoration: const BoxDecoration(
+            color: Colors.blueGrey,
+            shape: BoxShape.rectangle,
+          ),
+          child: const Icon(Icons.access_alarm),
+        ),
+      ],
     );
   }
 }
