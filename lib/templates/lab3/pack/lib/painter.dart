@@ -1,4 +1,3 @@
-// Your existing imports
 import 'package:flutter/material.dart';
 
 class WaterProgressPainter extends CustomPainter {

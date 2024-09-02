@@ -1,12 +1,10 @@
-library pack;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'screen.dart';
+import 'pack/lib/screen.dart';
 
 void main() {
   runApp(
-    ProviderScope(
+    const ProviderScope(
       child: WaterBalanceApp(),
     ),
   );
@@ -22,7 +20,7 @@ class WaterBalanceApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HydrationScreen(),
+      home: const HydrationScreen(),
     );
   }
 }

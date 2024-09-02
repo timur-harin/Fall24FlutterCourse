@@ -1,5 +1,3 @@
-library pack;
-
 import 'package:flutter/material.dart';
 import 'painter.dart';
 
