@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'templates/lab3/main.dart';
 
 void main() {
-  runApp(const MainApp());
+  // runApp(const MainApp());
+  runApp(const ProviderScope(child: WaterBalanceApp()));
 }
 
 class MainApp extends StatelessWidget {
