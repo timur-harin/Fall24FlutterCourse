@@ -1,5 +1,5 @@
-import 'package:fall_24_flutter_course/templates/lab3/painter.dart';
 import 'package:flutter/material.dart';
+import 'package:fall_24_flutter_course/templates/lab3/painter.dart';
 
 class HydrationWidget extends StatefulWidget {
   final double waterIntakeLevel;
@@ -15,7 +15,7 @@ class HydrationWidgetState extends State<HydrationWidget> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return SizedBox(
-      width: size.width,
+      width: size.width - 400,
       height: size.height - 200,
       child: WaterPainterWidget(waterIntakeLevel: widget.waterIntakeLevel),
     );
