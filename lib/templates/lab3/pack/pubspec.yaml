@@ -1,4 +1,4 @@
-name: my_flutter_package
+name: pack
 description: A new Flutter package.
 
 publish_to: 'none'
@@ -15,7 +15,6 @@ dependencies:
     sdk: flutter
   flutter_riverpod: ^2.3.0
   shared_preferences: ^2.3.2
-
   cupertino_icons: ^1.0.2
   provider: ^6.0.3
 
