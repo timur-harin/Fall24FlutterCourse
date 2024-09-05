@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' hide Provider;
+import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 
@@ -31,10 +34,9 @@ class MyHomePage extends StatelessWidget {
           children: <Widget>[
             ElevatedButton(
               onPressed: () async {
-                // TODO
-                // Exercise 1 - Perform an async operation using async/await
                 String result = await fetchData();
                 print(result);
+                const Text('result');
               },
               child: Text('Async/Await Task'),
             ),
@@ -55,7 +57,7 @@ class MyHomePage extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () async {
-                // TODO 
+                // TODO
                 // Exercise 4 - Make an HTTP request using the HTTP package
               },
               child: Text('HTTP Task'),
@@ -75,15 +77,11 @@ class MyHomePage extends StatelessWidget {
 }
 
 Future<String> fetchData() async {
-  // TODO get json from url and show as text
-  // 'https://jsonplaceholder.typicode.com/posts/1'
-
-  return 'data';
+  final response =
+      await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts/1'));
+  return response.body;
 }
 
 final counterProvider = StateProvider<int>((ref) => 0);
-
-// TODO create a state notifier
-// final 
 
 // TODO create class for state notifier
