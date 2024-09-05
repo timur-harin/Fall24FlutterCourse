@@ -2,6 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
+import 'package:provider/provider.dart';
+
+class CounterNotifier extends StateNotifier<int> {
+  CounterNotifier() : super(0);
+
+  void increment() {
+    state++;
+  }
+}
+
+final counterNotifierProvider = StateNotifierProvider<CounterNotifier, int>(
+  (ref) => CounterNotifier(),
+);
 
 void main() {
   runApp(MyApp());
@@ -21,6 +34,7 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final counter = context.watch(counterNotifierProvider);
     return Scaffold(
       appBar: AppBar(
         title: Text('Flutter Tasks'),
@@ -31,8 +45,8 @@ class MyHomePage extends StatelessWidget {
           children: <Widget>[
             ElevatedButton(
               onPressed: () async {
-                // TODO
                 // Exercise 1 - Perform an async operation using async/await
+                await Future.delayed(Duration(seconds: 4));
                 String result = await fetchData();
                 print(result);
               },
@@ -41,21 +55,20 @@ class MyHomePage extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // Exercise 2 - Use Provider for state management
-                // Increment the counter
+                context.read(counterNotifierProvider.notifier).increment();
               },
               child: Text('Provider Task'),
             ),
             ElevatedButton(
               onPressed: () {
-                // TODO
                 // Exercise 3 - Use Riverpod for state management
-                // Increment the counter
+                context.read(counterNotifierProvider.notifier).increment();
               },
               child: Text('Riverpod Task'),
             ),
             ElevatedButton(
               onPressed: () async {
-                // TODO 
+                // TODO
                 // Exercise 4 - Make an HTTP request using the HTTP package
               },
               child: Text('HTTP Task'),
@@ -84,6 +97,7 @@ Future<String> fetchData() async {
 final counterProvider = StateProvider<int>((ref) => 0);
 
 // TODO create a state notifier
-// final 
+// final
+
 
 // TODO create class for state notifier
