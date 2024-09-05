@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final counter = ref.watch(counterProvider); // Watch the counter state
+    final counter = ref.watch(counterProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -52,7 +52,7 @@ class MyHomePage extends ConsumerWidget {
               child: ElevatedButton(
                 onPressed: () {
                   // Exercise 2 - Use Provider for state management (increment counter)
-                  ref.read(counterProvider.notifier).state++; // Increment the counter
+                  ref.read(counterProvider.notifier).state++;
                 },
                 child: Text('Provider Task (Counter: $counter)'),
               ),
@@ -133,11 +133,10 @@ Future<String> fetchDioData() async {
     Response response = await dio.get('https://jsonplaceholder.typicode.com/posts/1');
     return response.data.toString();
   } catch (e) {
-    return 'Failed to fetch data: $e';
+    return 'Failed to load data: $e';
   }
 }
 
-// Provider for simple counter (Exercise 2)
 final counterProvider = StateProvider<int>((ref) => 0);
 
 // Exercise 3 - Using Riverpod StateNotifier for counter
@@ -145,7 +144,6 @@ final counterNotifierProvider = StateNotifierProvider<CounterNotifier, int>((ref
   return CounterNotifier();
 });
 
-// StateNotifier class for Riverpod
 class CounterNotifier extends StateNotifier<int> {
   CounterNotifier() : super(0);
 
