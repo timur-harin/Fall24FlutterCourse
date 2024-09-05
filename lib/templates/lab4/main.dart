@@ -31,7 +31,6 @@ class MyHomePage extends StatelessWidget {
           children: <Widget>[
             ElevatedButton(
               onPressed: () async {
-                // TODO
                 // Exercise 1 - Perform an async operation using async/await
                 String result = await fetchData();
                 print(result);
@@ -74,11 +73,15 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
+// Task 1: Fetch data asynchronously using async/await
 Future<String> fetchData() async {
-  // TODO get json from url and show as text
-  // 'https://jsonplaceholder.typicode.com/posts/1'
-
-  return 'data';
+  final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts/1'));
+  
+  if (response.statusCode == 200) {
+    return response.body; // returning the body of the response as a string
+  } else {
+    throw Exception('Failed to load data');
+  }
 }
 
 final counterProvider = StateProvider<int>((ref) => 0);
