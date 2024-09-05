@@ -74,7 +74,10 @@ class MyHomePage extends ConsumerWidget {
                 Dio dio = Dio();
                 final response = await dio
                     .get('https://jsonplaceholder.typicode.com/photos/224');
-                // Map<String, dynamic> json = jsonDecode(response.data);
+                print(response.data);
+                Map<String, dynamic> json = jsonDecode(response.data);
+                final Photo = json['url'];
+                // Here we should show photo
               },
               child: Text('Dio Task'),
             ),
