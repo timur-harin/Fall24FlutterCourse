@@ -43,11 +43,13 @@ class ShowerSession {
   final DateTime dateTime;
   final int totalTime;
   final int totalPhases;
+  final int? rating; // Optional rating field (can be null if user skips rating)
 
   ShowerSession({
     required this.dateTime,
     required this.totalTime,
     required this.totalPhases,
+    this.rating,
   });
 
   // Convert ShowerSession to a Map
@@ -56,6 +58,7 @@ class ShowerSession {
       'dateTime': dateTime.toIso8601String(),
       'totalTime': totalTime,
       'totalPhases': totalPhases,
+      'rating': rating,
     };
   }
 
@@ -65,6 +68,7 @@ class ShowerSession {
       dateTime: DateTime.parse(map['dateTime']),
       totalTime: map['totalTime'],
       totalPhases: map['totalPhases'],
+      rating: map['rating'],
     );
   }
 
@@ -164,7 +168,22 @@ class HomeScreen extends ConsumerWidget {
                             'Session on ${formatDateTime(session.dateTime)}',
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
-                          subtitle: Text('Total Time: ${session.totalTime} seconds\nPhases: ${session.totalPhases}'),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Total Time: ${session.totalTime} seconds\nPhases: ${session.totalPhases}'),
+                              if (session.rating != null)
+                                Row(
+                                  children: List.generate(5, (index) {
+                                    return Icon(
+                                      index < session.rating! ? Icons.star : Icons.star_border,
+                                      color: Colors.amber,
+                                      size: 16,
+                                    );
+                                  }),
+                                ),
+                            ],
+                          ),
                           isThreeLine: true,
                         );
                       },
@@ -304,6 +323,7 @@ class _ActiveSessionScreenState extends ConsumerState<ActiveSessionScreen>
   String _currentPhase = "Hot"; // Hot or Cold
   int _completedPhases = 0;
   bool _isSessionActive = true;
+  bool _isPaused = false; // New flag for pause state
 
   late int _hotDuration;
   late int _coldDuration;
@@ -336,13 +356,15 @@ class _ActiveSessionScreenState extends ConsumerState<ActiveSessionScreen>
 
   void _startTimer() {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      setState(() {
-        if (_remainingTime > 0) {
-          _remainingTime--;
-        } else {
-          _switchPhase();
-        }
-      });
+      if (!_isPaused) { // Update only if not paused
+        setState(() {
+          if (_remainingTime > 0) {
+            _remainingTime--;
+          } else {
+            _switchPhase();
+          }
+        });
+      }
     });
   }
 
@@ -362,43 +384,94 @@ class _ActiveSessionScreenState extends ConsumerState<ActiveSessionScreen>
   }
 
   void _endSession() {
-    _timer.cancel();
-    _animationController.stop(); // Stop the animation when session ends
+  _timer.cancel();
+  _animationController.stop(); // Stop the animation when session ends
+  setState(() {
+    _isSessionActive = false;
+  });
+
+  // Calculate total time
+  int hotPhases = (_totalPhases + 1) ~/ 2;
+  int coldPhases = _totalPhases ~/ 2;
+  int totalTime = (hotPhases * _hotDuration) + (coldPhases * _coldDuration);
+
+  // Create session without rating yet
+  final session = ShowerSession(
+    dateTime: DateTime.now(),
+    totalTime: totalTime,
+    totalPhases: _totalPhases,
+  );
+
+  // Prompt user to rate their experience
+  _showRatingDialog(session);
+}
+
+void _showRatingDialog(ShowerSession session) {
+  int _selectedRating = 3; // Default rating value
+
+  showDialog(
+    context: context,
+    builder: (context) {
+      return StatefulBuilder(
+        builder: (context, setDialogState) {
+          return AlertDialog(
+            title: const Text('Rate Your Experience'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text('How would you rate your contrast shower session?'),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(5, (index) {
+                    return IconButton(
+                      icon: Icon(
+                        index < _selectedRating ? Icons.star : Icons.star_border,
+                        color: Colors.amber,
+                      ),
+                      onPressed: () {
+                        setDialogState(() {
+                          _selectedRating = index + 1; // Update the rating
+                        });
+                      },
+                    );
+                  }),
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  // Add session with the selected rating
+                  final ratedSession = ShowerSession(
+                    dateTime: session.dateTime,
+                    totalTime: session.totalTime,
+                    totalPhases: session.totalPhases,
+                    rating: _selectedRating,
+                  );
+                  ref.read(sessionHistoryProvider.notifier).addSession(ratedSession);
+                  Navigator.pop(context); // Close the dialog
+                  Navigator.pop(context); // Navigate back to HomeScreen
+                },
+                child: const Text('Submit'),
+              ),
+            ],
+          );
+        },
+      );
+    },
+  );
+}
+
+  void _togglePauseResume() {
     setState(() {
-      _isSessionActive = false;
+      _isPaused = !_isPaused;
+      if (_isPaused) {
+        _animationController.stop(); // Stop animation when paused
+      } else {
+        _animationController.repeat(); // Resume animation when unpaused
+      }
     });
-
-    // Calculate total time
-    int hotPhases = (_totalPhases + 1) ~/ 2;
-    int coldPhases = _totalPhases ~/ 2;
-    int totalTime = (hotPhases * _hotDuration) + (coldPhases * _coldDuration);
-
-    // Create session and add to history
-    final session = ShowerSession(
-      dateTime: DateTime.now(),
-      totalTime: totalTime,
-      totalPhases: _totalPhases,
-    );
-
-    ref.read(sessionHistoryProvider.notifier).addSession(session);
-
-    // Optionally, show a confirmation dialog before navigating back
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Session Complete!'),
-        content: const Text('Your shower session has been recorded.'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context); // Close the dialog
-              Navigator.pop(context); // Navigate back to HomeScreen
-            },
-            child: const Text('OK'),
-          ),
-        ],
-      ),
-    );
   }
 
   @override
@@ -439,6 +512,11 @@ class _ActiveSessionScreenState extends ConsumerState<ActiveSessionScreen>
                       'Remaining Time: $_remainingTime seconds',
                       style: const TextStyle(fontSize: 20),
                     ),
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: _togglePauseResume, // Pause/Resume button
+                      child: Text(_isPaused ? 'Resume' : 'Pause'),
+                    ),
                   ],
                 )
               : const Text(
@@ -450,3 +528,4 @@ class _ActiveSessionScreenState extends ConsumerState<ActiveSessionScreen>
     );
   }
 }
+
