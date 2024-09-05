@@ -19,16 +19,16 @@ class MyApp extends StatelessWidget {
           create: (_) => CounterNotifier(),
           child: MaterialApp(
             home: MyHomePage(),
-          )
-      ),
+          )),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final counterNotifier = Provider.of<CounterNotifier>(context);
+    final counterProviderRiverprod = ref.watch(counterProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -55,7 +55,9 @@ class MyHomePage extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                context.read().state++;
+                ref.read(counterProvider.notifier).state++;
+                print(
+                    'Counter from provider(riverprod): $counterProviderRiverprod');
               },
               child: Text('Riverpod Task'),
             ),
