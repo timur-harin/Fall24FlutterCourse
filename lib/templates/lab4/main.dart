@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
@@ -18,72 +19,77 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Flutter Tasks'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ElevatedButton(
-              onPressed: () async {
-                // TODO
-                // Exercise 1 - Perform an async operation using async/await
-                String result = await fetchData();
-                print(result);
-              },
-              child: Text('Async/Await Task'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                // Exercise 2 - Use Provider for state management
-                // Increment the counter
-              },
-              child: Text('Provider Task'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                // TODO
-                // Exercise 3 - Use Riverpod for state management
-                // Increment the counter
-              },
-              child: Text('Riverpod Task'),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                // TODO 
-                // Exercise 4 - Make an HTTP request using the HTTP package
-              },
-              child: Text('HTTP Task'),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                // TODO
-                // Exercise 5 - Make an HTTP request using Dio and show it in App Screen
-              },
-              child: Text('Dio Task'),
-            ),
-          ],
+      body: SingleChildScrollView( // Wrap the Column with SingleChildScrollView
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              ElevatedButton(
+                onPressed: () async {
+                  String fetchedData = await fetchData();
+                  ref.read(jsonState.notifier).state = fetchedData;
+                },
+                child: Text('Async/Await Task'),
+              ),
+              Text(ref.watch(jsonState)),
+              ElevatedButton(
+                onPressed: () => ref.read(counterState.notifier).state++,
+                child: Text('Provider Task = ${ref.watch(counterState)}'),
+              ),
+              ElevatedButton(
+                onPressed: () => ref.read(riverpodCounterState.notifier).incrementCounter(),
+                child: Text('Riverpod Task = ${ref.watch(riverpodCounterState)}'),
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  String httpResponse = await fetchData();
+                  ref.read(httpResponseState.notifier).state = httpResponse;
+                },
+                child: Text('HTTP Task'),
+              ),
+              Text(ref.watch(httpResponseState)),
+              ElevatedButton(
+                onPressed: () async {
+                  Response dioResponse = await Dio().get('https://jsonplaceholder.typicode.com/posts/1');
+                  ref.read(dioResponseState.notifier).state = dioResponse.toString();
+                },
+                child: Text('Dio Task'),
+              ),
+              Text(ref.watch(dioResponseState)),
+            ],
+          ),
         ),
       ),
     );
   }
+
+
+  Future<String> fetchData() async {
+    final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts/1'));
+    if (response.statusCode == 200) {
+      return response.body;
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
 }
 
-Future<String> fetchData() async {
-  // TODO get json from url and show as text
-  // 'https://jsonplaceholder.typicode.com/posts/1'
+final jsonState = StateProvider<String>((ref) => '');
+final counterState = StateProvider<int>((ref) => 0);
+final dioResponseState = StateProvider<String>((ref) => '');
+final httpResponseState = StateProvider<String>((ref) => '');
+final riverpodCounterState = StateNotifierProvider<CounterNotifier, int>((ref) => CounterNotifier());
 
-  return 'data';
+class CounterNotifier extends StateNotifier<int> {
+  CounterNotifier() : super(0);
+  void incrementCounter() {
+    state++;
+  }
 }
-
-final counterProvider = StateProvider<int>((ref) => 0);
-
-// TODO create a state notifier
-// final 
-
-// TODO create class for state notifier
