@@ -79,6 +79,7 @@ Future<String> fetchData() async {
   // 'https://jsonplaceholder.typicode.com/posts/1'
 
   return 'data';
+  
 }
 
 final counterProvider = StateProvider<int>((ref) => 0);
