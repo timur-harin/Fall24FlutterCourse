@@ -4,26 +4,30 @@ import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return ProviderScope(
-      child: MaterialApp(
-        home: MyHomePage(),
-      ),
+    return MaterialApp(
+      home: MyHomePage(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final counter = ref.watch(counterProvider);
+    final riverpodCounter = ref.watch(riverpodCounterProvider);
+    final dioResponse = ref.watch(dioProvider);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter Tasks'),
+        title: const Text('Flutter Tasks'),
       ),
       body: Center(
         child: Column(
@@ -31,41 +35,40 @@ class MyHomePage extends StatelessWidget {
           children: <Widget>[
             ElevatedButton(
               onPressed: () async {
-                // TODO
-                // Exercise 1 - Perform an async operation using async/await
                 String result = await fetchData();
-                print(result);
+                print("Async/Await Task: $result");
               },
-              child: Text('Async/Await Task'),
+              child: const Text('Async/Await Task'),
             ),
             ElevatedButton(
               onPressed: () {
-                // Exercise 2 - Use Provider for state management
-                // Increment the counter
+                ref.read(counterProvider.notifier).state++;
               },
-              child: Text('Provider Task'),
+              child: Text('Provider Task - Count: $counter'),
             ),
             ElevatedButton(
               onPressed: () {
-                // TODO
-                // Exercise 3 - Use Riverpod for state management
-                // Increment the counter
+                ref.read(riverpodCounterProvider.notifier).increment();
               },
-              child: Text('Riverpod Task'),
+              child: Text('Riverpod Task - Count: $riverpodCounter'),
             ),
             ElevatedButton(
               onPressed: () async {
-                // TODO 
-                // Exercise 4 - Make an HTTP request using the HTTP package
+                final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts/1'));
+                print('HTTP Response: ${response.body}');
               },
-              child: Text('HTTP Task'),
+              child: const Text('HTTP Task'),
             ),
             ElevatedButton(
-              onPressed: () async {
-                // TODO
-                // Exercise 5 - Make an HTTP request using Dio and show it in App Screen
+              onPressed: () {
+                ref.read(dioProvider.notifier).fetchData();
               },
-              child: Text('Dio Task'),
+              child: const Text('Dio Task'),
+            ),
+            dioResponse.when(
+              data: (data) => Text('Dio Response: $data'),
+              loading: () => const CircularProgressIndicator(),
+              error: (err, stack) => Text('Error: $err'),
             ),
           ],
         ),
@@ -75,15 +78,37 @@ class MyHomePage extends StatelessWidget {
 }
 
 Future<String> fetchData() async {
-  // TODO get json from url and show as text
-  // 'https://jsonplaceholder.typicode.com/posts/1'
-
-  return 'data';
+  final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts/1'));
+  return response.body;
 }
 
 final counterProvider = StateProvider<int>((ref) => 0);
 
-// TODO create a state notifier
-// final 
+final riverpodCounterProvider = StateNotifierProvider<CounterNotifier, int>((ref) => CounterNotifier());
 
-// TODO create class for state notifier
+class CounterNotifier extends StateNotifier<int> {
+  CounterNotifier() : super(0);
+
+  void increment() => state++;
+}
+
+// StateNotifier for handling Dio responses
+class DioNotifier extends StateNotifier<AsyncValue<String>> {
+  DioNotifier() : super(const AsyncValue.data("Click button Dio Task"));
+
+  final Dio _dio = Dio();
+
+  Future<void> fetchData() async {
+    try {
+      state = const AsyncValue.data("Click button Dio Task");
+      final response = await _dio.get('https://jsonplaceholder.typicode.com/posts/1');
+      state = AsyncValue.data(response.data.toString());
+    } catch (error) {
+      state = AsyncValue.error(error, StackTrace.current);
+    }
+  }
+}
+
+final dioProvider = StateNotifierProvider<DioNotifier, AsyncValue<String>>((ref) {
+  return DioNotifier();
+});
