@@ -25,9 +25,6 @@ class Lab4 extends StatelessWidget {
 class MyHomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final counter = ref.watch(counterNotifierProvider);
-    final providerCounter = context.watch<CounterNotifier>();
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Flutter Tasks'),
@@ -45,6 +42,10 @@ class MyHomePage extends ConsumerWidget {
             ),
             ElevatedButton(
               onPressed: () {
+                final providerCounter = provider.Provider.of<CounterNotifier>(
+                  context,
+                  listen: false,
+                );
                 providerCounter.increment();
                 final int state = providerCounter.currentState;
                 print('current counter state: $state');
@@ -53,8 +54,10 @@ class MyHomePage extends ConsumerWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                ref.read(counterNotifierProvider.notifier).increment();
-                print('current counter state: $counter');
+                final CounterNotifier notifier =
+                    ref.read(counterNotifierProvider.notifier);
+                notifier.increment();
+                print('current counter state: ${notifier.currentState}');
               },
               child: const Text('Riverpod Task'),
             ),
