@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/shower_session.dart';
 import '../providers/session_history_provider.dart';
+import '../widgets/custom_painer.dart';
 
 class ActiveSessionScreen extends ConsumerStatefulWidget {
   @override
@@ -89,7 +90,7 @@ class _ActiveSessionScreenState extends ConsumerState<ActiveSessionScreen> {
 
   Future<void> _endSession() async {
     _timer.cancel();
-    _recordPhase(); // Record the final phase
+    _recordPhase();
 
     final settings = ModalRoute.of(context)!.settings.arguments as Map<String, int>;
     final sessionDuration = settings['sessionDuration']!;
@@ -136,15 +137,9 @@ class _ActiveSessionScreenState extends ConsumerState<ActiveSessionScreen> {
               ),
             ),
             const SizedBox(height: 40),
-
-            // Central Circle Indicator
-            Container(
-              width: 150,
-              height: 150,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: _isHotPhase ? Colors.red : Colors.blue,
-              ),
+            CustomPaint(
+              size: const Size(150, 150),
+              painter: PhaseCirclePainter(isHotPhase: _isHotPhase),
             ),
             const SizedBox(height: 40),
             // Pause/Resume Button
