@@ -19,7 +19,8 @@ class MyApp extends StatelessWidget {
           create: (_) => CounterNotifier(),
           child: MaterialApp(
             home: MyHomePage(),
-          )),
+          )
+      ),
     );
   }
 }
@@ -41,27 +42,28 @@ class MyHomePage extends StatelessWidget {
               onPressed: () async {
                 String result = await fetchData();
                 print(result);
-                Text(result);
               },
               child: Text('Async/Await Task'),
             ),
             ElevatedButton(
               onPressed: () {
                 counterNotifier.increment();
-                counterNotifier.increment();
+                final int counterRN = counterNotifier.count;
+                print('Counter from provider(provider): $counterRN');
               },
               child: Text('Provider Task'),
             ),
             ElevatedButton(
               onPressed: () {
-                context.read(counterProvider.notifier).state++;
+                context.read().state++;
               },
               child: Text('Riverpod Task'),
             ),
             ElevatedButton(
               onPressed: () async {
-                final response = await http.get(
-                    Uri.parse('https://jsonplaceholder.typicode.com/posts/2'));
+                final response = await http.get(Uri.parse(
+                    'https://jsonplaceholder.typicode.com/comments/42'));
+                print(response.body);
               },
               child: Text('HTTP Task'),
             ),
@@ -69,8 +71,8 @@ class MyHomePage extends StatelessWidget {
               onPressed: () async {
                 Dio dio = Dio();
                 final response = await dio
-                    .get('https://jsonplaceholder.typicode.com/posts/3');
-                Text(response.data.toString());
+                    .get('https://jsonplaceholder.typicode.com/photos/224');
+                // Map<String, dynamic> json = jsonDecode(response.data);
               },
               child: Text('Dio Task'),
             ),
