@@ -1,10 +1,21 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'dart:convert';
+import 'dart:js_interop';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' hide ChangeNotifierProvider, Provider;
+import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(ChangeNotifierProvider(
+    create: (context) => CounterModel(),
+    child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -18,12 +29,15 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final counter = ref.watch(counterRiverpod);
+    var counter_provider = Provider.of<CounterModel>(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter Tasks'),
+        title: const Text('Flutter Tasks'),
       ),
       body: Center(
         child: Column(
@@ -31,41 +45,76 @@ class MyHomePage extends StatelessWidget {
           children: <Widget>[
             ElevatedButton(
               onPressed: () async {
-                // TODO
-                // Exercise 1 - Perform an async operation using async/await
                 String result = await fetchData();
-                print(result);
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text('Fetched Data'),
+                    content: SingleChildScrollView(child: Text(result)),
+                    actions: <Widget>[
+                      TextButton(onPressed: () {
+                        Navigator.of(context).pop();
+                      }, 
+                      child: const Text('Close'))
+                    ],
+                  )
+                );
               },
-              child: Text('Async/Await Task'),
+              child: const Text('Async/Await Task'),
             ),
+            Text("Provider state counter: ${counter_provider.counter}"),
             ElevatedButton(
-              onPressed: () {
-                // Exercise 2 - Use Provider for state management
-                // Increment the counter
+              onPressed: () { 
+                counter_provider.incrementCounter();
               },
-              child: Text('Provider Task'),
+              child: const Text('Provider Task'),
             ),
+            Text("Riverpod state counter: ${ref.read(counterRiverpod.notifier).state}"),
             ElevatedButton(
-              onPressed: () {
-                // TODO
-                // Exercise 3 - Use Riverpod for state management
-                // Increment the counter
+              onPressed: () { 
+                ref.read(counterRiverpod.notifier).state++;
               },
-              child: Text('Riverpod Task'),
+              child: const Text('Riverpod Task'),
             ),
             ElevatedButton(
               onPressed: () async {
-                // TODO 
-                // Exercise 4 - Make an HTTP request using the HTTP package
+                final number = Random().nextInt(4) + 1;
+                final response = await http.get(Uri.parse('https://swapi.dev/api/films/$number/'));
+                final film = jsonDecode(response.body) as Map<String, dynamic>;
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text('Random Film Data'),
+                    content: SingleChildScrollView(child: Text(film["opening_crawl"])),
+                    actions: <Widget>[
+                      TextButton(onPressed: () {
+                        Navigator.of(context).pop();
+                      }, 
+                      child: const Text('Close'))
+                    ],
+                  )
+                );
               },
-              child: Text('HTTP Task'),
+              child: const Text('HTTP Task'),
             ),
             ElevatedButton(
               onPressed: () async {
-                // TODO
-                // Exercise 5 - Make an HTTP request using Dio and show it in App Screen
+                String result = await fetchDataDio();
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text('Fetched Data'),
+                    content: SingleChildScrollView(child: Text(result)),
+                    actions: <Widget>[
+                      TextButton(onPressed: () {
+                        Navigator.of(context).pop();
+                      }, 
+                      child: const Text('Close'))
+                    ],
+                  )
+                );
               },
-              child: Text('Dio Task'),
+              child: const Text('Dio Task'),
             ),
           ],
         ),
@@ -75,15 +124,35 @@ class MyHomePage extends StatelessWidget {
 }
 
 Future<String> fetchData() async {
-  // TODO get json from url and show as text
-  // 'https://jsonplaceholder.typicode.com/posts/1'
+  final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts/1'));
 
-  return 'data';
+  if (response.statusCode == 200) {
+    return response.body;
+  } else {
+    throw Exception('Failed to get data from url');
+  }
 }
 
-final counterProvider = StateProvider<int>((ref) => 0);
+Future<String> fetchDataDio() async {
+  final dio = Dio();
+  final response = await dio.get('https://jsonplaceholder.typicode.com/posts/3');
 
-// TODO create a state notifier
-// final 
+  if (response.statusCode == 200) {
+    return response.data.toString();
+  } else {
+    throw Exception('Failed to load data');
+  }
+}
 
-// TODO create class for state notifier
+final counterRiverpod = StateProvider<int>((ref) => 0);
+
+class CounterModel extends ChangeNotifier {
+  int _counter = 0;
+
+  int get counter => _counter;
+
+  void incrementCounter() {
+    _counter++;
+    notifyListeners();
+  }
+}
