@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' hide ChangeNotifierProvider;
 import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,7 +13,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ProviderScope(
       child: MaterialApp(
-        home: MyHomePage(),
+        home: ChangeNotifierProvider(
+          create: (_) => Counter(),
+          child: MyHomePage(),
+        ),
       ),
     );
   }
@@ -31,8 +35,6 @@ class MyHomePage extends StatelessWidget {
           children: <Widget>[
             ElevatedButton(
               onPressed: () async {
-                // TODO
-                // Exercise 1 - Perform an async operation using async/await
                 String result = await fetchData();
                 print(result);
               },
@@ -40,30 +42,28 @@ class MyHomePage extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                // Exercise 2 - Use Provider for state management
-                // Increment the counter
+                context.read<Counter>().increment();
               },
               child: Text('Provider Task'),
             ),
             ElevatedButton(
               onPressed: () {
-                // TODO
-                // Exercise 3 - Use Riverpod for state management
-                // Increment the counter
+                context.read<Counter>().increment();
               },
               child: Text('Riverpod Task'),
             ),
             ElevatedButton(
               onPressed: () async {
-                // TODO 
-                // Exercise 4 - Make an HTTP request using the HTTP package
+                String result = await httpRequest();
+                print(result);
               },
               child: Text('HTTP Task'),
             ),
             ElevatedButton(
               onPressed: () async {
-                // TODO
-                // Exercise 5 - Make an HTTP request using Dio and show it in App Screen
+                var dio = Dio();
+                final response = await dio.get('https://jsonplaceholder.typicode.com/posts/2');
+                print(response.data);
               },
               child: Text('Dio Task'),
             ),
@@ -75,15 +75,57 @@ class MyHomePage extends StatelessWidget {
 }
 
 Future<String> fetchData() async {
-  // TODO get json from url and show as text
-  // 'https://jsonplaceholder.typicode.com/posts/1'
+  final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts/1'));
 
-  return 'data';
+  if (response.statusCode == 200) {
+    return response.body;
+  } else {
+    throw Exception('Failed to load data');
+  }
 }
+
+
+Future<String> httpRequest() async {
+  final response = await http.post(
+    Uri.parse('https://jsonplaceholder.typicode.com/posts'),
+    body: {
+      'userId': '1',
+      'id': '1',
+      'title': 'new title',
+      'body': 'new body',
+    },
+  );
+
+  if (response.statusCode == 201) {
+    return response.body;
+  } else {
+    throw Exception('${response.statusCode} Failed to load data');
+  }
+}
+
 
 final counterProvider = StateProvider<int>((ref) => 0);
 
-// TODO create a state notifier
-// final 
+final counterStateNotifier = StateNotifierProvider<CounterNotifier, int>((ref) {
+  return CounterNotifier();
+});
 
-// TODO create class for state notifier
+class CounterNotifier extends StateNotifier<int> {
+  CounterNotifier() : super(0);
+
+  void increment() {
+    state++;
+  }
+}
+
+class Counter extends ChangeNotifier {
+  int _count = 0;
+
+  int get count => _count;
+
+  void increment() {
+    _count++;
+    print(_count);
+    notifyListeners();
+  }
+}
