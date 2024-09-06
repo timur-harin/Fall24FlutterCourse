@@ -1,0 +1,23 @@
+name: showerPackage
+description: showerPackage for contrastShower app
+
+publish_to: 'none'
+
+version: 0.0.1
+homepage: https://example.com
+
+environment:
+  sdk: ">=2.17.0 <3.0.0"
+  flutter: ">=2.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_riverpod: ^2.0.0
+  hive: ^2.0.0
+  hive_flutter: ^1.1.0
+  path_provider: ^2.0.0
+
+dev_dependencies:
+  hive_generator: ^1.1.0
+  build_runner: ^2.0.0
