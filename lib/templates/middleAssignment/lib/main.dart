@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:showerPackage/home_screen.dart';
 
-void main() {
-  runApp(const MiddleAssigmentApp());
+void main() async {
+  await Hive.initFlutter();
+  runApp(const ProviderScope(child: MiddleAssigmentApp()));
 }
 
 class MiddleAssigmentApp extends StatelessWidget {
@@ -14,8 +18,7 @@ class MiddleAssigmentApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      // TODO - complete assignment
-      home: null,
+      home: HomeScreen(),
     );
   }
 }
