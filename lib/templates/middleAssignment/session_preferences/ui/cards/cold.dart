@@ -81,7 +81,7 @@ class ColdDurationCard extends ConsumerWidget {
           textController: _minutesController,
           onChanged: (text) {
             ref.read(_provider.notifier).updateSessionPreferences(
-                    (state) => state.copyWith(coldMinutes: int.tryParse(text))
+              (state) => state.copyWith(coldMinutes: int.tryParse(text))
             );
           },
         ),
@@ -98,7 +98,7 @@ class ColdDurationCard extends ConsumerWidget {
           textController: _secondsController,
           onChanged: (text) {
             ref.read(_provider.notifier).updateSessionPreferences(
-                    (state) => state.copyWith(coldSeconds: int.tryParse(text))
+              (state) => state.copyWith(coldSeconds: int.tryParse(text))
             );
           },
         ),

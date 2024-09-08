@@ -1,11 +1,14 @@
-import 'package:fall_24_flutter_course/templates/middleAssignment/session_preferences/ui/cards/cards.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:get_it/get_it.dart';
 
+import '../session_preferences/ui/apply_button.dart';
+import '../session_preferences/ui/cards/cards.dart';
 import '../ui/foundation/app_label.dart';
 import '../ui/theme/theme.dart';
+
+const _applyButtonMaxWidth = 512.0;
 
 class SessionPreferencesScreen extends StatelessWidget {
   SessionPreferencesScreen({super.key});
@@ -44,6 +47,20 @@ class SessionPreferencesScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         PreferencesCards(),
+
+        SizedBox(height: _theme.dimensions.padding.large),
+
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: _applyButtonMaxWidth),
+          child: Container(
+              width: double.infinity,
+              margin: EdgeInsets.only(
+                left: _theme.dimensions.padding.medium,
+                right: _theme.dimensions.padding.medium,
+              ),
+              child: ApplyButton()
+          ),
+        ),
       ],
     ),
   );

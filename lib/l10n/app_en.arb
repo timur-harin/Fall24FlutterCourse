@@ -8,6 +8,8 @@
     "shower_prefs_hot_duration": "Hot Duration",
     "shower_prefs_cold_duration": "Cold Duration",
     "shower_prefs_phases": "Phases",
+    "shower_pref_phases_label": "Number of phases",
+    "shower_pref_begin": "Begin",
 
     "shower_minutes": "Minutes",
     "shower_seconds": "Seconds"

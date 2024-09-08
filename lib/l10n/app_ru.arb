@@ -8,6 +8,8 @@
     "shower_prefs_hot_duration": "Продолжительность горячего душа",
     "shower_prefs_cold_duration": "Продолжительность холодного душа",
     "shower_prefs_phases": "Фазы",
+    "shower_pref_phases_label": "Количество фаз",
+    "shower_pref_begin": "Начать",
 
     "shower_minutes": "Минуты",
     "shower_seconds": "Секунды"

@@ -27,6 +27,16 @@ class PreferencesNotifier extends StateNotifier<PreferencesState> {
     state = update(state);
   }
 
+  bool get isSessionCreationReady {
+    if (state.hotMinutes == null) return false;
+    if (state.hotSeconds == null) return false;
+    if (state.coldMinutes == null) return false;
+    if (state.coldSeconds == null) return false;
+    if (state.phases == null) return false;
+    if (state.startPhase == null) return false;
+    return true;
+  }
+
   void storeCurrentSession() async {
     await _repository.updateCurrentSession(
         ShowerSession(
