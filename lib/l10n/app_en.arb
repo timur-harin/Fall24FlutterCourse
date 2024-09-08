@@ -1,0 +1,14 @@
+{
+    "shower_app_name": "Contrast Shower Companion",
+
+    "shower_home_start_first_session": "Start Your First Session",
+    "shower_home_start_session": "Start New Session",
+
+    "shower_prefs_top_bar": "Session Preferences",
+    "shower_prefs_hot_duration": "Hot Duration",
+    "shower_prefs_cold_duration": "Cold Duration",
+    "shower_prefs_phases": "Phases",
+
+    "shower_minutes": "Minutes",
+    "shower_seconds": "Seconds"
+}
