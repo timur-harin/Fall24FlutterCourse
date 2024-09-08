@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'home_screen.dart';
 
-void main() {
-  runApp(const MiddleAssigmentApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  runApp(const ProviderScope(child: MiddleAssigmentApp()));
 }
 
 class MiddleAssigmentApp extends StatelessWidget {
@@ -13,9 +18,9 @@ class MiddleAssigmentApp extends StatelessWidget {
       title: 'Middle Assigment',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: const Color(0xFF2C2C2C),
       ),
-      // TODO - complete assignment
-      home: null,
+      home: const HomeScreen(),
     );
   }
 }
