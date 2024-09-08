@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'session_history_screen.dart';
 
 void main() {
-  runApp(const MiddleAssigmentApp());
+  runApp(const ProviderScope(child: MiddleAssignmentApp()));
 }
 
-class MiddleAssigmentApp extends StatelessWidget {
-  const MiddleAssigmentApp({super.key});
+class MiddleAssignmentApp extends StatelessWidget {
+  const MiddleAssignmentApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Middle Assigment',
+      title: 'Contrast Shower Companion',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      // TODO - complete assignment
-      home: null,
+      home: const SessionHistoryScreen(),
     );
   }
 }
