@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
   Future<void> _execute(BuildContext context, String path) async {
     final Dio dio = Dio();
     final Response response =
-        await dio.get('https://jsonplaceholder.typicode.com/comments');
+        await dio.get(path);
     if (context.mounted) {
       context.pushRoute(CatRoute(statusCode: response.statusCode.toString()));
     }
