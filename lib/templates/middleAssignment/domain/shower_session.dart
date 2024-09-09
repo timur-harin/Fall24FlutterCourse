@@ -16,9 +16,11 @@ class ShowerSession {
 
   final int hotMinutes;
   final int hotSeconds;
+  late final int hotDurationSecs;
 
   final int coldMinutes;
   final int coldSeconds;
+  late final int coldDurationSecs;
 
   late final String totalDuration;
   late final int totalDurationSecs;
@@ -32,14 +34,14 @@ class ShowerSession {
     required this.phases,
     required this.startPhase,
   }) {
-    final hotSessionDurationSecs = _sessionDurationSecs(minutes: hotMinutes, seconds: hotSeconds);
-    final coldSessionDurationSecs = _sessionDurationSecs(minutes: coldMinutes, seconds: coldSeconds);
+    hotDurationSecs = _sessionDurationSecs(minutes: hotMinutes, seconds: hotSeconds);
+    coldDurationSecs = _sessionDurationSecs(minutes: coldMinutes, seconds: coldSeconds);
 
     final firstPhaseTimes = phases ~/ 2 + phases % 2;
     final secondPhaseTimes = phases ~/ 2;
 
-    final firstPhaseDurationSecs = startPhase == ShowerPhase.hot ? hotSessionDurationSecs : coldSessionDurationSecs;
-    final secondPhaseDurationSecs = startPhase != ShowerPhase.hot ? hotSessionDurationSecs : coldSessionDurationSecs;
+    final firstPhaseDurationSecs = startPhase == ShowerPhase.hot ? hotDurationSecs : coldDurationSecs;
+    final secondPhaseDurationSecs = startPhase != ShowerPhase.hot ? hotDurationSecs : coldDurationSecs;
 
     final totalDurationTotalSecs = firstPhaseDurationSecs * firstPhaseTimes + secondPhaseDurationSecs * secondPhaseTimes;
     final totalDurationMinutes = totalDurationTotalSecs ~/ 60;

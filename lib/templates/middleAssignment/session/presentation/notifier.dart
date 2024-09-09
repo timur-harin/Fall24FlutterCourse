@@ -14,9 +14,13 @@ class SessionNotifier extends StateNotifier<SessionState?> {
     final session = await _repository.currentSession();
     if (session == null) return;
     state = SessionState(
-      phasesRemaining: session.phases,
+      totalPhases: session.phases,
       phase: session.startPhase,
       timeRemainingSecs: session.totalDurationSecs,
+      hotDurationSecs: session.hotDurationSecs,
+      coldDurationSecs: session.coldDurationSecs,
     );
   }
+
+  void onValveClick() => state = state?.switchedState;
 }

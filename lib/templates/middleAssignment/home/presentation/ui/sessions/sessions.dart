@@ -43,7 +43,7 @@ class ShowerSessionsColumn extends ConsumerWidget {
         SizedBox(height: _theme.dimensions.padding.extraBig),
         _startSessionsButton(context, isFirstSession: true)
       ],
-    )
+    ),
   );
 
   Widget _startSessionsButton(BuildContext context, {required bool isFirstSession}) {
