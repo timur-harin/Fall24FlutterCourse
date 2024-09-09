@@ -6,8 +6,8 @@ import 'package:get_it/get_it.dart';
 
 import 'notifier.dart';
 import 'state.dart';
+import 'ui/content.dart';
 import '../../domain/shower_session.dart';
-import '../../session/presentation/ui/valve/valve.dart';
 import '../../ui/foundation/app_label.dart';
 import '../../ui/theme/images.dart';
 import '../../ui/theme/theme.dart';
@@ -28,7 +28,7 @@ class SessionScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: state == null ? null : _appBar(context, state),
-      body: state == null ? _loadingStub() : _content(state, notifier),
+      body: state == null ? _loadingStub() : _content(context, state, notifier),
     );
   }
 
@@ -79,34 +79,59 @@ class SessionScreen extends ConsumerWidget {
     child: CircularProgressIndicator(color: _theme.colors.button.primary),
   );
 
-  // _theme.colors.background.primary
+  Widget _content(
+      BuildContext context,
+      SessionState state,
+      SessionNotifier notifier,
+  ) {
+    final strings = AppLocalizations.of(context)!;
 
-  Widget _content(SessionState state, SessionNotifier notifier) => Container(
-    alignment: Alignment.center,
-    width: double.infinity,
-    height: double.infinity,
-    decoration: BoxDecoration(
-      gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            _theme.colors.background.primary,
-            state.phase == ShowerPhase.hot
-                ? _theme.colors.background.hot
-                : _theme.colors.background.cold,
-          ],
-      ),
-    ),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return SessionContent(
+        phase: state.phase,
+        currentPhaseDurationSecs: state.currentPhaseDurationSecs,
+        nextPhaseDurationSecs: state.nextPhaseDurationSecs,
+        onTimeChanged: (_) => notifier.incrementDuration(),
+        onPhaseEnd: () => switch (state.hasNextPhase) {
+          true => notifier.beginNextPhase(),
+          false => showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text(
+                strings.shower_session_end_dialog_title,
+                style: _theme.typography.h.h3.copyWith(
+                  color: _theme.colors.text.topBar,
+                ),
+              ),
+              backgroundColor: _theme.colors.background.primary,
+              content: _dialogContent(context, state),
+            ),
+          ),
+        },
+    );
+  }
+
+  Widget _dialogContent(BuildContext context, SessionState state) {
+    final strings = AppLocalizations.of(context)!;
+
+    return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        // TODO: нарисовать вентиль, таймер, паузу
-        Valve(
-            phase: state.phase,
-            onClick: () => notifier.onValveClick(),
+        Text(
+          '${strings.shower_session_end_dialog_total_duration}: ${state.passedDuration}s',
+          style: _theme.typography.regular.copyWith(
+            color: _theme.colors.text.onBackground,
+          ),
+        ),
+
+        SizedBox(height: _theme.dimensions.padding.small),
+
+        Text(
+          '${strings.shower_session_end_dialog_phases_number}: ${state.currentPhaseNumber + 1}',
+          style: _theme.typography.regular.copyWith(
+            color: _theme.colors.text.onBackground,
+          ),
         ),
       ],
-    ),
-  );
+    );
+  }
 }

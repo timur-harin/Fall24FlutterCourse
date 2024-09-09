@@ -5,5 +5,5 @@ abstract class ShowerSessionRepository {
   Future<void> insertShowerSession(ShowerSession session);
 
   Future<ShowerSession?> currentSession();
-  Future<void> updateCurrentSession(ShowerSession session);
+  Future<void> updateCurrentSession(ShowerSession? session);
 }

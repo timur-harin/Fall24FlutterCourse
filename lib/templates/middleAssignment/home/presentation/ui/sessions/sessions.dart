@@ -21,32 +21,38 @@ class ShowerSessionsColumn extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final sessions = ref.watch(_provider);
-    return sessions.isEmpty ? _emptyStub(context) : _sessionsColumn();
+    final notifier = ref.read(_provider.notifier);
+    return sessions.isEmpty ? _emptyStub(context, notifier) : _sessionsColumn();
   }
 
   Widget _sessionsColumn() => Column();
 
-  Widget _emptyStub(BuildContext context) => Container(
-    alignment: Alignment.center,
-    width: double.infinity,
-    height: double.infinity,
-    margin: EdgeInsets.only(bottom: _theme.dimensions.padding.large),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Image(
-          image: AssetImage(AppImages.load('bath.png')),
-          width: _imageStubSize,
-          height: _imageStubSize,
+  Widget _emptyStub(BuildContext context, ShowerSessionsNotifier notifier) =>
+      Container(
+        alignment: Alignment.center,
+        width: double.infinity,
+        height: double.infinity,
+        margin: EdgeInsets.only(bottom: _theme.dimensions.padding.large),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image(
+              image: AssetImage(AppImages.load('bath.png')),
+              width: _imageStubSize,
+              height: _imageStubSize,
+            ),
+            SizedBox(height: _theme.dimensions.padding.extraBig),
+            _startSessionsButton(context, notifier, isFirstSession: true)
+          ],
         ),
-        SizedBox(height: _theme.dimensions.padding.extraBig),
-        _startSessionsButton(context, isFirstSession: true)
-      ],
-    ),
-  );
+      );
 
-  Widget _startSessionsButton(BuildContext context, {required bool isFirstSession}) {
+  Widget _startSessionsButton(
+      BuildContext context,
+      ShowerSessionsNotifier notifier,
+      {required bool isFirstSession}
+  ) {
     final local = AppLocalizations.of(context)!;
 
     final text = isFirstSession

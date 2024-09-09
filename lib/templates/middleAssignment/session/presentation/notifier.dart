@@ -16,11 +16,12 @@ class SessionNotifier extends StateNotifier<SessionState?> {
     state = SessionState(
       totalPhases: session.phases,
       phase: session.startPhase,
-      timeRemainingSecs: session.totalDurationSecs,
       hotDurationSecs: session.hotDurationSecs,
       coldDurationSecs: session.coldDurationSecs,
     );
   }
 
-  void onValveClick() => state = state?.switchedState;
+  void beginNextPhase() => state = state?.switchedState;
+
+  void incrementDuration() => state = state?.withIncrementedDuration;
 }

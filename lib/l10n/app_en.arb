@@ -1,8 +1,8 @@
 {
     "shower_app_name": "Contrast Shower Companion",
 
-    "shower_home_start_first_session": "Start Your First Session",
-    "shower_home_start_session": "Start New Session",
+    "shower_home_start_first_session": "Start your first session",
+    "shower_home_start_session": "Start new session",
 
     "shower_prefs_top_bar": "Session Preferences",
     "shower_prefs_hot_duration": "Hot Duration",
@@ -14,6 +14,9 @@
     "shower_session_top_bar_phase": "Phase",
     "shower_session_top_bar_hot": "Hot",
     "shower_session_top_bar_cold": "Cold",
+    "shower_session_end_dialog_title": "Session is over",
+    "shower_session_end_dialog_total_duration": "Total duration",
+    "shower_session_end_dialog_phases_number": "Completed phases",
 
     "shower_minutes": "Minutes",
     "shower_seconds": "Seconds"

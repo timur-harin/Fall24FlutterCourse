@@ -7,8 +7,12 @@ class ShowerSessionsNotifier extends StateNotifier<List<ShowerSession>> {
 
   ShowerSessionsNotifier(this._repository): super([]) {
     loadSessions();
+    clearPreviousSession();
   }
 
   void loadSessions() async =>
       state = await _repository.showerSessions();
+
+  void clearPreviousSession() async =>
+      await _repository.updateCurrentSession(null);
 }

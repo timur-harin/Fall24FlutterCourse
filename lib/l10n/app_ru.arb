@@ -1,10 +1,10 @@
 {
-    "shower_app_name": "Компаньон Контрастного Душа",
+    "shower_app_name": "Контрастный Душ",
 
-    "shower_home_start_first_session": "Начать Первую Сессию",
-    "shower_home_start_first_session": "Начать Новую Сессию",
+    "shower_home_start_first_session": "Начать первый сеанс",
+    "shower_home_start_first_session": "Начать новый сеанс",
 
-    "shower_prefs_top_bar": "Параметры Сессии",
+    "shower_prefs_top_bar": "Настройки сеанса",
     "shower_prefs_hot_duration": "Продолжительность горячего душа",
     "shower_prefs_cold_duration": "Продолжительность холодного душа",
     "shower_prefs_phases": "Фазы",
@@ -14,6 +14,9 @@
     "shower_session_top_bar_phase": "Фаза",
     "shower_session_top_bar_hot": "Горячая",
     "shower_session_top_bar_cold": "Холодная",
+    "shower_session_end_dialog_title": "Сеанс закончен",
+    "shower_session_end_dialog_total_duration": "Общее время",
+    "shower_session_end_dialog_phases_number": "Кол-во пройденных фаз",
 
     "shower_minutes": "Минуты",
     "shower_seconds": "Секунды"

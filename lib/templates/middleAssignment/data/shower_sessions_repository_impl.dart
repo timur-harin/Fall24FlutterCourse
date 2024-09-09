@@ -79,8 +79,13 @@ class ShowerSessionsRepositoryImpl extends ShowerSessionRepository {
   }
 
   @override
-  Future<void> updateCurrentSession(ShowerSession session) async {
+  Future<void> updateCurrentSession(ShowerSession? session) async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setString(_currentSessionKey, jsonEncode(session.toJson()));
+
+    if (session == null) {
+      prefs.remove(_currentSessionKey);
+    } else {
+      prefs.setString(_currentSessionKey, jsonEncode(session.toJson()));
+    }
   }
 }

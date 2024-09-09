@@ -9,51 +9,64 @@ class SessionState {
   final int totalPhases;
   final int hotDurationSecs;
   final int coldDurationSecs;
-  final int timeRemainingSecs;
+  final int passedDuration;
+  late final int currentPhaseDurationSecs;
+  late final bool hasNextPhase;
 
   SessionState({
     required this.phase,
     required this.totalPhases,
     required this.hotDurationSecs,
     required this.coldDurationSecs,
-    required this.timeRemainingSecs,
+    this.passedDuration = 0,
     this.currentPhaseNumber = 0,
-  });
+  }) {
+    currentPhaseDurationSecs = switch (phase) {
+      ShowerPhase.hot => hotDurationSecs,
+      ShowerPhase.cold => coldDurationSecs,
+    };
+
+    hasNextPhase = currentPhaseNumber + 1 < totalPhases;
+  }
 
   SessionState copyWith({
     ShowerPhase? phase,
     int? totalPhases,
     int? hotDurationSecs,
     int? coldDurationSecs,
-    int? timeRemainingSecs,
+    int? passedDuration,
     int? currentPhaseNumber,
   }) => SessionState(
       phase: phase ?? this.phase,
       totalPhases: totalPhases ?? this.totalPhases,
       hotDurationSecs: hotDurationSecs ?? this.hotDurationSecs,
       coldDurationSecs: coldDurationSecs ?? this.coldDurationSecs,
-      timeRemainingSecs: timeRemainingSecs ?? this.timeRemainingSecs,
+      passedDuration: passedDuration ?? this.passedDuration,
       currentPhaseNumber: currentPhaseNumber ?? this.currentPhaseNumber,
   );
 
-  SessionState get switchedState => copyWith(
-    phase: _nextPhase,
-    currentPhaseNumber: currentPhaseNumber + 1,
-    timeRemainingSecs: _nextTimeRemainingSecs,
+  SessionState get switchedState => switch (hasNextPhase) {
+    false => this,
+    true => copyWith(
+      phase: _nextPhase,
+      currentPhaseNumber: currentPhaseNumber + 1,
+    ),
+  };
+
+  SessionState get withIncrementedDuration => copyWith(
+    passedDuration: passedDuration + 1
   );
 
-  SessionState get withReducedSecond => switch (timeRemainingSecs) {
-    0 => switchedState,
-    _ => copyWith(timeRemainingSecs: timeRemainingSecs - 1),
+  int? get nextPhaseDurationSecs => switch (hasNextPhase) {
+    false => null,
+    true => switch (phase) {
+      ShowerPhase.hot => coldDurationSecs,
+      ShowerPhase.cold => hotDurationSecs,
+    },
   };
 
   ShowerPhase get _nextPhase => switch (phase) {
     ShowerPhase.hot => ShowerPhase.cold,
     ShowerPhase.cold => ShowerPhase.hot,
-  };
-
-  int get _nextTimeRemainingSecs => switch (phase) {
-    ShowerPhase.hot => coldDurationSecs,
-    ShowerPhase.cold => hotDurationSecs,
   };
 }
