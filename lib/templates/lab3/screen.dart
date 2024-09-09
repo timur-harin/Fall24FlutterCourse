@@ -8,7 +8,7 @@ class HydrationScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // TODO - Add ref.watch and use provider to get the water intake
     // final waterIntake =
-    return Scaffold(
+    return const Scaffold(
       // TODO add AppBar with Icon to reset the water intake as actions parameter of AppBar
       body: Center(
         child: Column(

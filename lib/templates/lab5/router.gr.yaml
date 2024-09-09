@@ -1,0 +1,10 @@
+   routes:
+     /:
+       name: Home
+       page: 'screens/home_screen.dart'
+     /about:
+       name: About
+       page: 'screens/about_screen.dart'
+     /user/:id:
+       name: UserDetail
+       page: 'screens/user_detail_screen.dart'
