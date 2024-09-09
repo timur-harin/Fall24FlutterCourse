@@ -1,44 +1,47 @@
 import 'package:flutter/material.dart';
-import 'dart:async'; // For the timer
+import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'session_active_screen.dart';
 import 'shower_session.dart';
-import 'session_provider.dart'; // Your session and preferences provider
 
-class SessionScreen extends ConsumerWidget {
+class SessionScreen extends ConsumerStatefulWidget {
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    int _counter = 5; // Starting timer at 5 seconds
-    Timer? _timer;
+  _SessionScreenState createState() => _SessionScreenState();
+}
 
-    // Function to navigate to the active session screen
-    void _navigateToActiveSession(BuildContext context, WidgetRef ref) {
-      final userPreferences = ref.read(preferencesProvider);
+class _SessionScreenState extends ConsumerState<SessionScreen> {
+  int _counter = 5;
+  Timer? _timer;
 
-      ShowerSession session = ShowerSession(phases: List.generate(
-        userPreferences.totalPhases * 2, // Hot and Cold alternating
-            (index) => TemperaturePhase(
-          isHot: index % 2 == 0, // Even index = Hot, Odd index = Cold
-          duration: index % 2 == 0 ? userPreferences.hotPhase : userPreferences.coldPhase,
-        ),
-      ));
+  @override
+  void initState() {
+    super.initState();
+    _startTimer();
+  }
 
-      ref.read(sessionProvider.notifier).startSession(session);
+  void _navigateToActiveSession(BuildContext context, WidgetRef ref) {
+    final phases = [
+      TemperaturePhase(isHot: true, duration: 10),
+      TemperaturePhase(isHot: false, duration: 10),
+    ];
 
-      Navigator.of(context).pushReplacement(
-        PageRouteBuilder(
-          pageBuilder: (context, animation, secondaryAnimation) => SessionActiveScreen(session: session),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            return FadeTransition(opacity: animation, child: child);
-          },
-          transitionDuration: Duration(seconds: 1), // Fade transition duration
-        ),
-      );
-    }
+    final session = ShowerSession(
+      phases: phases,
+      date: DateTime.now(),
+      totalDuration: phases.fold(0, (sum, phase) => sum + phase.duration),
+    );
 
-    // Function to start the countdown timer
-    void _startTimer() {
-      _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SessionActiveScreen(session: session),
+      ),
+    );
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {
         if (_counter > 0) {
           _counter--;
         } else {
@@ -46,45 +49,49 @@ class SessionScreen extends ConsumerWidget {
           _navigateToActiveSession(context, ref);
         }
       });
-    }
+    });
+  }
 
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Contrast Shower Companion'),
+        title: const Text('Contrast Shower Companion'),
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              'New session will start soon',
+            const SizedBox(height: 140),
+            const Text(
+              'Be ready',
               style: TextStyle(
-                fontSize: 24, // 24pt font size for the main message
+                fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 30), // Spacing between message and the circle
+            const SizedBox(height: 170),
             ElevatedButton(
-              onPressed: () {
-                _startTimer();
-              },
+              onPressed: null,
               style: ElevatedButton.styleFrom(
-                shape: CircleBorder(), backgroundColor: Colors.blue,
-                padding: EdgeInsets.all(50), // Background color of the button
+                shape: const CircleBorder(),
+                padding: const EdgeInsets.all(100),
               ),
               child: Text(
-                '$_counter', // Display the countdown timer inside the circle
-                style: TextStyle(
-                  fontSize: 48, // Larger font size for the timer
+                '$_counter',
+                style: const TextStyle(
+                  fontSize: 48,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white, // White text for better contrast
                 ),
               ),
             ),
-            SizedBox(height: 20), // Additional space below timer
           ],
         ),
       ),

@@ -3,20 +3,33 @@ import 'package:hive/hive.dart';
 part 'shower_session.g.dart';
 
 @HiveType(typeId: 0)
-class ShowerSession {
+class ShowerSession extends HiveObject {
   @HiveField(0)
   final List<TemperaturePhase> phases;
 
-  ShowerSession({required this.phases});
+  @HiveField(1)
+  final DateTime date;
+
+  @HiveField(2)
+  final int totalDuration;
+
+  ShowerSession({
+    required this.phases,
+    required this.date,
+    required this.totalDuration,
+  });
 }
 
 @HiveType(typeId: 1)
 class TemperaturePhase {
   @HiveField(0)
-  final bool isHot; // true = Hot, false = Cold
+  final bool isHot;
 
   @HiveField(1)
-  final int duration; // Duration in seconds
+  final int duration;
 
-  TemperaturePhase({required this.isHot, required this.duration});
+  TemperaturePhase({
+    required this.isHot,
+    required this.duration,
+  });
 }

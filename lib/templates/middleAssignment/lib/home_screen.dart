@@ -43,15 +43,15 @@ class HomeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 20), // Padding from top
+            SizedBox(height: 20),
             const Text(
               'Welcome back',
               style: TextStyle(
-                fontSize: 24, // 24pt font size
+                fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 50), // Spacing between "Welcome back" and the progress
+            SizedBox(height: 50),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(7, (index) {
@@ -60,10 +60,10 @@ class HomeScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        daysOfWeek[index], // Display day names above each circle
+                        daysOfWeek[index],
                         style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                       ),
-                      const SizedBox(height: 5), // Small spacing between text and the circle
+                      const SizedBox(height: 5),
                       CircleAvatar(
                         radius: 20,
                         backgroundColor: index < 5 ? Colors.green : Colors.grey,
@@ -77,7 +77,6 @@ class HomeScreen extends StatelessWidget {
               }),
             ),
             SizedBox(height: 170),
-            // Space between progress and the button
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -86,10 +85,10 @@ class HomeScreen extends StatelessWidget {
                 );
               },
               style: ElevatedButton.styleFrom(
-                shape: CircleBorder(),
-                padding: EdgeInsets.all(100), // Adjust the padding to make a big circle button
+                shape: const CircleBorder(),
+                padding: const EdgeInsets.all(100), // Adjust the padding to make a big circle button
               ),
-              child: Text(
+              child: const Text(
                 'Start New Session',
                 style: TextStyle(fontSize: 24),
               ),
