@@ -1,18 +1,115 @@
-// Use these dependencies for your classes
+import 'package:flutter/material.dart';
 import 'dart:convert';
-import 'package:http/http.dart';
-import 'package:json_annotation/json_annotation.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:http/http.dart' as http;
 
+void main() {
+  runApp(MyApp());
+}
 
-void main() {}
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      initialRoute: '/',
+      onGenerateRoute: (settings) {
+        if (settings.name == '/') {
+          return MaterialPageRoute(builder: (context) => HomePage());
+        } else if (settings.name == '/statusDetails') {
+          final int statusCode = settings.arguments as int;
+          return MaterialPageRoute(builder: (context) => StatusDetailsPage(statusCode: statusCode));
+        } else {
+          return MaterialPageRoute(builder: (context) => UndefinedPage(statusCode: 404));
+        }
+      },
+    );
+  }
+}
 
-// TODO add needed classes for Flutter APP
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Home Page')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/statusDetails', arguments: 200);
+              },
+              child: Text('Go to Status Code 200'),
+            ),
+            SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/statusDetails', arguments: 404);
+              },
+              child: Text('Go to Status Code 404'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
-// TODO add generated route flutter app with undifined page with cat status code using api
+class StatusDetailsPage extends StatelessWidget {
+  final int statusCode;
+  StatusDetailsPage({required this.statusCode});
 
-// TODO add putting argument in route navigation as parameter for generated page
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Status Code Details')),
+      body: Center(
+        child: FadeInImage.assetNetwork(
+          placeholder: 'assets/loading.gif',
+          image: 'https://http.cat/$statusCode',
+          imageErrorBuilder: (context, error, stackTrace) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.error, color: Colors.red, size: 100),
+                SizedBox(height: 10),
+                Text('Failed to load image for status code $statusCode', style: TextStyle(fontSize: 18)),
+              ],
+            );
+          },
+          fit: BoxFit.contain,
+        ),
+      ),
+    );
+  }
+}
 
-// TODO use api with cat status codes
-// https://http.cat/[status_code]
+class UndefinedPage extends StatelessWidget {
+  final int statusCode;
+  UndefinedPage({required this.statusCode});
 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Error')),
+      body: Center(
+        child: FadeInImage.assetNetwork(
+          placeholder: 'assets/loading.gif',
+          image: 'https://http.cat/$statusCode',
+          imageErrorBuilder: (context, error, stackTrace) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.error, color: Colors.red, size: 100),
+                SizedBox(height: 10),
+                Text('Failed to load image for status code $statusCode', style: TextStyle(fontSize: 18)),
+              ],
+            );
+          },
+          fit: BoxFit.contain,
+        ),
+      ),
+    );
+  }
+}
