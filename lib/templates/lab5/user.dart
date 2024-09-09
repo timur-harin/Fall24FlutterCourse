@@ -2,7 +2,6 @@
 // TODO add user.g.dart as part
 // TODO add user.freezed.dart as part
 
-import 'package:freezed_annotation/freezed_annotation.dart';
 
 // @freezed
 // class User with _$User {

@@ -1,8 +1,4 @@
 // Use these dependencies for your classes
-import 'dart:convert';
-import 'package:http/http.dart';
-import 'package:json_annotation/json_annotation.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
 
 void main() {}

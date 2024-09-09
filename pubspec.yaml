@@ -19,6 +19,7 @@ dependencies:
   json_annotation: ^4.9.0
   provider: ^6.1.2
   shared_preferences: ^2.3.2
+  flutter_rating_bar: ^4.0.0
 
 dev_dependencies:
   flutter_test:
