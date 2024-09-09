@@ -1,17 +1,47 @@
-// TODO add dependencies
-// TODO add user.g.dart as part
-// TODO add user.freezed.dart as part
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
-import 'package:freezed_annotation/freezed_annotation.dart';
+class User {
+  final int id;
+  final String name;
+  final String username;
+  final String email;
+  final Map<String, dynamic> address;
+  final String phone;
+  final String website;
+  final Map<String, dynamic> company;
 
-// @freezed
-// class User with _$User {
-  // TODO task 3 to make this class for url http://jsonplaceholder.typicode.com/users/
-// }
+  User(
+      {required this.id,
+      required this.name,
+      required this.username,
+      required this.email,
+      required this.address,
+      required this.phone,
+      required this.website,
+      required this.company});
 
-// Future<List<User>> fetchUsers() async {
-  // TODO task 3.2 to make this function for url http://jsonplaceholder.typicode.com/users/ 
-  // Using fabric from class
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+        id: json['id'],
+        name: json['name'],
+        username: json['username'],
+        email: json['email'],
+        address: json['address'],
+        phone: json['phone'],
+        website: json['website'],
+        company: json['company']);
+  }
+}
 
-  // return [];
-// }
+Future<List<User>> fetchUsers() async {
+  final response =
+      await http.get(Uri.parse('http://jsonplaceholder.typicode.com/users'));
+
+  if (response.statusCode == 200) {
+    List jsonResponse = json.decode(response.body);
+    return jsonResponse.map((item) => User.fromJson(item)).toList();
+  } else {
+    throw Exception('Failed to load users');
+  }
+}
