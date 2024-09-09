@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'presentation/home/screens/home_screen.dart';
+
 void main() {
   runApp(const MiddleAssigmentApp());
 }
@@ -9,13 +11,14 @@ class MiddleAssigmentApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Middle Assigment',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return SafeArea(
+      child: MaterialApp(
+        title: 'Middle Assigment',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const HomeScreen(),
       ),
-      // TODO - complete assignment
-      home: null,
     );
   }
 }

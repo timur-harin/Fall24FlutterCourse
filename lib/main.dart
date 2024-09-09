@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'templates/lab4/main.dart';
+import 'templates/middleAssignment/main.dart';
 
 void main() {
-  runApp(Lab4());
+  runApp(const MiddleAssigmentApp());
 }
 
 class MainApp extends StatelessWidget {

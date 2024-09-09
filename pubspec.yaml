@@ -7,9 +7,11 @@ environment:
   sdk: '>=3.4.3 <4.0.0'
 
 dependencies:
+  bottom_picker: ^2.8.0
   dio: ^5.6.0
   flutter:
     sdk: flutter
+  flutter_bounceable: ^1.1.0
   flutter_localizations:
     sdk: flutter
   flutter_riverpod: ^2.5.1
@@ -17,6 +19,7 @@ dependencies:
   http: ^1.2.2
   intl: ^0.19.0
   json_annotation: ^4.9.0
+  neumorphic_ui: ^1.0.1
   provider: ^6.1.2
   shared_preferences: ^2.3.2
 
