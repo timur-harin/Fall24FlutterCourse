@@ -1,20 +1,29 @@
 import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:http/http.dart' as http;
 
-part 'post.freezed.dart';
 part 'post.g.dart';
 
-@freezed
-class Post with _$Post {
-  const factory Post({
-    required int userId,
-    required int id,
-    required String title,
-    required String body,
-  }) = _Post;
+@JsonSerializable()
+class Post {
+  final int userId;
+  final int id;
+  final String title;
+  final String body;
 
+  Post({
+    required this.userId,
+    required this.id,
+    required this.title,
+    required this.body,
+  });
+
+  // Factory constructor for creating a new `Post` instance from a map
   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
+
+  // Method to convert the `Post` instance to a map
+  Map<String, dynamic> toJson() => _$PostToJson(this);
 }
 
 Future<List<Post>> fetchPosts() async {

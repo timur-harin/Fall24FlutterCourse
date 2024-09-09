@@ -1,14 +1,10 @@
-// TODO add dependencies
 import 'dart:convert';
-
-import 'package:http/http.dart' as http;
-// TODO add user.g.dart as part
-// TODO add user.freezed.dart as part
 import 'package:json_annotation/json_annotation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:http/http.dart' as http;
 
-part 'main.g.dart';
-part 'main.freezed.dart';
+part 'user.g.dart';
+part 'user.freezed.dart';
 
 @freezed
 class User with _$User {
