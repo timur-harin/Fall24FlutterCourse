@@ -9,7 +9,6 @@ import 'package:go_router/go_router.dart';
 // flutter pub add freezed_annotation
 // flutter pub add build_runner
 // flutter pub add go_router
-// flutter pub get
 // flutter pub upgrade
 // dart run build_runner build
 
@@ -87,7 +86,20 @@ class AboutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('About')),
-      body: Center(child: Text('About Page')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('About Page'),
+            ElevatedButton(
+              onPressed: () {
+                context.go('/');
+              },
+              child: Text('Back'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -97,7 +109,20 @@ class ServicesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Services')),
-      body: Center(child: Text('Services Page')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Services Page'),
+            ElevatedButton(
+              onPressed: () {
+                context.go('/');
+              },
+              child: Text('Back'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -107,7 +132,20 @@ class ContactPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Contact')),
-      body: Center(child: Text('Contact Page')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Contact Page'),
+            ElevatedButton(
+              onPressed: () {
+                context.go('/');
+              },
+              child: Text('Back'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -118,11 +156,22 @@ class UndefinedPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('404')),
       body: Center(
-        child: Image.network(
-          'https://http.cat/404',
-          errorBuilder: (context, error, stackTrace) {
-            return Text('Failed to load image');
-          },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.network(
+              'https://http.cat/404',
+              errorBuilder: (context, error, stackTrace) {
+                return Text('Failed to load image');
+              },
+            ),
+            ElevatedButton(
+              onPressed: () {
+                context.go('/');
+              },
+              child: Text('Back'),
+            ),
+          ],
         ),
       ),
     );
