@@ -1,18 +1,82 @@
-// Use these dependencies for your classes
-import 'dart:convert';
-import 'package:http/http.dart';
-import 'package:json_annotation/json_annotation.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/material.dart';
 
+void main() {
+  runApp(MyApp());
+}
 
-void main() {}
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      onGenerateRoute: _onGenerateRoute,
+    );
+  }
 
-// TODO add needed classes for Flutter APP
+  Route<dynamic>? _onGenerateRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case '/home':
+        return MaterialPageRoute(builder: (_) => HomePage());
+      case '/detail':
+        final String arg = settings.arguments as String;
+        return MaterialPageRoute(builder: (_) => DetailPage(arg: arg));
+      default:
+        return MaterialPageRoute(
+          builder: (_) => UndefinedPage(),
+        );
+    }
+  }
+}
 
-// TODO add generated route flutter app with undifined page with cat status code using api
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Home Page')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text('Welcome to the Home Page!'),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(
+                  context,
+                  '/detail',
+                  arguments: 'Hello from Home',
+                );
+              },
+              child: Text('Go to Detail Page'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
-// TODO add putting argument in route navigation as parameter for generated page
+class DetailPage extends StatelessWidget {
+  final String arg;
+  const DetailPage({required this.arg});
 
-// TODO use api with cat status codes
-// https://http.cat/[status_code]
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Detail Page')),
+      // Display passed argument
+      body: Center(child: Text('Passed argument: $arg')),
+    );
+  }
+}
 
+class UndefinedPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('404')),
+      // Cat status code for undefined route
+      body: Center(
+        child: Image.network('https://http.cat/404'),
+      ),
+    );
+  }
+}
