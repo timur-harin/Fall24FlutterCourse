@@ -1,11 +1,24 @@
 // Use these dependencies for your classes
-import 'dart:convert';
-import 'package:http/http.dart';
-import 'package:json_annotation/json_annotation.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:fall_24_flutter_course/templates/lab5/app_router/app_router.dart';
+import 'package:flutter/material.dart';
 
 
-void main() {}
+void main() {
+  runApp(Lab5());
+}
+
+class Lab5 extends StatelessWidget {
+  Lab5({super.key});
+
+  final _appRouter = AppRouter();
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp.router(
+      routerConfig: _appRouter.config(),
+    );
+  }
+}
 
 // TODO add needed classes for Flutter APP
 
