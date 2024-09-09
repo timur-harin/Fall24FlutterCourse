@@ -9,6 +9,7 @@ import 'package:go_router/go_router.dart';
 // flutter pub add freezed_annotation
 // flutter pub add build_runner
 // flutter pub add go_router
+// flutter pub get
 // flutter pub upgrade
 // dart run build_runner build
 
