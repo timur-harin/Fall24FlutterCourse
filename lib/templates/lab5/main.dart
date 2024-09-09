@@ -1,6 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+// If it doesn't work, then you need to write the following commands before starting
+// flutter pub get
+// flutter pub add json_serializable
+// flutter pub add json_annotation
+// flutter pub add freezed
+// flutter pub add freezed_annotation
+// flutter pub add build_runner
+// flutter pub add go_router
+// flutter pub upgrade
+// dart run build_runner build
+
 void main() {
   runApp(MyApp());
 }
