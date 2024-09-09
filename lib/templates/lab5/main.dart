@@ -1,18 +1,92 @@
-// Use these dependencies for your classes
 import 'dart:convert';
-import 'package:http/http.dart';
-import 'package:json_annotation/json_annotation.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
+void main() {
+  runApp(MyApp());
+}
 
-void main() {}
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      onGenerateRoute: _onGenerateRoute,
+      initialRoute: '/',
+    );
+  }
+}
 
-// TODO add needed classes for Flutter APP
+Route<dynamic>? _onGenerateRoute(RouteSettings settings) {
+  final Uri uri = Uri.parse(settings.name ?? '');
+  if (uri.pathSegments.isEmpty) {
+    return MaterialPageRoute(builder: (context) => HomePage());
+  }
+  switch (uri.pathSegments.first) {
+    case 'status':
+      final status = uri.pathSegments.last; // Получаем статус из пути
+      return MaterialPageRoute(
+        builder: (context) => StatusPage(status: status),
+      );
+    default:
+      return _errorRoute();
+  }
+}
 
-// TODO add generated route flutter app with undifined page with cat status code using api
+Route<dynamic> _errorRoute() {
+  return MaterialPageRoute(
+    builder: (context) => ErrorPage(),
+  );
+}
 
-// TODO add putting argument in route navigation as parameter for generated page
+class ErrorPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Text('Error: Path does not exist'),
+      ),
+    );
+  }
+}
 
-// TODO use api with cat status codes
-// https://http.cat/[status_code]
+class StatusPage extends StatelessWidget {
+  final String status;
 
+  StatusPage({required this.status});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Status Page")),
+      body: Center(
+        child: Image.network('https://http.cat/$status'), // Показ картинки статуса
+      ),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Home Page")),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () async {
+            final response = await fetchComment(); // Фетчим данные
+            final statusCode = response.statusCode; // Получаем статус код
+            
+            Navigator.pushNamed(context, '/status/$statusCode'); // Переходим на страницу статуса
+          },
+          child: Text('Fetch Comment and Get Status Code'),
+        ),
+      ),
+    );
+  }
+}
+
+// Функция для выполнения HTTP запроса
+Future<http.Response> fetchComment() async {
+  final response = await http.get(Uri.parse('http://jsonplaceholder.typicode.com/comments/1'));
+  return response;
+}
