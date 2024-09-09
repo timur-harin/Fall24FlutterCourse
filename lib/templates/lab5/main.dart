@@ -1,8 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'comment.dart';
-import 'user.dart';
 import 'post.dart';
+import 'user.dart';
 
 void main() {
   runApp(MyApp());
@@ -36,11 +36,11 @@ class MyApp extends StatelessWidget {
 
 class HomeScreen extends StatelessWidget {
   Future<void> navigateBasedOnFetch(
-      BuildContext context, Future<http.Response> Function() fetchMethod) async {
+      BuildContext context, Future<Response> Function() fetchMethod) async {
     try {
       // Trigger the fetch method
       final response = await fetchMethod();
-      final statusCode = response.statusCode;
+      final statusCode = response.statusCode ?? 500;
 
       // Navigate to the cat status page based on the response status code
       Navigator.pushNamed(context, '/catStatus', arguments: statusCode);
@@ -74,7 +74,7 @@ class HomeScreen extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                navigateBasedOnFetch(context, fetchPosts());
+                navigateBasedOnFetch(context, fetchPosts);
               },
               child: Text('Fetch Posts'),
             ),

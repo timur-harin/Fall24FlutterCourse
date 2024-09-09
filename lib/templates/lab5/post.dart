@@ -31,14 +31,16 @@ class Post {
   }
 }
 
-Future<List<Post>> fetchPosts() async {
+//I have changed return type of function to get responce
+// (actual posts are still available and working fine)
+Future<Response> fetchPosts() async {
   final Response response =
   await getData('https://jsonplaceholder.typicode.com/posts');
   final List<Post> posts = [];
   for (dynamic postJson in response.data as List<dynamic>) {
     posts.add(Post.fromJson(postJson as Map<String, dynamic>));
   }
-  return posts;
+  return response;
 }
 
 Future<Response> getData(String path) async {

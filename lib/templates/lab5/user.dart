@@ -12,7 +12,7 @@ class User with _$User {
     required String name,
     required String username,
     required String email,
-    required Map<String, dynamic>  address,
+    required Map<String, dynamic> address,
     required String phone,
     required String website,
     required Map<String, dynamic> company,
@@ -21,8 +21,11 @@ class User with _$User {
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 }
 
-Future<List<User>> fetchUsers() async {
-  final Response response = await getData('https://jsonplaceholder.typicode.com/users');
+//I have changed return type of function to get response
+// (actual users are still available and working fine)
+Future<Response> fetchUsers() async {
+  final Response response =
+      await getData('https://jsonplaceholder.typicode.com/users');
 
   final List<User> users = [];
 
@@ -30,5 +33,5 @@ Future<List<User>> fetchUsers() async {
     users.add(User.fromJson(userJson as Map<String, dynamic>));
   }
 
-  return users;
+  return response;
 }

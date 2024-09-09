@@ -4,7 +4,6 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'comment.g.dart';
 
-
 @JsonSerializable()
 class Comment {
   const Comment({
@@ -21,11 +20,15 @@ class Comment {
   final String email;
   final String body;
 
-  factory Comment.fromJson(Map<String, dynamic> json) => _$CommentFromJson(json);
+  factory Comment.fromJson(Map<String, dynamic> json) =>
+      _$CommentFromJson(json);
 }
 
-Future<List<Comment>> fetchComments() async {
-  final Response response = await getData('http://jsonplaceholder.typicode.com/comments');
+//I have changed return type of function to get response
+// (actual comments are still available and working fine)
+Future<Response> fetchComments() async {
+  final Response response =
+      await getData('http://jsonplaceholder.typicode.com/comments');
 
   final List<Comment> comments = [];
 
@@ -33,5 +36,5 @@ Future<List<Comment>> fetchComments() async {
     comments.add(Comment.fromJson(commentJson as Map<String, dynamic>));
   }
 
-  return comments;
+  return response;
 }
