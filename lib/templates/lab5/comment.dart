@@ -33,5 +33,3 @@ Future<List<Comment>> fetchComments() async {
     throw Exception('Failed to load comments');
   }
 }
-
-// To generate comment.g.dart, run: dart run build_runner build
