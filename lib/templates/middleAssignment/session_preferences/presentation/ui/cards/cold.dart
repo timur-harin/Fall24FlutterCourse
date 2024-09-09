@@ -4,11 +4,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:get_it/get_it.dart';
 
-import '../../../session_preferences/ui/cards/number_text_field.dart';
-import '../../../session_preferences/ui/notifier.dart';
-import '../../../session_preferences/ui/state.dart';
-import '../../../ui/theme/images.dart';
-import '../../../ui/theme/theme.dart';
+import 'number_text_field.dart';
+import '../../notifier.dart';
+import '../../state.dart';
+import '../../../../ui/theme/images.dart';
+import '../../../../ui/theme/theme.dart';
 
 const _coldIconSize = 24.0;
 const _timeTextFieldWidth = 128.0;
@@ -23,22 +23,16 @@ class ColdDurationCard extends ConsumerWidget {
   final _secondsController = TextEditingController();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(_provider);
-    _minutesController.text = state.coldMinutes?.toString() ?? '';
-    _secondsController.text = state.coldSeconds?.toString() ?? '';
-
-    return Card(
-      color: _theme.colors.background.card,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(_theme.dimensions.radius.small)),
-      ),
-      child: Container(
-        margin: EdgeInsets.all(_theme.dimensions.padding.medium),
-        child: _content(context, ref),
-      ),
-    );
-  }
+  Widget build(BuildContext context, WidgetRef ref) => Card(
+    color: _theme.colors.background.card,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(_theme.dimensions.radius.small)),
+    ),
+    child: Container(
+      margin: EdgeInsets.all(_theme.dimensions.padding.medium),
+      child: _content(context, ref),
+    ),
+  );
 
   Widget _content(BuildContext context, WidgetRef ref) => Column(
     mainAxisSize: MainAxisSize.min,
@@ -53,7 +47,7 @@ class ColdDurationCard extends ConsumerWidget {
     mainAxisSize: MainAxisSize.min,
     children: [
       Image(
-        image: AssetImage(AppImages.load('cold.png')),
+        image: AssetImage(AppImages.load('ic_cold.png')),
         width: _coldIconSize,
         height: _coldIconSize,
       ),
@@ -76,7 +70,7 @@ class ColdDurationCard extends ConsumerWidget {
         constraints: const BoxConstraints(
           maxWidth: _timeTextFieldWidth,
         ),
-        child: TimeTextField(
+        child: NumberTextField(
           label: AppLocalizations.of(context)!.shower_minutes,
           textController: _minutesController,
           onChanged: (text) {
@@ -93,7 +87,7 @@ class ColdDurationCard extends ConsumerWidget {
         constraints: const BoxConstraints(
           maxWidth: _timeTextFieldWidth,
         ),
-        child: TimeTextField(
+        child: NumberTextField(
           label: AppLocalizations.of(context)!.shower_seconds,
           textController: _secondsController,
           onChanged: (text) {

@@ -1,13 +1,14 @@
-import 'package:fall_24_flutter_course/templates/middleAssignment/ui/theme/images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:get_it/get_it.dart';
 
-import '../../ui/theme/theme.dart';
-import 'notifier.dart';
-import 'state.dart';
+import '../../../session/presentation/session_screen.dart';
+import '../../../ui/theme/theme.dart';
+import '../../../ui/theme/images.dart';
+import '../notifier.dart';
+import '../state.dart';
 
 const _iconSize = 20.0;
 
@@ -19,7 +20,7 @@ class ApplyButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isEnabled = ref.watch(_provider.notifier).isSessionCreationReady;
+    final isEnabled = ref.watch(_provider).isSessionCreationReady;
 
     return OutlinedButton.icon(
       icon: Image(
@@ -29,15 +30,13 @@ class ApplyButton extends ConsumerWidget {
         height: _iconSize,
       ),
       onPressed: !isEnabled ? null : () {
-        /* TODO: Show Session screen */
-        // Navigator.of(context).push(
-        //     MaterialPageRoute(
-        //         builder: (context) {
-        //           /* TODO: Show Session screen */
-        //         },
-        //         settings: const RouteSettings()
-        //     )
-        // )
+        ref.watch(_provider.notifier).storeCurrentSession();
+        Navigator.of(context).push(
+            MaterialPageRoute(
+                builder: (context) => SessionScreen(),
+                settings: const RouteSettings()
+            )
+        );
       },
       style: OutlinedButton.styleFrom(
         foregroundColor: _theme.colors.button.primary,

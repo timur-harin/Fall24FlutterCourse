@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../session_preferences/ui/state.dart';
+import 'state.dart';
 import '../../domain/shower_session.dart';
 import '../../domain/shower_sessions_repository.dart';
 
@@ -25,16 +25,6 @@ class PreferencesNotifier extends StateNotifier<PreferencesState> {
 
   void updateSessionPreferences(PreferencesState Function(PreferencesState) update) async {
     state = update(state);
-  }
-
-  bool get isSessionCreationReady {
-    if (state.hotMinutes == null) return false;
-    if (state.hotSeconds == null) return false;
-    if (state.coldMinutes == null) return false;
-    if (state.coldSeconds == null) return false;
-    if (state.phases == null) return false;
-    if (state.startPhase == null) return false;
-    return true;
   }
 
   void storeCurrentSession() async {

@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 
 import 'package:get_it/get_it.dart';
 
-import '../../../ui/theme/theme.dart';
+import '../../../../ui/theme/theme.dart';
 
 const _inputLength = 2;
 
-class TimeTextField extends StatefulWidget {
+class NumberTextField extends StatefulWidget {
   final String label;
   final TextEditingController textController;
   final void Function(String) onChanged;
 
-  const TimeTextField({
+  const NumberTextField({
     super.key,
     required this.label,
     required this.textController,
@@ -19,10 +19,10 @@ class TimeTextField extends StatefulWidget {
   });
 
   @override
-  State<StatefulWidget> createState() => TimeTextFieldState();
+  State<StatefulWidget> createState() => NumberTextFieldState();
 }
 
-class TimeTextFieldState extends State<TimeTextField> {
+class NumberTextFieldState extends State<NumberTextField> {
   final _theme = GetIt.instance<AppTheme>();
   final _key = GlobalKey<FormState>();
   bool _isInputValid = true;

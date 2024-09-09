@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../../../domain/shower_session.dart';
-import '../../../../session_preferences/preferences_screen.dart';
+import '../../../../session_preferences/presentation/preferences_screen.dart';
 import '../../../../ui/theme/images.dart';
 import '../../../../ui/theme/theme.dart';
 import 'notifier.dart';

@@ -21,6 +21,7 @@ class ShowerSession {
   final int coldSeconds;
 
   late final String totalDuration;
+  late final int totalDurationSecs;
 
   ShowerSession({
     required this.startTimestamp,
@@ -44,6 +45,7 @@ class ShowerSession {
     final totalDurationMinutes = totalDurationTotalSecs ~/ 60;
     final totalDurationSeconds = totalDurationTotalSecs % 60;
 
+    totalDurationSecs = totalDurationTotalSecs;
     totalDuration = '$totalDurationMinutes:$totalDurationSeconds';
   }
 
@@ -58,7 +60,7 @@ class ShowerSession {
         coldMinutes: json[_coldMinutesKey],
         coldSeconds: json[_coldSecondsKey],
         phases: json[_phasesKey],
-        startPhase: json[_startPhaseKey],
+        startPhase: ShowerPhase.values[json[_startPhaseKey]],
     );
 
   Map<String, Object> toMap() =>

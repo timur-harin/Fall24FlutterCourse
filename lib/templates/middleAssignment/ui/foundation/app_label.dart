@@ -14,7 +14,7 @@ class AppLabel extends StatelessWidget {
   Widget build(BuildContext context) =>
       Text(
         text,
-        style: _theme.typography.h.h1.copyWith(
+        style: _theme.typography.h.h2.copyWith(
           color: _theme.colors.text.topBar,
         ),
       );

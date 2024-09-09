@@ -18,11 +18,15 @@ class AppBackgroundColors {
   final Color primary;
   final Color item;
   final Color card;
+  final Color hot;
+  final Color cold;
 
   AppBackgroundColors({
     this.primary = _Verdigris,
     this.item = _GhostWhite,
     this.card = _Moonstone,
+    this.hot = _Tomato,
+    this.cold = _Moonstone,
   });
 }
 

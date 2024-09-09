@@ -11,6 +11,9 @@
     "shower_pref_phases_label": "Number of phases",
     "shower_pref_begin": "Begin",
 
+    "shower_session_hot_top_bar": "Hot phase",
+    "shower_session_cold_top_bar": "Cold phase",
+
     "shower_minutes": "Minutes",
     "shower_seconds": "Seconds"
 }
