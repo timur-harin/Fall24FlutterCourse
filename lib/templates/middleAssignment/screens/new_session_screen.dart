@@ -64,9 +64,9 @@ class _NewSessionScreenState extends State<NewSessionScreen> {
     } else {
       _saveNumber().then((_) {
         Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => ActiveSessionScreen()),
-          (Route<dynamic> route) => false,
+        context,
+        MaterialPageRoute(builder: (context) => ActiveSessionScreen()), // Переход на главный экран
+        (Route<dynamic> route) => false, // Условие удаления всех предыдущих маршрутов (false означает удалить все)
         );
       });
     }
@@ -79,6 +79,8 @@ class _NewSessionScreenState extends State<NewSessionScreen> {
         title: Text('New Session'),
       ),
       body: Center(
+        child: Padding(
+              padding: EdgeInsets.all(20.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -88,6 +90,7 @@ class _NewSessionScreenState extends State<NewSessionScreen> {
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 labelText: 'Duration in seconds (min 5)',
+                hintText: 'How long will you take a shower?',
                 border: OutlineInputBorder(),
               ),
             ),
@@ -97,7 +100,10 @@ class _NewSessionScreenState extends State<NewSessionScreen> {
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 labelText: 'Max temperature',
-                border: OutlineInputBorder(),
+                hintText: 'What is the maximum temperature?',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10)
+                ),
               ),
             ),
             SizedBox(height: 20),
@@ -106,7 +112,10 @@ class _NewSessionScreenState extends State<NewSessionScreen> {
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 labelText: 'Min temperature',
-                border: OutlineInputBorder(),
+                hintText: 'What is the minimum temperature?',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10)
+                ),
               ),
             ),
             SizedBox(height: 20),
@@ -115,17 +124,29 @@ class _NewSessionScreenState extends State<NewSessionScreen> {
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 labelText: 'Phase Duration',
-                border: OutlineInputBorder(),
+                hintText: 'How long will take 1 phase (hot or cold)?',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10)
+                ),
               ),
             ),
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: _navigateToNextScreen,
-              child: Text('Begin Session'),
+              style: ElevatedButton.styleFrom(
+              backgroundColor: const Color.fromARGB(255, 112, 22, 22), // Оранжевый цвет фона кнопки  // Круглая форма
+              padding: EdgeInsets.all(40),
+              minimumSize: Size(30, 30),  // Увеличенный размер кнопки
+            ),
+            child: Text(
+              'Start New Session',
+              style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 255, 255, 255)), // Увеличение текста на кнопке
+            ),
             ),
           ],
         ),
       ),
+    ),
     );
   }
 }

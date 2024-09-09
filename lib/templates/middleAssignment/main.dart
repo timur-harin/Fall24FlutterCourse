@@ -2,12 +2,10 @@ import 'package:fall_24_flutter_course/templates/middleAssignment/screens/active
 import 'package:fall_24_flutter_course/templates/middleAssignment/screens/new_session_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'screens/main_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Hive.initFlutter();
   runApp(ProviderScope(child: MyApp()));
 }
 
@@ -17,8 +15,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Contrast Shower Companion',
       theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+          color: Color.fromARGB(255, 112, 22, 22),
+          elevation: 10,
+          titleTextStyle: TextStyle(
+            color: Color.fromARGB(255, 255, 255, 255)
+          )
+        ),
         primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: Colors.white,
+        scaffoldBackgroundColor: const Color.fromARGB(255, 179, 247, 245),
       ),
       initialRoute: '/',
       routes: {

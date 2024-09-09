@@ -70,59 +70,62 @@ class _confirmDialogState extends State<ConfirmDialog> {
     } else {
       _saveSession();
       Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) => MainScreen()),
-              (Route<dynamic> route) => false,
-            );
+        context,
+        MaterialPageRoute(builder: (context) => MainScreen()), // Переход на главный экран
+        (Route<dynamic> route) => false, // Условие удаления всех предыдущих маршрутов (false означает удалить все)
+      );
     }
   }
 
   void _typeNo() {
     Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => MainScreen()),
-            (Route<dynamic> route) => false,
-          );
+        context,
+        MaterialPageRoute(builder: (context) => MainScreen()), // Переход на главный экран
+        (Route<dynamic> route) => false, // Условие удаления всех предыдущих маршрутов (false означает удалить все)
+        );
   }
 
     @override
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget> [
-          Text("Save session?"),
-          SizedBox(height: 20),
-          Text("$_phases phases of $_phase_dur seconds"),
-          SizedBox(height: 10),
-          Text("Max/Min temperature: $_max_temp/$_min_temp"),
-          SizedBox(height: 10),
-          Text("Total duration: $_duration"),
-          SizedBox(height: 20),
-          TextField(
-              controller: _controller1,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                labelText: 'How it was? (out of 10)',
-                border: OutlineInputBorder(),
-              ),
-            ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              ElevatedButton(
-                onPressed: _typeYes,
-                 child: const Text("Yes")
+      child: 
+      Padding(padding: EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget> [
+            Text("Save session?"),
+            SizedBox(height: 20),
+            Text("$_phases phases of $_phase_dur seconds"),
+            SizedBox(height: 10),
+            Text("Max/Min temperature: $_max_temp/$_min_temp"),
+            SizedBox(height: 10),
+            Text("Total duration: $_duration"),
+            SizedBox(height: 20),
+            TextField(
+                controller: _controller1,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  labelText: 'How it was? (out of 10)',
+                  border: OutlineInputBorder(),
                 ),
-              ElevatedButton(
-                onPressed: _typeNo,
-                child: Text('No')
-              )
-            ],
-          )
-        ],
+              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                ElevatedButton(
+                  onPressed: _typeYes,
+                  child: const Text("Yes")
+                  ),
+                ElevatedButton(
+                  onPressed: _typeNo,
+                  child: Text('No')
+                )
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

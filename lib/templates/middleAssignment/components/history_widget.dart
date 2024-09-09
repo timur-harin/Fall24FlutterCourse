@@ -1,34 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fall_24_flutter_course/templates/middleAssignment/components/history_notifier.dart';
 
-class HistoryWidget extends StatefulWidget {
+class HistoryWidget extends ConsumerWidget {
+  HistoryWidget({required this.history});
+  List<String> history;
   @override
-  _HistoryWidgetState createState() => _HistoryWidgetState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
 
-class _HistoryWidgetState extends State<HistoryWidget> {
-  List<String> _savedHistory = [];
+    if (history.isEmpty) {
+      return Center(
+        child: Text('No sessions yet'),
+      );
+    }
 
-  @override
-  void initState() {
-    super.initState();
-    _loadSavedHistory();
-  }
-
-  Future<void> _loadSavedHistory() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _savedHistory = prefs.getStringList('saved_history')?.reversed.toList() ?? [];
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: _savedHistory.length,
+      itemCount: history.length,
       itemBuilder: (context, index) {
         return ListTile(
-          title: Text('Session #${_savedHistory.length - index}: ${_savedHistory[index]}'),
+          title: Text('Session #${history.length - index}: ${history[index]}'),
         );
       },
     );

@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:fall_24_flutter_course/templates/middleAssignment/components/history_notifier.dart';
+import 'package:fall_24_flutter_course/templates/middleAssignment/components/temperature_painter.dart';
 import 'package:fall_24_flutter_course/templates/middleAssignment/screens/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -31,6 +33,7 @@ class _TemperatureTransitionWidgetState
   bool _hasStarted = false;
   double _temperature = 0.0;
   Color _currentColor = Colors.red;
+  int _phases = 0;
 
   @override
   void initState() {
@@ -53,10 +56,12 @@ class _TemperatureTransitionWidgetState
             if (_isRed) {
               // Переход к синему
               _currentColor = Colors.blue;
+              _phases += 1;
               _temperature = widget.minTemperature;
               _secondsRemaining = widget.phaseDuration - 1; // Пауза 10 секунд на синем цвете
             } else {
               // Переход к красному
+              _phases += 1;
               _currentColor = Colors.red;
               _temperature = widget.maxTemperature;
               _secondsRemaining = widget.phaseDuration - 1; // Пауза 10 секунд на красном цвете
@@ -105,13 +110,14 @@ class _TemperatureTransitionWidgetState
       _currentColor = Colors.red;
       _isRed = true;
       _hasStarted = false;
+      _phases = 0;
     });
   }
 
   Future<void> _saveCurrentTime() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setInt('duration', prefs.getInt('duration')! - _totalTimeRemaining);
-    await prefs.setInt('phases', ((prefs.getInt('duration')! - _totalTimeRemaining) / widget.phaseDuration) as int);
+    await prefs.setInt('phases', _phases);
   }
 
   void _endSession(BuildContext context) {
@@ -119,9 +125,9 @@ class _TemperatureTransitionWidgetState
     showDialog(context: context, builder: (BuildContext context) {
       return ConfirmDialog();
     });
-  }
-
-  @override
+    }
+  
+   @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(
@@ -130,17 +136,11 @@ class _TemperatureTransitionWidgetState
           Stack(
             alignment: Alignment.center,
             children: [
-              Container(
-                width: 200, // Увеличенный размер
-                height: 200,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
+              CustomPaint(
+                size: Size(200, 200), // Устанавливаем размер виджета
+                painter: TemperaturePainter(
+                  temperature: _temperature,
                   color: _currentColor,
-                ),
-                alignment: Alignment.center,
-                child: Text(
-                  '${_temperature.toStringAsFixed(1)}°C',
-                  style: TextStyle(color: Colors.white, fontSize: 36),
                 ),
               ),
               Positioned(
@@ -156,15 +156,23 @@ class _TemperatureTransitionWidgetState
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              IconButton(onPressed: _toggleTimer, icon: _isTimerRunning ? Icon(Icons.pause_circle) : Icon(Icons.play_circle)),
-              IconButton(onPressed: _resetTimer, icon: Icon(Icons.restore_rounded)),
-              IconButton(onPressed: () => _endSession(context), icon: Icon(Icons.stop_circle))
+              IconButton(
+                  onPressed: _toggleTimer,
+                  icon: _isTimerRunning
+                      ? Icon(Icons.pause_circle)
+                      : Icon(Icons.play_circle)),
+              IconButton(
+                  onPressed: _resetTimer, icon: Icon(Icons.restore_rounded)),
+              IconButton(
+                  onPressed: () => _endSession(context),
+                  icon: Icon(Icons.stop_circle))
             ],
           ),
         ],
       ),
     );
   }
+
 
   @override
   void dispose() {
