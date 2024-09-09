@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'shower_session.dart';
+import 'session_provider.dart';
 
-class SessionActiveScreen extends StatefulWidget {
+class SessionActiveScreen extends ConsumerStatefulWidget {
   final ShowerSession session;
 
   const SessionActiveScreen({Key? key, required this.session})
@@ -11,7 +13,7 @@ class SessionActiveScreen extends StatefulWidget {
   _SessionActiveScreenState createState() => _SessionActiveScreenState();
 }
 
-class _SessionActiveScreenState extends State<SessionActiveScreen> {
+class _SessionActiveScreenState extends ConsumerState<SessionActiveScreen> {
   int currentPhaseIndex = 0;
   late TemperaturePhase currentPhase;
   late int remainingTime;
@@ -41,6 +43,7 @@ class _SessionActiveScreenState extends State<SessionActiveScreen> {
           startTimer();
         } else {
           // End of session
+          ref.read(sessionProvider.notifier).endSession();
           Navigator.pop(context);
         }
       }
@@ -57,10 +60,14 @@ class _SessionActiveScreenState extends State<SessionActiveScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(currentPhase.isHot ? 'Hot Phase' : 'Cold Phase',
-                style: TextStyle(fontSize: 32)),
-            Text('$remainingTime seconds remaining',
-                style: TextStyle(fontSize: 24)),
+            Text(
+              currentPhase.isHot ? 'Hot Phase' : 'Cold Phase',
+              style: TextStyle(fontSize: 32),
+            ),
+            Text(
+              '$remainingTime seconds remaining',
+              style: TextStyle(fontSize: 24),
+            ),
           ],
         ),
       ),

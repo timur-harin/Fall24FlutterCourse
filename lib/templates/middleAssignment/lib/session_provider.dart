@@ -3,7 +3,7 @@ import 'shower_session.dart';
 import 'user_preferences.dart';
 
 final preferencesProvider =
-    StateNotifierProvider<UserPreferencesNotifier, UserPreferences>((ref) {
+StateNotifierProvider<UserPreferencesNotifier, UserPreferences>((ref) {
   return UserPreferencesNotifier();
 });
 
@@ -17,7 +17,7 @@ class UserPreferencesNotifier extends StateNotifier<UserPreferences> {
 }
 
 final sessionProvider =
-    StateNotifierProvider<SessionNotifier, ShowerSession?>((ref) {
+StateNotifierProvider<SessionNotifier, ShowerSession?>((ref) {
   return SessionNotifier();
 });
 

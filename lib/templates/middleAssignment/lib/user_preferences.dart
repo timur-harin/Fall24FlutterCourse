@@ -1,11 +1,7 @@
 class UserPreferences {
-  int hotPhase;
-  int coldPhase;
-  int totalPhases;
+  final int hotPhase;
+  final int coldPhase;
+  final int totalPhases;
 
-  UserPreferences({
-    required this.hotPhase,
-    required this.coldPhase,
-    required this.totalPhases,
-  });
+  UserPreferences({required this.hotPhase, required this.coldPhase, required this.totalPhases});
 }
