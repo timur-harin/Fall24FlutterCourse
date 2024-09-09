@@ -1,18 +1,105 @@
-// Use these dependencies for your classes
-import 'dart:convert';
-import 'package:http/http.dart';
-import 'package:json_annotation/json_annotation.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/material.dart';
+import 'comment_page.dart';
+import 'post_page.dart';
+import 'user_page.dart';
 
+void main() {
+  runApp(const MyApp());
+}
 
-void main() {}
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-// TODO add needed classes for Flutter APP
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: HomePage(),
+      onGenerateRoute: (RouteSettings settings) {
+        final int? statusCode = settings.arguments as int?;
+        return MaterialPageRoute(
+          builder: (context) => StatusPage(statusCode: statusCode ?? 404),
+        );
+      },
+      onUnknownRoute: (settings) {
+        return MaterialPageRoute(
+          builder: (context) => const UndefinedPage(),
+        );
+      },
+      routes: {
+        '/comments': (context) => CommentPage(),
+        '/posts': (context) => PostPage(),
+        '/users': (context) => UserPage(),
+      },
+    );
+  }
+}
 
-// TODO add generated route flutter app with undifined page with cat status code using api
+class StatusPage extends StatelessWidget {
+  final int statusCode;
 
-// TODO add putting argument in route navigation as parameter for generated page
+  StatusPage({super.key, required this.statusCode});
 
-// TODO use api with cat status codes
-// https://http.cat/[status_code]
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Status Code: $statusCode'),
+      ),
+      body: Center(
+        child: Image.network('https://http.cat/$statusCode'),
+      ),
+    );
+  }
+}
 
+class UndefinedPage extends StatelessWidget {
+  const UndefinedPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Undefined Route'),
+      ),
+      body: Center(
+        child: Image.network('https://http.cat/404'),
+      ),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Home'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/comments');
+              },
+              child: const Text('Comments'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/posts');
+              },
+              child: const Text('Posts'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/users');
+              },
+              child: const Text('Users'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
