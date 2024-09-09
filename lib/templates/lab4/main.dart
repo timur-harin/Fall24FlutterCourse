@@ -8,6 +8,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ProviderScope(
@@ -19,11 +21,13 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends ConsumerWidget {
+  const MyHomePage({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter Tasks'),
+        title: const Text('Flutter Tasks'),
       ),
       body: Center(
         child: Column(
@@ -36,7 +40,7 @@ class MyHomePage extends ConsumerWidget {
                 String result = await fetchData();
                 print(result);
               },
-              child: Text('Async/Await Task'),
+              child: const Text('Async/Await Task'),
             ),
             ElevatedButton(
               onPressed: () {
@@ -44,7 +48,7 @@ class MyHomePage extends ConsumerWidget {
                 // Increment the counter
                 ref.read(counterProvider.notifier).state++;
               },
-              child: Text('Provider Task'),
+              child: const Text('Provider Task'),
             ),
             ElevatedButton(
               onPressed: () {
@@ -53,7 +57,7 @@ class MyHomePage extends ConsumerWidget {
                 // Increment the counter
                 ref.read(counterNotifierProvider.notifier).increment();
               },
-              child: Text('Riverpod Task'),
+              child: const Text('Riverpod Task'),
             ),
             ElevatedButton(
               onPressed: () async {
@@ -62,7 +66,7 @@ class MyHomePage extends ConsumerWidget {
                 final data = await fetchData();
                 print(data);
               },
-              child: Text('HTTP Task'),
+              child: const Text('HTTP Task'),
             ),
             ElevatedButton(
               onPressed: () async {
@@ -71,7 +75,7 @@ class MyHomePage extends ConsumerWidget {
                 final data = await fetchDataWithDio();
                 print(data);
               },
-              child: Text('Dio Task'),
+              child: const Text('Dio Task'),
             ),
           ],
         ),

@@ -12,10 +12,10 @@ class HydrationScreen extends ConsumerWidget {
     final waterIntake = ref.watch(waterIntakeProvider);
     return Scaffold(
       // TODO add AppBar with Icon to reset the water intake as actions parameter of AppBar
-      appBar: AppBar(title: Text('Hydration'),
+      appBar: AppBar(title: const Text('Hydration'),
         actions: [
           IconButton(
-            icon: Icon(Icons.refresh),
+            icon: const Icon(Icons.refresh),
             onPressed: () {
               // Reset the water intake when the icon is pressed
               ref.read(waterIntakeProvider.notifier).reset();
@@ -29,9 +29,9 @@ class HydrationScreen extends ConsumerWidget {
             // TODO - Add text to display the water intake
             Text(
               'Water Intake: ${waterIntake.toStringAsFixed(2)} L',
-              style: TextStyle(fontSize: 24),
+              style: const TextStyle(fontSize: 24),
             ),
-             SizedBox(height: 20),
+             const SizedBox(height: 20),
             // TODO add HydrationWidget to display the water intake and put waterIntake into it
               HydrationWidget(waterIntakeLevel: waterIntake),
             // Add more UI components if necessary
