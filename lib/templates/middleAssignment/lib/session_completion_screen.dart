@@ -4,7 +4,6 @@ import 'home_screen.dart';
 class SessionCompletionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // Automatically navigate to home screen after 2 seconds
     Future.delayed(Duration(seconds: 2), () {
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => HomeScreen()),

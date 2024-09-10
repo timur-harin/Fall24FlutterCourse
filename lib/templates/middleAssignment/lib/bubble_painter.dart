@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:flutter/material.dart';
 
 class BubblePainter extends CustomPainter {
   final Animation<double> animation;
-  final List<Offset> _bubbles = [];
+  final List<Bubble> _bubbles = [];
 
   BubblePainter(this.animation) : super(repaint: animation) {
     _generateBubbles();
@@ -11,10 +11,13 @@ class BubblePainter extends CustomPainter {
 
   void _generateBubbles() {
     final Random random = Random();
-    for (int i = 0; i < 20; i++) {
-      final double x = random.nextDouble() * 300;
-      final double y = 600 + random.nextDouble() * 100;
-      _bubbles.add(Offset(x, y));
+    _bubbles.clear();
+    for (int i = 0; i < 30; i++) {
+      _bubbles.add(Bubble(
+        position: Offset(random.nextDouble() * 1800, random.nextDouble() * 100), // Start off-screen
+        size: random.nextDouble() * 20 + 10,  // Random size between 10 and 30
+        speed: random.nextDouble() * 0.1 + 0.05,  // Constant speed (between 0.05 and 0.15)
+      ));
     }
   }
 
@@ -24,24 +27,47 @@ class BubblePainter extends CustomPainter {
       ..color = Colors.white.withOpacity(0.6)
       ..style = PaintingStyle.fill;
 
-    final double bubbleSize = 30 + 10 * animation.value;
-
-    // Update bubble positions based on animation
     for (int i = 0; i < _bubbles.length; i++) {
-      final Offset bubblePosition = _bubbles[i];
-      final double newY = bubblePosition.dy - (animation.value * size.height);
-      _bubbles[i] = Offset(bubblePosition.dx, newY < -50 ? size.height : newY);
-    }
+      final bubble = _bubbles[i];
+      final double newY = bubble.position.dy - (bubble.speed * size.height * 0.1);
 
-    for (final bubble in _bubbles) {
-      canvas.drawCircle(
-        bubble,
-        bubbleSize,
-        paint,
-      );
+      if (newY < -bubble.size) {
+        _bubbles[i] = bubble.copyWith(
+          position: Offset(Random().nextDouble() * size.width, size.height + bubble.size),
+        );
+      } else {
+        _bubbles[i] = bubble.copyWith(
+          position: Offset(bubble.position.dx, newY),
+        );
+      }
+      canvas.drawCircle(_bubbles[i].position, bubble.size, paint);
     }
   }
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => true;
+}
+
+class Bubble {
+  final Offset position;
+  final double size;
+  final double speed;
+
+  Bubble({
+    required this.position,
+    required this.size,
+    required this.speed,
+  });
+
+  Bubble copyWith({
+    Offset? position,
+    double? size,
+    double? speed,
+  }) {
+    return Bubble(
+      position: position ?? this.position,
+      size: size ?? this.size,
+      speed: speed ?? this.speed,
+    );
+  }
 }
