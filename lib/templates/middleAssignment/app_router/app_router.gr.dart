@@ -11,15 +11,15 @@
 import 'package:auto_route/auto_route.dart' as _i5;
 import 'package:fall_24_flutter_course/templates/middleAssignment/domain/session_entity.dart'
     as _i7;
-import 'package:fall_24_flutter_course/templates/middleAssignment/presentation/home/screens/home_screen.dart'
-    as _i1;
-import 'package:fall_24_flutter_course/templates/middleAssignment/presentation/home/screens/session_details_screen.dart'
+import 'package:fall_24_flutter_course/templates/middleAssignment/presentation/screens/details/session_details_screen.dart'
     as _i2;
-import 'package:fall_24_flutter_course/templates/middleAssignment/presentation/home/screens/session_overview.dart'
+import 'package:fall_24_flutter_course/templates/middleAssignment/presentation/screens/home/home_screen.dart'
+    as _i1;
+import 'package:fall_24_flutter_course/templates/middleAssignment/presentation/screens/overview/session_overview.dart'
     as _i3;
-import 'package:fall_24_flutter_course/templates/middleAssignment/presentation/home/screens/session_preferences_screen.dart'
+import 'package:fall_24_flutter_course/templates/middleAssignment/presentation/screens/preferences/session_preferences_screen.dart'
     as _i4;
-import 'package:fall_24_flutter_course/templates/middleAssignment/presentation/home/screens/session_preferences_state.dart'
+import 'package:fall_24_flutter_course/templates/middleAssignment/presentation/screens/preferences/session_preferences_state.dart'
     as _i8;
 import 'package:neumorphic_ui/neumorphic_ui.dart' as _i6;
 

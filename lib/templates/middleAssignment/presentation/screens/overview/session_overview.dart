@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:fall_24_flutter_course/templates/middleAssignment/app_router/app_router.gr.dart';
-import 'package:fall_24_flutter_course/templates/middleAssignment/presentation/home/screens/home_screen_notifier.dart';
-import 'package:fall_24_flutter_course/templates/middleAssignment/presentation/home/screens/session_preferences_state.dart';
+import 'package:fall_24_flutter_course/templates/middleAssignment/presentation/screens/home/home_screen_notifier.dart';
+import 'package:fall_24_flutter_course/templates/middleAssignment/presentation/screens/preferences/session_preferences_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neumorphic_ui/neumorphic_ui.dart';
 

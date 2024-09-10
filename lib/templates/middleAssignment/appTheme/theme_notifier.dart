@@ -2,7 +2,7 @@ import 'package:fall_24_flutter_course/templates/middleAssignment/appTheme/cold_
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../presentation/home/screens/session_overview_notifier.dart';
+import '../presentation/screens/overview/session_overview_notifier.dart';
 import 'hot_theme.dart';
 
 class ThemeNotifier extends StateNotifier<ThemeData> {

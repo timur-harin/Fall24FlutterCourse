@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'appTheme/theme_notifier.dart';
 import 'app_router/app_router.dart';
-import 'presentation/home/screens/home_screen.dart';
+import 'presentation/screens/home/home_screen.dart';
 
 void main() {
   runApp(MiddleAssigmentApp());

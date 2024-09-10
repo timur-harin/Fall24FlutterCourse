@@ -5,8 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:neumorphic_ui/neumorphic_ui.dart';
 
 import '../../../app_router/app_router.gr.dart';
-import '../widgets/start_session_floating_button.dart';
-import '../widgets/time_picker_widget.dart';
+import '../home/widgets/start_session_floating_button.dart';
+import '../home/widgets/time_picker_widget.dart';
 import 'session_preferences_notifier.dart';
 import 'session_preferences_state.dart';
 

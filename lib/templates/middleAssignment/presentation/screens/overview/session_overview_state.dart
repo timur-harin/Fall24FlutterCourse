@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'session_preferences_state.dart';
+import '../preferences/session_preferences_state.dart';
 
 part 'session_overview_state.freezed.dart';
 

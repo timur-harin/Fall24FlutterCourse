@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../domain/session_entity.dart';
-import '../widgets/start_session_floating_button.dart';
+import 'widgets/start_session_floating_button.dart';
 import 'home_screen_notifier.dart';
 
 const double kShowerSessionHistoryHeight = 64.0;
