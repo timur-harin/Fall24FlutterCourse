@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fall_24_flutter_course/templates/middleAssignment/homepage.dart';
+import 'package:fall_24_flutter_course/templates/middleAssignment/settingspage.dart';
+import 'package:fall_24_flutter_course/templates/middleAssignment/showerpage.dart';
 
 void main() {
-  runApp(const MiddleAssigmentApp());
+  runApp(const ProviderScope(child: MiddleAssigmentApp()));
 }
 
 class MiddleAssigmentApp extends StatelessWidget {
@@ -14,8 +18,12 @@ class MiddleAssigmentApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      // TODO - complete assignment
-      home: null,
+      initialRoute: '/',
+      routes: {
+        '/': (context) => HomePage(),
+        '/settings': (context) => SettingsPage(),
+        '/shower': (context) => ShowerPage(),
+      },
     );
   }
 }
