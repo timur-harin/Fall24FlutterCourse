@@ -33,9 +33,8 @@ class OptionsScreen extends StatelessWidget {
                 final session = sessions[index];
                 return ListTile(
                   title: Text('Session ${index + 1}'),
-                  subtitle: Text(
-                      'Date: ${session.date}\nDuration: '
-                          '${session.totalDuration} seconds'),
+                  subtitle: Text('Date: ${session.date}\nDuration: '
+                      '${session.totalDuration} seconds'),
                   onTap: () {},
                 );
               },

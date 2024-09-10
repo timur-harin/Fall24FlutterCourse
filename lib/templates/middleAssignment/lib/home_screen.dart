@@ -7,23 +7,32 @@ import 'profile_screen.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // List of days for the week
-    final List<String> daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    final List<String> daysOfWeek = [
+      'Mon',
+      'Tue',
+      'Wed',
+      'Thu',
+      'Fri',
+      'Sat',
+      'Sun'
+    ];
 
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(MdiIcons.archive),
           onPressed: () {
-            // Navigate to the options panel
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => OptionsScreen()),
             );
           },
         ),
-        centerTitle: true, // Centers the title
-        title: Text('Contrast Shower Companion'),
+        centerTitle: true,
+        title: const Text(
+          'Contrast Shower Companion',
+          style: TextStyle(color: Color(0xFF6750A4)),
+        ),
         actions: [
           IconButton(
             icon: Icon(MdiIcons.faceManProfile),
@@ -47,6 +56,7 @@ class HomeScreen extends StatelessWidget {
             const Text(
               'Welcome back',
               style: TextStyle(
+                color: Color(0xFF6750A4),
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
@@ -61,7 +71,10 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       Text(
                         daysOfWeek[index],
-                        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                        style: const TextStyle(
+                            color: Color(0xFF6750A4),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500),
                       ),
                       const SizedBox(height: 5),
                       CircleAvatar(
@@ -86,11 +99,12 @@ class HomeScreen extends StatelessWidget {
               },
               style: ElevatedButton.styleFrom(
                 shape: const CircleBorder(),
-                padding: const EdgeInsets.all(100), // Adjust the padding to make a big circle button
+                padding: const EdgeInsets.all(
+                    100), // Adjust the padding to make a big circle button
               ),
               child: const Text(
                 'Start New Session',
-                style: TextStyle(fontSize: 24),
+                style: TextStyle(fontSize: 24, color: Color(0xFF6750A4)),
               ),
             ),
           ],

@@ -31,7 +31,8 @@ class _SessionActiveScreenState extends ConsumerState<SessionActiveScreen>
     _bubbleController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 30),
-    )..repeat();
+    )
+      ..repeat();
 
     startTimer();
   }
@@ -79,19 +80,55 @@ class _SessionActiveScreenState extends ConsumerState<SessionActiveScreen>
 
   @override
   Widget build(BuildContext context) {
-    final Color backgroundColor =
-        currentPhase.isHot ? Colors.red.shade100 : Colors.blue.shade100;
-    final Color buttonColor =
-        currentPhase.isHot ? Colors.pink.shade200 : Colors.purple.shade200;
+    // Define colors for hot phase
+    final Color hotButtonColor = const Color(0xFFF28B82);
+    final Color hotTextColor = const Color(0xFFFEF7FF);
+    final Color hotTextColorOutsideButton = const Color(0xFF6750A4);
+    final Color hotAppBarColor = hotTextColorOutsideButton;
+    final Color hotBackgroundColor = const Color(0xFFFAD2CF);
+    final Color hotCircleColor = const Color(0xFFFF9999);
+
+    // Define colors for cold phase
+    final Color coldButtonColor = const Color(0xFFA7C7E7);
+    final Color coldTextColor = hotTextColor;
+    final Color coldTextColorOutsideButton = hotTextColorOutsideButton;
+    final Color coldAppBarColor = coldTextColorOutsideButton;
+    final Color coldBackgroundColor = const Color(0xFFE1F3FF);
+    final Color coldCircleColor = const Color(0xFFB3D9FF);
+
+    final Color backgroundColor = currentPhase.isHot ? hotBackgroundColor
+        : coldBackgroundColor;
+    final Color buttonColor = currentPhase.isHot
+        ? hotButtonColor : coldButtonColor;
+    final Color appBarColor = currentPhase
+        .isHot ? hotAppBarColor : coldAppBarColor;
+    final Color circleColor
+    = currentPhase.isHot ? hotCircleColor : coldCircleColor;
 
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
-        title: const Text('Active Shower Session'),
+        centerTitle: true,
+        title: Text(
+          'Active Shower Session',
+          style: TextStyle(color: appBarColor),
+        ),
         backgroundColor: backgroundColor,
       ),
       body: Stack(
         children: [
+          // Circle decoration behind button, aligned with button
+          Center(
+              child: Column(
+                children: [
+                  const SizedBox(height: 345,),
+                  CustomPaint(
+                    size: const Size(270, 270), // Adjust size as needed
+                    painter: CirclePainter(color: circleColor),
+                  ),
+                ],
+              )
+          ),
           Center(
             child: CustomPaint(
               size: Size.infinite,
@@ -105,9 +142,12 @@ class _SessionActiveScreenState extends ConsumerState<SessionActiveScreen>
               children: [
                 const SizedBox(height: 140),
                 Text(
-                  currentPhase.isHot ? 'Hot Phase' : 'Cold Phase',
-                  style: const TextStyle(
-                      fontSize: 32, fontWeight: FontWeight.bold),
+                  currentPhase.isHot ? 'Hot!' : 'Cold!',
+                  style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: hotTextColorOutsideButton,
+                  ),
                 ),
                 const SizedBox(height: 170),
                 ElevatedButton(
@@ -116,13 +156,13 @@ class _SessionActiveScreenState extends ConsumerState<SessionActiveScreen>
                     backgroundColor: buttonColor,
                     shape: const CircleBorder(),
                     padding: const EdgeInsets.all(100),
-                    textStyle: const TextStyle(
-                      fontSize: 48,
-                      fontWeight: FontWeight.bold,
-                    ),
                   ),
                   child: Text(
                     '$remainingTime',
+                    style: TextStyle(
+                      color: hotTextColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 48,),
                   ),
                 ),
               ],
@@ -132,4 +172,24 @@ class _SessionActiveScreenState extends ConsumerState<SessionActiveScreen>
       ),
     );
   }
+}
+
+// CirclePainter for drawing the circle
+class CirclePainter extends CustomPainter {
+  final Color color;
+
+  CirclePainter({required this.color});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = color
+      ..style = PaintingStyle.fill;
+
+    // Draw circle at the center of the canvas
+    canvas.drawCircle(size.center(Offset.zero), size.width / 2, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

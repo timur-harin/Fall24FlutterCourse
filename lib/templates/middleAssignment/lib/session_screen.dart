@@ -63,7 +63,8 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Contrast Shower Companion'),
+        title: const Text('Contrast Shower Companion',
+        style: TextStyle(color: Color(0xFF6750A4),),),
       ),
       body: Center(
         child: Column(
@@ -74,6 +75,7 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
+                color: Color(0xFF6750A4),
               ),
               textAlign: TextAlign.center,
             ),
@@ -89,6 +91,7 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
                 style: const TextStyle(
                   fontSize: 48,
                   fontWeight: FontWeight.bold,
+                  color: Color(0xFF6750A4),
                 ),
               ),
             ),

@@ -14,9 +14,9 @@ class BubblePainter extends CustomPainter {
     _bubbles.clear();
     for (int i = 0; i < 30; i++) {
       _bubbles.add(Bubble(
-        position: Offset(random.nextDouble() * 1800, random.nextDouble() * 100), // Start off-screen
-        size: random.nextDouble() * 20 + 10,  // Random size between 10 and 30
-        speed: random.nextDouble() * 0.1 + 0.05,  // Constant speed (between 0.05 and 0.15)
+        position: Offset(random.nextDouble() * 1800, random.nextDouble() * 100),
+        size: random.nextDouble() * 20 + 10,
+        speed: random.nextDouble() * 0.1 + 0.05,
       ));
     }
   }
@@ -29,11 +29,13 @@ class BubblePainter extends CustomPainter {
 
     for (int i = 0; i < _bubbles.length; i++) {
       final bubble = _bubbles[i];
-      final double newY = bubble.position.dy - (bubble.speed * size.height * 0.1);
+      final double newY =
+          bubble.position.dy - (bubble.speed * size.height * 0.1);
 
       if (newY < -bubble.size) {
         _bubbles[i] = bubble.copyWith(
-          position: Offset(Random().nextDouble() * size.width, size.height + bubble.size),
+          position: Offset(
+              Random().nextDouble() * size.width, size.height + bubble.size),
         );
       } else {
         _bubbles[i] = bubble.copyWith(
