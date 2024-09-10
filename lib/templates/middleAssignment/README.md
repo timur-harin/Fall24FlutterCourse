@@ -1,5 +1,8 @@
 # Middle Assigment: The Contrast Shower Companion
 
+## Link to the Demo video:
+https://drive.google.com/file/d/1NecxDG4YnjZVlKMaq9_XvUnYaKwQvQHx/view?usp=sharing
+
 ## Project Background:
 In the bustling city of Innopolis, Timur found himself engulfed in the monotonous routine of a 9-to-5 job. His days were a blur, with little to distinguish one from the next, until he stumbled upon the concept of contrast showers—a wellness practice involving the alternation of hot and cold water during a shower. Intrigued by the potential benefits, such as improved circulation and invigoration of the mind, Timur decided to integrate this practice into his daily routine.
 
