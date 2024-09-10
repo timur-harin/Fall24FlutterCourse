@@ -14,6 +14,9 @@ class AppRouter extends RootStackRouter {
           initial: true,
         ),
         AutoRoute(
+          page: SessionDetailsRoute.page,
+        ),
+        AutoRoute(
           page: SessionPreferencesRoute.page,
         ),
         AutoRoute(

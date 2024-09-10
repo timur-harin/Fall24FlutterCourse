@@ -7,7 +7,7 @@ class TimePickerWidget extends StatefulWidget {
     this.max = 15.0,
     required this.onChanged,
     this.accent,
-    this.initialValue = 15,
+    this.initialValue = 7,
   });
 
   final String title;
@@ -35,7 +35,7 @@ class _TimePickerWidgetState extends State<TimePickerWidget> {
       children: [
         Text(widget.title),
         NeumorphicSlider(
-          min: 0.0,
+          min: 2.0,
           max: widget.max,
           value: value.toDouble(),
           onChanged: (newValue) {

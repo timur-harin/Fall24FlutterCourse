@@ -14,10 +14,10 @@ class CreateSessionNotifier extends StateNotifier<CreateSessionState> {
   }
 
   void updateColdIntervalMinutes(int value) {
-    state = state.copyWith(coldIntervalMinutes: value);
+    state = state.copyWith(coldIntervalSeconds: value);
   }
 
   void updateHotIntervalMinutes(int value) {
-    state = state.copyWith(hotIntervalMinutes: value);
+    state = state.copyWith(hotIntervalSeconds: value);
   }
 }

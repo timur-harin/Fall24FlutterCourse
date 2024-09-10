@@ -18,8 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CreateSessionState {
   bool get startWithCold => throw _privateConstructorUsedError;
   int get numberOfSets => throw _privateConstructorUsedError;
-  int get coldIntervalMinutes => throw _privateConstructorUsedError;
-  int get hotIntervalMinutes => throw _privateConstructorUsedError;
+  int get coldIntervalSeconds => throw _privateConstructorUsedError;
+  int get hotIntervalSeconds => throw _privateConstructorUsedError;
 
   /// Create a copy of CreateSessionState
   /// with the given fields replaced by the non-null parameter values.
@@ -37,8 +37,8 @@ abstract class $CreateSessionStateCopyWith<$Res> {
   $Res call(
       {bool startWithCold,
       int numberOfSets,
-      int coldIntervalMinutes,
-      int hotIntervalMinutes});
+      int coldIntervalSeconds,
+      int hotIntervalSeconds});
 }
 
 /// @nodoc
@@ -58,8 +58,8 @@ class _$CreateSessionStateCopyWithImpl<$Res, $Val extends CreateSessionState>
   $Res call({
     Object? startWithCold = null,
     Object? numberOfSets = null,
-    Object? coldIntervalMinutes = null,
-    Object? hotIntervalMinutes = null,
+    Object? coldIntervalSeconds = null,
+    Object? hotIntervalSeconds = null,
   }) {
     return _then(_value.copyWith(
       startWithCold: null == startWithCold
@@ -70,13 +70,13 @@ class _$CreateSessionStateCopyWithImpl<$Res, $Val extends CreateSessionState>
           ? _value.numberOfSets
           : numberOfSets // ignore: cast_nullable_to_non_nullable
               as int,
-      coldIntervalMinutes: null == coldIntervalMinutes
-          ? _value.coldIntervalMinutes
-          : coldIntervalMinutes // ignore: cast_nullable_to_non_nullable
+      coldIntervalSeconds: null == coldIntervalSeconds
+          ? _value.coldIntervalSeconds
+          : coldIntervalSeconds // ignore: cast_nullable_to_non_nullable
               as int,
-      hotIntervalMinutes: null == hotIntervalMinutes
-          ? _value.hotIntervalMinutes
-          : hotIntervalMinutes // ignore: cast_nullable_to_non_nullable
+      hotIntervalSeconds: null == hotIntervalSeconds
+          ? _value.hotIntervalSeconds
+          : hotIntervalSeconds // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
   }
@@ -93,8 +93,8 @@ abstract class _$$CreateSessionStateImplCopyWith<$Res>
   $Res call(
       {bool startWithCold,
       int numberOfSets,
-      int coldIntervalMinutes,
-      int hotIntervalMinutes});
+      int coldIntervalSeconds,
+      int hotIntervalSeconds});
 }
 
 /// @nodoc
@@ -112,8 +112,8 @@ class __$$CreateSessionStateImplCopyWithImpl<$Res>
   $Res call({
     Object? startWithCold = null,
     Object? numberOfSets = null,
-    Object? coldIntervalMinutes = null,
-    Object? hotIntervalMinutes = null,
+    Object? coldIntervalSeconds = null,
+    Object? hotIntervalSeconds = null,
   }) {
     return _then(_$CreateSessionStateImpl(
       startWithCold: null == startWithCold
@@ -124,13 +124,13 @@ class __$$CreateSessionStateImplCopyWithImpl<$Res>
           ? _value.numberOfSets
           : numberOfSets // ignore: cast_nullable_to_non_nullable
               as int,
-      coldIntervalMinutes: null == coldIntervalMinutes
-          ? _value.coldIntervalMinutes
-          : coldIntervalMinutes // ignore: cast_nullable_to_non_nullable
+      coldIntervalSeconds: null == coldIntervalSeconds
+          ? _value.coldIntervalSeconds
+          : coldIntervalSeconds // ignore: cast_nullable_to_non_nullable
               as int,
-      hotIntervalMinutes: null == hotIntervalMinutes
-          ? _value.hotIntervalMinutes
-          : hotIntervalMinutes // ignore: cast_nullable_to_non_nullable
+      hotIntervalSeconds: null == hotIntervalSeconds
+          ? _value.hotIntervalSeconds
+          : hotIntervalSeconds // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -142,8 +142,8 @@ class _$CreateSessionStateImpl implements _CreateSessionState {
   const _$CreateSessionStateImpl(
       {this.startWithCold = true,
       this.numberOfSets = 3,
-      this.coldIntervalMinutes = 1,
-      this.hotIntervalMinutes = 1});
+      this.coldIntervalSeconds = 7,
+      this.hotIntervalSeconds = 7});
 
   @override
   @JsonKey()
@@ -153,14 +153,14 @@ class _$CreateSessionStateImpl implements _CreateSessionState {
   final int numberOfSets;
   @override
   @JsonKey()
-  final int coldIntervalMinutes;
+  final int coldIntervalSeconds;
   @override
   @JsonKey()
-  final int hotIntervalMinutes;
+  final int hotIntervalSeconds;
 
   @override
   String toString() {
-    return 'CreateSessionState(startWithCold: $startWithCold, numberOfSets: $numberOfSets, coldIntervalMinutes: $coldIntervalMinutes, hotIntervalMinutes: $hotIntervalMinutes)';
+    return 'CreateSessionState(startWithCold: $startWithCold, numberOfSets: $numberOfSets, coldIntervalSeconds: $coldIntervalSeconds, hotIntervalSeconds: $hotIntervalSeconds)';
   }
 
   @override
@@ -172,15 +172,15 @@ class _$CreateSessionStateImpl implements _CreateSessionState {
                 other.startWithCold == startWithCold) &&
             (identical(other.numberOfSets, numberOfSets) ||
                 other.numberOfSets == numberOfSets) &&
-            (identical(other.coldIntervalMinutes, coldIntervalMinutes) ||
-                other.coldIntervalMinutes == coldIntervalMinutes) &&
-            (identical(other.hotIntervalMinutes, hotIntervalMinutes) ||
-                other.hotIntervalMinutes == hotIntervalMinutes));
+            (identical(other.coldIntervalSeconds, coldIntervalSeconds) ||
+                other.coldIntervalSeconds == coldIntervalSeconds) &&
+            (identical(other.hotIntervalSeconds, hotIntervalSeconds) ||
+                other.hotIntervalSeconds == hotIntervalSeconds));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, startWithCold, numberOfSets,
-      coldIntervalMinutes, hotIntervalMinutes);
+      coldIntervalSeconds, hotIntervalSeconds);
 
   /// Create a copy of CreateSessionState
   /// with the given fields replaced by the non-null parameter values.
@@ -196,17 +196,17 @@ abstract class _CreateSessionState implements CreateSessionState {
   const factory _CreateSessionState(
       {final bool startWithCold,
       final int numberOfSets,
-      final int coldIntervalMinutes,
-      final int hotIntervalMinutes}) = _$CreateSessionStateImpl;
+      final int coldIntervalSeconds,
+      final int hotIntervalSeconds}) = _$CreateSessionStateImpl;
 
   @override
   bool get startWithCold;
   @override
   int get numberOfSets;
   @override
-  int get coldIntervalMinutes;
+  int get coldIntervalSeconds;
   @override
-  int get hotIntervalMinutes;
+  int get hotIntervalSeconds;
 
   /// Create a copy of CreateSessionState
   /// with the given fields replaced by the non-null parameter values.

@@ -7,7 +7,7 @@ class CreateSessionState with _$CreateSessionState {
   const factory CreateSessionState({
     @Default(true) bool startWithCold,
     @Default(3) int numberOfSets,
-    @Default(1) int coldIntervalMinutes,
-    @Default(1) int hotIntervalMinutes,
+    @Default(7) int coldIntervalSeconds,
+    @Default(7) int hotIntervalSeconds,
   }) = _CreateSessionState;
 }
