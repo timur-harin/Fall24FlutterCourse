@@ -39,11 +39,48 @@ class HomeScreen extends ConsumerWidget {
             child: ListView.builder(
               itemCount: sessionHistory.length,
               itemBuilder: (context, index) {
-                final session = sessionHistory[index];
-                return ListTile(
-                  title: Text('Session ${index + 1}'),
-                  subtitle: Text('Duration: ${session.duration} min, Phases: ${session.phases}'),
+                final session = sessionHistory[index].split('|');
+                if (session[2].replaceAll(RegExp(r'\s+'), '') == "1") {
+                  return ListTile(
+                  title: Text('Session ${sessionHistory.length - index}'),
+                  subtitle: Text(
+                    'Duration: ${session[0]} min, Phases: ${session[1]} \nRating: ⭐️',
+                    style: const TextStyle(fontSize: 16),
+                  ),
                 );
+                } else if (session[2].replaceAll(RegExp(r'\s+'), '') == "2") {
+                  return ListTile(
+                  title: Text('Session ${sessionHistory.length - index}'),
+                  subtitle: Text(
+                    'Duration: ${session[0]} min, Phases: ${session[1]} \nRating: ⭐️⭐️',
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                );
+                } else if (session[2].replaceAll(RegExp(r'\s+'), '') == "3") {
+                  return ListTile(
+                  title: Text('Session ${sessionHistory.length - index}'),
+                  subtitle: Text(
+                    'Duration: ${session[0]} min, Phases: ${session[1]} \nRating: ⭐️⭐️⭐️',
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                );
+                } else if (session[2].replaceAll(RegExp(r'\s+'), '') == "4") {
+                  return ListTile(
+                  title: Text('Session ${sessionHistory.length - index}'),
+                  subtitle: Text(
+                    'Duration: ${session[0]} min, Phases: ${session[1]} \nRating: ⭐️⭐️⭐️⭐️',
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                );
+                } else {
+                  return ListTile(
+                  title: Text('Session ${sessionHistory.length - index}'),
+                  subtitle: Text(
+                    'Duration: ${session[0]} min, Phases: ${session[1]} \nRating: ⭐️⭐️⭐️⭐️⭐️',
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                );
+                }
               },
             ),
           ),
@@ -73,8 +110,8 @@ class SessionPreferencesScreen extends StatefulWidget {
 }
 
 class _SessionPreferencesScreenState extends State<SessionPreferencesScreen> {
-  int _duration = 10; // Default duration in minutes
-  int _phases = 3; // Default number of phases
+  int _duration = 10;
+  int _phases = 3;
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +120,7 @@ class _SessionPreferencesScreenState extends State<SessionPreferencesScreen> {
         title: const Text('Session Preferences'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(15.0),
         child: Column(
           children: [
             Text('Duration: $_duration minutes'),
@@ -142,22 +179,19 @@ class ActiveSessionScreen extends ConsumerStatefulWidget {
   @override
   _ActiveSessionScreenState createState() => _ActiveSessionScreenState();
 }
+
 class _ActiveSessionScreenState extends ConsumerState<ActiveSessionScreen> with SingleTickerProviderStateMixin {
   late int _remainingTime;
   late Timer _timer;
-  late AnimationController _animationController;
   int _currentPhase = 1;
   bool _isHotPhase = true;
   bool _isPaused = false;
+  int _rating = 0;
 
   @override
   void initState() {
     super.initState();
     _remainingTime = widget.duration * 60; // Convert minutes to seconds
-    _animationController = AnimationController(
-      duration: const Duration(milliseconds: 500),
-      vsync: this,
-    );
     _startTimer();
   }
 
@@ -172,7 +206,6 @@ class _ActiveSessionScreenState extends ConsumerState<ActiveSessionScreen> with 
               _currentPhase++;
               _isHotPhase = !_isHotPhase;
               _remainingTime = widget.duration * 60;
-              _animationController.forward(from: 0);
             } else {
               _endSession();
             }
@@ -188,135 +221,125 @@ class _ActiveSessionScreenState extends ConsumerState<ActiveSessionScreen> with 
     });
   }
 
-  void _endSession() {
-    _timer.cancel();
-    final showerSession = ShowerSession(duration: widget.duration, phases: widget.phases);
-    ref.read(sessionHistoryProvider.notifier).addSession(showerSession);
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const SessionSummaryScreen()),
-    );
-  }
-
   @override
   void dispose() {
     _timer.cancel();
-    _animationController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: _isHotPhase ? Colors.red : Colors.blue,
       appBar: AppBar(
         title: const Text('Active Session'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            FadeTransition(
-              opacity: _animationController,
-              child: Text(
-                'Current Phase: ${_isHotPhase ? 'Hot' : 'Cold'}',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+      body: AnimatedContainer(
+        duration: const Duration(milliseconds: 1000),
+        color: _isHotPhase ? Colors.red : Colors.blue,
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Current Phase: ${_isHotPhase ? "Hot" : "Cold"}',
+                style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
-            ),
-            Text('Remaining Time: ${_remainingTime ~/ 60}:${(_remainingTime % 60).toString().padLeft(2, '0')}', 
-            style: const TextStyle(fontSize: 24)),
-            ElevatedButton(
-              onPressed: _togglePause,
-              child: Text(_isPaused ? 'Resume' : 'Pause'),
-            ),
-            ElevatedButton(
-              onPressed: _endSession,
-              child: const Text('End Session'),
-            ),
+              Text('Phase $_currentPhase of ${widget.phases}', style: const TextStyle(fontSize: 20)),
+              Text('Remaining Time: ${_remainingTime ~/ 60}:${(_remainingTime % 60).toString().padLeft(2, '0')}', 
+              style: const TextStyle(fontSize: 30)),
+              ElevatedButton(
+                onPressed: _togglePause,
+                child: Text(_isPaused ? 'Resume' : 'Pause'),
+              ),
+              ElevatedButton(
+                onPressed: _endSession,
+                child: const Text('End Session'),
+              ),
           ],
         ),
+          )
+        )
       ),
     );
   }
-}
 
-class SessionSummaryScreen extends StatelessWidget {
-  const SessionSummaryScreen({super.key});
+  void _endSession() {
+    _timer.cancel();
+    _showRatingDialog();
+  }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Session Summary'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('Total Time: 10 min'),
-            const Text('Phases Completed: 3'),
-            const Text('Rate your experience:'),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(5, (index) {
-                return IconButton(
-                  icon: Icon(Icons.star_border),
-                  onPressed: () {
-                    // Handle rating logic
-                  },
-                );
-              }),
-            ),
-            ElevatedButton(
+  Future<void> _showRatingDialog() async {
+    await showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Rate Your Experience'),
+          content: StatefulBuilder(
+            builder: (BuildContext context, StateSetter setState) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(5, (index) {
+                  return IconButton(
+                    icon: Icon(
+                      _rating > index ? Icons.star : Icons.star_border,
+                      color: Colors.yellow,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _rating = index + 1;
+                      });
+                    },
+                  );
+                }),
+              );
+            },
+          ),
+
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Submit'),
               onPressed: () {
-                Navigator.popUntil(context, ModalRoute.withName('/'));
+                _saveSession(widget.duration, widget.phases, _rating);
+                Navigator.of(context).pop();
+                Navigator.pop(context);
               },
-              child: const Text('Back to Home'),
             ),
           ],
-        ),
-      ),
+        );
+      },
     );
+  }
+
+  Future<void> _saveSession(int duration, int phases, int rating) async {
+    final sessionSummary = '$duration | $phases | $rating';
+    await ref.read(sessionHistoryProvider.notifier).saveToLocalStorage(sessionSummary);
   }
 }
 
 // State Management with Riverpod
-final sessionHistoryProvider = StateNotifierProvider<SessionHistoryNotifier, List<ShowerSession>>((ref) {
+final sessionHistoryProvider = StateNotifierProvider<SessionHistoryNotifier, List<String>>((ref) {
   return SessionHistoryNotifier();
 });
 
-class SessionHistoryNotifier extends StateNotifier<List<ShowerSession>> {
-  SessionHistoryNotifier() : super([]);
-  void addSession(ShowerSession session) {
-    state = [session, ...state];
-    _saveToLocalStorage();
+class SessionHistoryNotifier extends StateNotifier<List<String>> {
+  SessionHistoryNotifier() : super([]) {
+    loadFromLocalStorage();
   }
 
-  Future<void> _saveToLocalStorage() async {
+  void setHistory(List<String> newHistory) {
+    state = newHistory;
+  }
+
+  Future<void> saveToLocalStorage(String session) async {
     final prefs = await SharedPreferences.getInstance();
-    final sessionData = state.map((session) => session.toJson()).toList();
-    prefs.setString('sessionHistory', sessionData.toString());
+    state = [session, ...state];
+    await prefs.setStringList('sessionHistory', state);
   }
 
   Future<void> loadFromLocalStorage() async {
     final prefs = await SharedPreferences.getInstance();
-    final sessionData = prefs.getString('sessionHistory');
-    if (sessionData != null) {
-      // Deserialize and update state
-    }
-  }
-}
-
-class ShowerSession {
-  final int duration;
-  final int phases;
-
-  ShowerSession({required this.duration, required this.phases});
-
-  Map<String, dynamic> toJson() {
-    return {
-      'duration': duration,
-      'phases': phases,
-    };
+    state = prefs.getStringList('sessionHistory') ?? [];
   }
 }
