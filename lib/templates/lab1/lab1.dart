@@ -57,96 +57,33 @@ class LAb1HomePage extends StatelessWidget {
   }
 
   Widget exercise1() {
-    return Text(
-      'Hello Flutter!',
-      style: TextStyle(
-        fontSize: 22,
-        color: Colors.deepOrangeAccent,
-        fontWeight: FontWeight.w800,
-      ),
+    return const FlutterLogo(
+      size: 100,
     );
   }
 
   Widget exercise2() {
-    return Icon(
-      Icons.music_video,
+    return const FlutterLogo(
       size: 100,
-      color: Colors.amber,
     );
   }
 
-
-
   Widget exercise3() {
-    return Image.network(
-      'https://fakeimg.pl/500x500/?text=Lab01',
-      width: 100,
-      height: 100,
-      fit: BoxFit.cover,
+    // Example for image from internet 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'
+    return const FlutterLogo(
+      size: 100,
     );
   }
 
   Widget exercise4() {
-    return TextButton(
-      onPressed: () {
-        print("Pressed");
-      },
-      style: TextButton.styleFrom(
-        foregroundColor: Colors.white,
-        backgroundColor: const Color.fromARGB(255, 199, 61, 187),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-          side: const BorderSide(
-            color: Color.fromARGB(255, 255, 152, 250),
-            width: 0.2,
-          ),
-        ),
-      ),
-      child: Text('Just a Button'),
+    return const FlutterLogo(
+      size: 100,
     );
   }
 
   Widget exercise5() {
-    return Column(
-      children: [
-        Container(
-          padding: EdgeInsets.all(8.0),
-          margin: EdgeInsets.all(8.0),
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.greenAccent,
-              width: 1.2,
-            ),
-            color: Colors.blueAccent[100],
-            borderRadius: BorderRadius.circular(15.0),
-          ),
-          child: Text(
-            'idk what to write',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              fontStyle: FontStyle.italic,
-            ),
-          ),
-        ),
-        Container(
-          padding: EdgeInsets.all(12.0),
-          margin: EdgeInsets.all(6.0),
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.yellowAccent,
-              width: 1.8,
-              style: BorderStyle.solid,
-            ),
-            borderRadius: BorderRadius.horizontal(right: Radius.zero),
-          ),
-          child: Icon(
-            Icons.backpack,
-            size: 50,
-            color: Colors.blueGrey,
-          ),
-        )
-      ],
+    return const FlutterLogo(
+      size: 100,
     );
   }
 }
