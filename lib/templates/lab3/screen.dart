@@ -1,5 +1,3 @@
-import 'package:fall_24_flutter_course/templates/lab3/hydration.dart';
-import 'package:fall_24_flutter_course/templates/lab3/notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -8,71 +6,21 @@ class HydrationScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final waterIntake = ref.watch(waterIntakeProvider);
+    // TODO - Add ref.watch and use provider to get the water intake
+    // final waterIntake =
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Water Balancer'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              ref.read(waterIntakeProvider.notifier).reset();
-            }, 
-            icon: const Icon(Icons.refresh)
-          ),
-        ],
-      ),
+      // TODO add AppBar with Icon to reset the water intake as actions parameter of AppBar
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'Water Intake: $waterIntake',
-              style: const TextStyle(fontSize: 20, color: Colors.blueGrey),
-            ),
-            const SizedBox(height: 20,),
-            HydrationWidget(waterIntakeLevel: waterIntake),
-            const SizedBox(height: 40,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    ref.read(waterIntakeProvider.notifier).increment(0.1);
-                  }, 
-                  child: const Text('0.1L'),
-                ),
-
-                ElevatedButton(
-                  onPressed: () {
-                    ref.read(waterIntakeProvider.notifier).increment(0.25);
-                  },
-                  child: const Text('0.25L'),
-                ),
-
-                const SizedBox(width: 20,),
-
-                ElevatedButton(
-                  onPressed: () {
-                    ref.read(waterIntakeProvider.notifier).increment(0.5);
-                  }, 
-                  child: const Text('0.5L'),
-                ),
-
-                ElevatedButton(
-                  onPressed: () {
-                    ref.read(waterIntakeProvider.notifier).increment(1.0);
-                  }, 
-                  child: const Text('1L'),
-                ),
-              ],
-            )
+            // TODO - Add text to display the water intake
+            // TODO add HydrationWidget to display the water intake and put waterIntake into it
+            // Add more UI components if necessary
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => ref.read(waterIntakeProvider.notifier).increment(0.5),
-        child: const Icon(Icons.add),
-      ),
+      // TODO - Add floating action button to increment the water intake using ref.read(waterIntakeProvider.notifier).increment(x)
     );
   }
 }
