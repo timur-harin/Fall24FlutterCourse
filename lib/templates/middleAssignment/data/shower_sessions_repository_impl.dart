@@ -16,7 +16,7 @@ const _currentSessionKey = 'current_session';
 class ShowerSessionsRepositoryImpl extends ShowerSessionRepository {
   Database? _database;
 
-  void init() async {
+  Future<void> _init() async {
     _database = await openDatabase(
       join(await getDatabasesPath(), _databaseName),
       onCreate: (db, versions) => db.execute(
@@ -37,7 +37,16 @@ class ShowerSessionsRepositoryImpl extends ShowerSessionRepository {
   }
 
   @override
+  Future<void> _ensureInitialised() async {
+    if (_database == null) {
+      await _init();
+    }
+  }
+
+  @override
   Future<void> insertShowerSession(ShowerSession session) async {
+    await _ensureInitialised();
+
     await _database?.insert(
         _tableName,
         session.toMap(),
@@ -47,6 +56,7 @@ class ShowerSessionsRepositoryImpl extends ShowerSessionRepository {
 
   @override
   Future<List<ShowerSession>> showerSessions() async {
+    await _ensureInitialised();
     final data = await _database?.query(_tableName) ?? [];
     return [
       for (

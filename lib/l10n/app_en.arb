@@ -3,6 +3,8 @@
 
     "shower_home_start_first_session": "Start your first session",
     "shower_home_start_session": "Start new session",
+    "shower_home_item_duration": "Duration",
+    "shower_home_item_phases": "Phases",
 
     "shower_prefs_top_bar": "Session Preferences",
     "shower_prefs_hot_duration": "Hot Duration",

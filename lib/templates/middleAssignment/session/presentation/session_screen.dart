@@ -86,6 +86,28 @@ class SessionScreen extends ConsumerWidget {
   ) {
     final strings = AppLocalizations.of(context)!;
 
+    void showSessionResultDialog(BuildContext context) async {
+      await showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(
+            strings.shower_session_end_dialog_title,
+            style: _theme.typography.h.h3.copyWith(
+              color: _theme.colors.text.topBar,
+            ),
+          ),
+          backgroundColor: _theme.colors.background.primary,
+          content: _dialogContent(context, state),
+        ),
+      );
+
+      await notifier.storeSession();
+
+      if (context.mounted) {
+        Navigator.of(context).popUntil((route) => route.isFirst);
+      }
+    }
+
     return SessionContent(
         phase: state.phase,
         currentPhaseDurationSecs: state.currentPhaseDurationSecs,
@@ -93,19 +115,7 @@ class SessionScreen extends ConsumerWidget {
         onTimeChanged: (_) => notifier.incrementDuration(),
         onPhaseEnd: () => switch (state.hasNextPhase) {
           true => notifier.beginNextPhase(),
-          false => showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: Text(
-                strings.shower_session_end_dialog_title,
-                style: _theme.typography.h.h3.copyWith(
-                  color: _theme.colors.text.topBar,
-                ),
-              ),
-              backgroundColor: _theme.colors.background.primary,
-              content: _dialogContent(context, state),
-            ),
-          ),
+          false => showSessionResultDialog(context),
         },
     );
   }

@@ -48,7 +48,7 @@ class ShowerSession {
     final totalDurationSeconds = totalDurationTotalSecs % 60;
 
     totalDurationSecs = totalDurationTotalSecs;
-    totalDuration = '$totalDurationMinutes:$totalDurationSeconds';
+    totalDuration = '${totalDurationMinutes}m ${totalDurationSeconds}s';
   }
 
   int _sessionDurationSecs({required int minutes, required int seconds}) =>

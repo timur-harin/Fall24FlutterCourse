@@ -3,6 +3,8 @@
 
     "shower_home_start_first_session": "Начать первый сеанс",
     "shower_home_start_first_session": "Начать новый сеанс",
+    "shower_home_item_duration": "Длительность",
+    "shower_home_item_phases": "Фазы",
 
     "shower_prefs_top_bar": "Настройки сеанса",
     "shower_prefs_hot_duration": "Продолжительность горячего душа",

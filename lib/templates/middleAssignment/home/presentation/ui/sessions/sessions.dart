@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../../../domain/shower_session.dart';
+import '../../../../home/presentation/ui/sessions/item.dart';
 import '../../../../session_preferences/presentation/preferences_screen.dart';
 import '../../../../ui/theme/images.dart';
 import '../../../../ui/theme/theme.dart';
@@ -12,7 +13,7 @@ import 'notifier.dart';
 
 const _imageStubSize = 256.0;
 
-class ShowerSessionsColumn extends ConsumerWidget {
+class ShowerSessionsColumn extends ConsumerWidget with WidgetsBindingObserver {
   ShowerSessionsColumn({super.key});
 
   final _provider = GetIt.instance<StateNotifierProvider<ShowerSessionsNotifier, List<ShowerSession>>>();
@@ -22,10 +23,40 @@ class ShowerSessionsColumn extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final sessions = ref.watch(_provider);
     final notifier = ref.read(_provider.notifier);
-    return sessions.isEmpty ? _emptyStub(context, notifier) : _sessionsColumn();
+
+    return RefreshIndicator(
+      onRefresh: () => notifier.loadSessions(),
+      child: Stack(
+        children: [
+          ListView(),
+          sessions.isEmpty
+              ? _emptyStub(context, notifier)
+              : _sessionsColumn(context, notifier, sessions)
+        ],
+      ),
+    );
   }
 
-  Widget _sessionsColumn() => Column();
+  Widget _sessionsColumn(
+      BuildContext context,
+      ShowerSessionsNotifier notifier,
+      List<ShowerSession> sessions,
+  ) => Stack(
+    children: [
+      ListView(
+        children: sessions.map((item) => Container(
+          padding: EdgeInsets.all(_theme.dimensions.padding.medium),
+          child: SessionItem(item: item),
+        )).toList(),
+      ),
+
+      Container(
+        alignment: Alignment.bottomCenter,
+        margin: EdgeInsets.only(bottom: _theme.dimensions.padding.extraMedium),
+        child: _startSessionsButton(context, notifier, isFirstSession: false),
+      ),
+    ],
+  );
 
   Widget _emptyStub(BuildContext context, ShowerSessionsNotifier notifier) =>
       Container(

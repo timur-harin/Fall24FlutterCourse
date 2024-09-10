@@ -4,6 +4,8 @@ import '../../domain/shower_session.dart';
 
 @freezed
 class SessionState {
+  final ShowerPhase initialPhase;
+  final String startTimestamp;
   final ShowerPhase phase;
   final int currentPhaseNumber;
   final int totalPhases;
@@ -14,6 +16,8 @@ class SessionState {
   late final bool hasNextPhase;
 
   SessionState({
+    required this.initialPhase,
+    required this.startTimestamp,
     required this.phase,
     required this.totalPhases,
     required this.hotDurationSecs,
@@ -37,6 +41,8 @@ class SessionState {
     int? passedDuration,
     int? currentPhaseNumber,
   }) => SessionState(
+      initialPhase: initialPhase,
+      startTimestamp: startTimestamp,
       phase: phase ?? this.phase,
       totalPhases: totalPhases ?? this.totalPhases,
       hotDurationSecs: hotDurationSecs ?? this.hotDurationSecs,
