@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'shower_session.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class OptionsScreen extends StatelessWidget {
   @override
@@ -8,12 +9,12 @@ class OptionsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(MdiIcons.arrowLeft),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        title: Text('Previous Sessions'),
+        title: const Text('Previous Sessions'),
       ),
       body: FutureBuilder<List<ShowerSession>>(
         future: _fetchSessions(),

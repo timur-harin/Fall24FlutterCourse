@@ -37,7 +37,6 @@ class HomeScreen extends StatelessWidget {
           IconButton(
             icon: Icon(MdiIcons.faceManProfile),
             onPressed: () {
-              // Navigate to the profile page
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => ProfileScreen()),
@@ -52,7 +51,7 @@ class HomeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             const Text(
               'Welcome back',
               style: TextStyle(
@@ -89,7 +88,7 @@ class HomeScreen extends StatelessWidget {
                 );
               }),
             ),
-            SizedBox(height: 170),
+            const SizedBox(height: 170),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -100,7 +99,7 @@ class HomeScreen extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 shape: const CircleBorder(),
                 padding: const EdgeInsets.all(
-                    100), // Adjust the padding to make a big circle button
+                    100),
               ),
               child: const Text(
                 'Start New Session',

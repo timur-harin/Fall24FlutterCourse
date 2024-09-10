@@ -21,7 +21,6 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
     _startTimer();
   }
 
-
   void _navigateToActiveSession(BuildContext context, WidgetRef ref) {
     final firstPhase = [
       TemperaturePhase(isHot: true, duration: 10),
@@ -57,7 +56,7 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
       phases: phases,
       date: DateTime.now(),
       totalDuration: phases.fold(0, (sum, phase) => sum + phase.duration),
-    interrupted: false,
+      interrupted: false,
     );
 
     Navigator.push(
@@ -69,7 +68,7 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
   }
 
   void _startTimer() {
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         if (_counter > 0) {
           _counter--;
@@ -92,8 +91,12 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Contrast Shower Companion',
-        style: TextStyle(color: Color(0xFF6750A4),),),
+        title: const Text(
+          'Contrast Shower Companion',
+          style: TextStyle(
+            color: Color(0xFF6750A4),
+          ),
+        ),
       ),
       body: Center(
         child: Column(
