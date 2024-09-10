@@ -3,21 +3,18 @@ class ShowerSession {
   final List<TemperaturePhase> phases;
   final DateTime dateTime;
   final Duration totalDuration;
-  double? rating;
 
   ShowerSession({
     required this.phases,
     required this.dateTime,
     required this.totalDuration,
-    this.rating,
   });
-
+  
   Map<String, dynamic> toJson() {
     return {
-      'phases': phases.map((phase) => phase.toJson()).toList(),
-      'dateTime': dateTime.toIso8601String(),
-      'totalDuration': totalDuration.inMinutes,
-      'rating': rating,
+      'dateTime': dateTime,
+      'totalDuration': totalDuration,
+      'phases': phases,
     };
   }
 
@@ -28,14 +25,13 @@ class ShowerSession {
       phases: (json['phases'] as List)
           .map((phaseJson) => TemperaturePhase.fromJson(phaseJson))
           .toList(),
-      rating: json['rating']?.toDouble(),
     );
   }
 }
 
 class TemperaturePhase {
   final Duration duration;
-  final bool isHot;
+  final bool isHot; 
 
   TemperaturePhase({
     required this.duration,
@@ -47,13 +43,6 @@ class TemperaturePhase {
       duration: Duration(seconds: json['duration']),
       isHot: json['isHot'],
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'duration': duration,
-      'isHot': isHot,
-    };
   }
 }
 
