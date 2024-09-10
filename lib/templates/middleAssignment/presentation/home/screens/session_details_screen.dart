@@ -12,7 +12,10 @@ class SessionDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Session Details'),
+        title: Text(
+          'Session Details',
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
         backgroundColor: Theme.of(context).primaryColor,
       ),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,

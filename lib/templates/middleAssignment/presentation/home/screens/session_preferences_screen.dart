@@ -27,7 +27,10 @@ class SessionPreferencesScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        title: Text('Session Preferences'),
+        title: Text(
+          'Session Preferences',
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
         backgroundColor: Theme.of(context).primaryColor,
       ),
       body: SingleChildScrollView(
@@ -44,7 +47,8 @@ class SessionPreferencesScreen extends ConsumerWidget {
             const SizedBox(height: 16.0),
             _buildTimePicker(
               context,
-              title: 'Choose Cold Interval: ${sessionState.coldIntervalSeconds}s',
+              title:
+                  'Choose Cold Interval: ${sessionState.coldIntervalSeconds}s',
               color: coldTheme.primaryColor,
               onChanged: (value) =>
                   stateNotifier.updateColdIntervalMinutes(value),
@@ -125,12 +129,12 @@ class SessionPreferencesScreen extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Start with:'),
+            const Text('Start with:'),
             Row(
               children: [
                 Expanded(
                   child: RadioListTile(
-                    title: Text('Cold'),
+                    title: const Text('Cold'),
                     value: true,
                     groupValue: sessionState.startWithCold,
                     onChanged: (_) => stateNotifier.toggleStartWithCold(),
@@ -138,7 +142,7 @@ class SessionPreferencesScreen extends ConsumerWidget {
                 ),
                 Expanded(
                   child: RadioListTile(
-                    title: Text('Hot'),
+                    title: const Text('Hot'),
                     value: false,
                     groupValue: sessionState.startWithCold,
                     onChanged: (_) => stateNotifier.toggleStartWithCold(),

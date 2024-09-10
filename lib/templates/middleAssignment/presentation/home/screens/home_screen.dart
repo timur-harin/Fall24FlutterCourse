@@ -20,7 +20,10 @@ class HomeScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        title: Text('Home'),
+        title: Text(
+          'Home',
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
         backgroundColor: Theme.of(context).primaryColor,
       ),
       body: state.loading == false
@@ -28,7 +31,8 @@ class HomeScreen extends ConsumerWidget {
           : const Center(
               child: CircularProgressIndicator(
                 strokeWidth: 6.0,
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.blue), // Customize to match theme
+                valueColor: AlwaysStoppedAnimation<Color>(
+                    Colors.blue), // Customize to match theme
               ),
             ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -44,10 +48,10 @@ class HomeScreen extends ConsumerWidget {
     List<SessionEntity> sessions,
   ) {
     if (sessions.isEmpty) {
-      return const Center(
+      return Center(
         child: Text(
           'No session yet...',
-          style: TextStyle(fontSize: 16.0, color: Colors.grey),
+          style: Theme.of(context).textTheme.bodyMedium,
         ),
       );
     }
@@ -56,7 +60,7 @@ class HomeScreen extends ConsumerWidget {
         SliverPadding(
           padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
           sliver: SliverGrid(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               mainAxisSpacing: 16.0,
               crossAxisSpacing: 16.0,
@@ -85,7 +89,7 @@ class HomeScreen extends ConsumerWidget {
                         children: [
                           Text(
                             'Started With: ${sessions[index].startWithCold ? 'Cold' : 'Hot'}',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
                             ),
@@ -103,7 +107,8 @@ class HomeScreen extends ConsumerWidget {
                             'Duration: ${sessions[index].totalDuration.inSeconds.toString()}s',
                             style: TextStyle(
                               fontSize: 14,
-                              color: Theme.of(context).primaryColor,                           ),
+                              color: Theme.of(context).primaryColor,
+                            ),
                           ),
                         ],
                       ),

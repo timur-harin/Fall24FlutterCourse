@@ -40,7 +40,10 @@ class SessionOverviewScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Session Overview'),
+        title: Text(
+          'Session Overview',
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
         backgroundColor: Theme.of(context).primaryColor,
       ),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,

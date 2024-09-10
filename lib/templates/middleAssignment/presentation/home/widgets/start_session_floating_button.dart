@@ -14,7 +14,7 @@ class StartSessionFloatingButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return NeumorphicButton(
       style: NeumorphicStyle(
-        color: Colors.blue[100],
+        color: Theme.of(context).primaryColor,
         boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12.0)),
       ),
       onPressed: onPressed,
@@ -24,7 +24,10 @@ class StartSessionFloatingButton extends StatelessWidget {
         child: Center(
           child: Text(
             title,
-            style: const TextStyle(color: Colors.white, fontSize: 20.0),
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium!
+                .copyWith(color: Colors.white),
           ),
         ),
       ),
