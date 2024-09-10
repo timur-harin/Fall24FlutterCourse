@@ -1,9 +1,14 @@
 import 'package:neumorphic_ui/neumorphic_ui.dart';
 
 class StartSessionFloatingButton extends StatelessWidget {
-  const StartSessionFloatingButton({super.key, required this.onPressed});
+  const StartSessionFloatingButton({
+    super.key,
+    required this.onPressed,
+    required this.title,
+  });
 
   final void Function() onPressed;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -13,15 +18,15 @@ class StartSessionFloatingButton extends StatelessWidget {
         boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12.0)),
       ),
       onPressed: onPressed,
-      child: const SizedBox(
+      child: SizedBox(
         height: 36.0,
         width: 128.0,
         child: Center(
-            child: Text(
-              'New session',
-              style: TextStyle(color: Colors.white, fontSize: 20.0),
-            ),
+          child: Text(
+            title,
+            style: const TextStyle(color: Colors.white, fontSize: 20.0),
           ),
+        ),
       ),
     );
   }

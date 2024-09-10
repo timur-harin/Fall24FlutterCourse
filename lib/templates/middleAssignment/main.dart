@@ -1,24 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'appTheme/theme_notifier.dart';
+import 'app_router/app_router.dart';
 import 'presentation/home/screens/home_screen.dart';
 
 void main() {
-  runApp(const MiddleAssigmentApp());
+  runApp(MiddleAssigmentApp());
 }
 
 class MiddleAssigmentApp extends StatelessWidget {
-  const MiddleAssigmentApp({super.key});
+  MiddleAssigmentApp({super.key});
+
+  final _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: MaterialApp(
-        title: 'Middle Assigment',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: const HomeScreen(),
-      ),
+      child: Consumer(builder: (context, ref, child) {
+        final theme = ref.watch(themeNotifierProvider);
+
+        return MaterialApp.router(
+          routerConfig: _appRouter.config(),
+          title: 'Middle Assigment',
+          theme: theme,
+        );
+      }),
     );
   }
 }

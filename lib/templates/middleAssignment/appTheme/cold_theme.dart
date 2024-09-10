@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-ThemeData coldTheme() {
-  return ThemeData(
-    primarySwatch: Colors.blue,
-  );
-}
+final ThemeData coldTheme = ThemeData(
+  brightness: Brightness.light,
+  primaryColor: Colors.blue,
+  scaffoldBackgroundColor: const Color(0xFFE0E5EC),
+);

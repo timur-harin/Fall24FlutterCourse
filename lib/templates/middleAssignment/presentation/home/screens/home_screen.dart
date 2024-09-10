@@ -1,16 +1,18 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:fall_24_flutter_course/templates/middleAssignment/app_router/app_router.gr.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/shower_session_history.dart';
 import '../widgets/start_session_floating_button.dart';
-import 'session_preferences_screen.dart';
 
+@RoutePage()
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: CustomScrollView(
         slivers: [
           ..._testData,
@@ -21,13 +23,8 @@ class HomeScreen extends StatelessWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: StartSessionFloatingButton(
-        onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => const SessionPreferencesScreen(),
-            ),
-          );
-        },
+        title: 'Start Session',
+        onPressed: () => context.pushRoute(const SessionPreferencesRoute()),
       ),
     );
   }

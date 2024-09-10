@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-ThemeData hotTheme() {
-  return ThemeData(
-    primarySwatch: Colors.red,
-  );
-}
+final ThemeData hotTheme = ThemeData(
+  brightness: Brightness.light,
+  primaryColor: Colors.red,
+  scaffoldBackgroundColor: const Color(0xFFE0E5EC),
+);

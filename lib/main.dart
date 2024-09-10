@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'templates/middleAssignment/main.dart';
 
 void main() {
-  runApp(const MiddleAssigmentApp());
+  runApp(ProviderScope(
+    child: MiddleAssigmentApp(),
+  ));
 }
 
 class MainApp extends StatelessWidget {

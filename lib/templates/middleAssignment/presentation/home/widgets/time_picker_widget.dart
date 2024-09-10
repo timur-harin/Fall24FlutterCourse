@@ -1,71 +1,50 @@
-import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:neumorphic_ui/neumorphic_ui.dart';
-import 'package:bottom_picker/bottom_picker.dart';
 
-class DefaultSliderWidget extends StatefulWidget {
-  const DefaultSliderWidget({
+class TimePickerWidget extends StatefulWidget {
+  const TimePickerWidget({
     super.key,
-    required this.onChanged,
     required this.title,
+    this.max = 15.0,
+    required this.onChanged,
     this.accent,
-    this.min,
-    this.max,
-    this.initialValue,
+    this.initialValue = 15,
   });
 
-  final Function(int) onChanged;
-  final Color? accent;
   final String title;
-  final double? min;
-  final double? max;
-  final int? initialValue;
+  final Function(int value) onChanged;
+  final Color? accent;
+  final double max;
+  final int initialValue;
 
   @override
-  State<DefaultSliderWidget> createState() => _DefaultSliderWidgetState();
+  State<TimePickerWidget> createState() => _TimePickerWidgetState();
 }
 
-class _DefaultSliderWidgetState extends State<DefaultSliderWidget> {
-  late int currentValue;
+class _TimePickerWidgetState extends State<TimePickerWidget> {
+  late int value;
 
   @override
   void initState() {
     super.initState();
-
-    currentValue = widget.initialValue ?? 5;
+    value = widget.initialValue;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Column(
       children: [
         Text(widget.title),
-        Bounceable(
-          onTap: () => _showPicker(context),
-          child: Container(
-            decoration: BoxDecoration(border: Border.all()),
-            child: Text(currentValue.toStringAsFixed(0)),
-          ),
+        NeumorphicSlider(
+          min: 0.0,
+          max: widget.max,
+          value: value.toDouble(),
+          onChanged: (newValue) {
+            value = newValue.round();
+            setState(() {});
+            widget.onChanged(value);
+          },
         ),
       ],
     );
-  }
-
-  void _showPicker(BuildContext context) => BottomPicker.time(
-        pickerTitle: Text(widget.title),
-        initialTime: Time(),
-        onChange: _onTimeChanged,
-        onClose: _onPickerClosed,
-      ).show(context);
-
-  void _onTimeChanged(dynamic value) {
-    currentValue = value.minute;
-  }
-
-  void _onPickerClosed() {
-    widget.onChanged(currentValue);
-    setState(() {});
   }
 }
