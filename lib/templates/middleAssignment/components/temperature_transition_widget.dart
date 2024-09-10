@@ -100,6 +100,15 @@ class _TemperatureTransitionWidgetState
     });
   }
 
+  void _stopTimer() {
+     setState(() {
+      if (_isTimerRunning) {
+        // Останавливаем таймер
+        _isTimerRunning = false;
+        _timer?.cancel();
+      }});
+  }
+
   void _resetTimer() {
     setState(() {
       _timer?.cancel();
@@ -122,6 +131,7 @@ class _TemperatureTransitionWidgetState
 
   void _endSession(BuildContext context) {
     _saveCurrentTime();
+    _stopTimer();
     showDialog(context: context, builder: (BuildContext context) {
       return ConfirmDialog();
     });
