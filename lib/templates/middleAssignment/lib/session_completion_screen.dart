@@ -7,7 +7,7 @@ class SessionCompletionScreen extends StatelessWidget {
     Future.delayed(Duration(seconds: 2), () {
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => HomeScreen()),
-            (Route<dynamic> route) => false,
+        (Route<dynamic> route) => false,
       );
     });
 
@@ -15,10 +15,13 @@ class SessionCompletionScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Session Complete'),
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'Well done!',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF6750A4)),
         ),
       ),
     );

@@ -59,7 +59,7 @@ class _SessionActiveScreenState extends ConsumerState<SessionActiveScreen>
           });
           startTimer();
         } else {
-          _saveSession(widget.session);
+          _saveSession(widget.session, interrupted: false);
           ref.read(sessionProvider.notifier).endSession();
           Navigator.pushReplacement(
             context,
@@ -72,10 +72,49 @@ class _SessionActiveScreenState extends ConsumerState<SessionActiveScreen>
     });
   }
 
-  Future<void> _saveSession(ShowerSession session) async {
+  Future<void> _saveSession(ShowerSession session, {bool interrupted = false}) async {
     final box = await Hive.openBox<ShowerSession>('sessionsBox');
-    await box.add(session);
+    if (interrupted) {
+      final interruptedSession = ShowerSession(
+        phases: session.phases,
+        date: session.date,
+        totalDuration: session.totalDuration,
+        interrupted: true,
+      );
+      await box.add(interruptedSession);
+    } else {
+      await box.add(session);
+    }
     await box.close();
+  }
+
+  Future<bool> _onWillPop() async {
+    final shouldExit = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('End Session?'),
+        content: Text('Do you really want to end the session?'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: Text('Yes'),
+          ),
+        ],
+      ),
+    ) ?? false;
+
+    if (shouldExit) {
+      // Save the session as "interrupted"
+      await _saveSession(widget.session, interrupted: true);
+      ref.read(sessionProvider.notifier).endSession();
+      Navigator.of(context).pop(); // Go back to the previous screen
+    }
+
+    return false; // Prevent default back navigation
   }
 
   @override
@@ -105,70 +144,73 @@ class _SessionActiveScreenState extends ConsumerState<SessionActiveScreen>
     final Color circleColor
     = currentPhase.isHot ? hotCircleColor : coldCircleColor;
 
-    return Scaffold(
-      backgroundColor: backgroundColor,
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          'Active Shower Session',
-          style: TextStyle(color: appBarColor),
-        ),
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
         backgroundColor: backgroundColor,
-      ),
-      body: Stack(
-        children: [
-          // Circle decoration behind button, aligned with button
-          Center(
-              child: Column(
-                children: [
-                  const SizedBox(height: 345,),
-                  CustomPaint(
-                    size: const Size(270, 270), // Adjust size as needed
-                    painter: CirclePainter(color: circleColor),
-                  ),
-                ],
-              )
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            'Active Shower Session',
+            style: TextStyle(color: appBarColor),
           ),
-          Center(
-            child: CustomPaint(
-              size: Size.infinite,
-              painter: BubblePainter(
-                _bubbleController,
+          backgroundColor: backgroundColor,
+        ),
+        body: Stack(
+          children: [
+            // Circle decoration behind button, aligned with button
+            Center(
+                child: Column(
+                  children: [
+                    const SizedBox(height: 345,),
+                    CustomPaint(
+                      size: const Size(270, 270), // Adjust size as needed
+                      painter: CirclePainter(color: circleColor),
+                    ),
+                  ],
+                )
+            ),
+            Center(
+              child: CustomPaint(
+                size: Size.infinite,
+                painter: BubblePainter(
+                  _bubbleController,
+                ),
               ),
             ),
-          ),
-          Center(
-            child: Column(
-              children: [
-                const SizedBox(height: 140),
-                Text(
-                  currentPhase.isHot ? 'Hot!' : 'Cold!',
-                  style: TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                    color: hotTextColorOutsideButton,
-                  ),
-                ),
-                const SizedBox(height: 170),
-                ElevatedButton(
-                  onPressed: null,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: buttonColor,
-                    shape: const CircleBorder(),
-                    padding: const EdgeInsets.all(100),
-                  ),
-                  child: Text(
-                    '$remainingTime',
+            Center(
+              child: Column(
+                children: [
+                  const SizedBox(height: 140),
+                  Text(
+                    currentPhase.isHot ? 'Hot!' : 'Cold!',
                     style: TextStyle(
-                      color: hotTextColor,
+                      fontSize: 32,
                       fontWeight: FontWeight.bold,
-                      fontSize: 48,),
+                      color: hotTextColorOutsideButton,
+                    ),
                   ),
-                ),
-              ],
+                  const SizedBox(height: 170),
+                  ElevatedButton(
+                    onPressed: null,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: buttonColor,
+                      shape: const CircleBorder(),
+                      padding: const EdgeInsets.all(100),
+                    ),
+                    child: Text(
+                      '$remainingTime',
+                      style: TextStyle(
+                        color: hotTextColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 48,),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

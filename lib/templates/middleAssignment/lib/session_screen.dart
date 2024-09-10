@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,16 +21,43 @@ class _SessionScreenState extends ConsumerState<SessionScreen> {
     _startTimer();
   }
 
+
   void _navigateToActiveSession(BuildContext context, WidgetRef ref) {
-    final phases = [
+    final firstPhase = [
       TemperaturePhase(isHot: true, duration: 10),
       TemperaturePhase(isHot: false, duration: 10),
+      TemperaturePhase(isHot: true, duration: 15),
+      TemperaturePhase(isHot: false, duration: 5),
+      TemperaturePhase(isHot: true, duration: 20),
+      TemperaturePhase(isHot: false, duration: 10),
     ];
+    final secondPhase = [
+      TemperaturePhase(isHot: false, duration: 10),
+      TemperaturePhase(isHot: true, duration: 5),
+      TemperaturePhase(isHot: false, duration: 15),
+      TemperaturePhase(isHot: true, duration: 10),
+      TemperaturePhase(isHot: false, duration: 20),
+      TemperaturePhase(isHot: true, duration: 10),
+      TemperaturePhase(isHot: true, duration: 5),
+    ];
+    final thirdPhase = [
+      TemperaturePhase(isHot: true, duration: 20),
+      TemperaturePhase(isHot: false, duration: 10),
+      TemperaturePhase(isHot: true, duration: 15),
+      TemperaturePhase(isHot: false, duration: 5),
+      TemperaturePhase(isHot: true, duration: 10),
+      TemperaturePhase(isHot: false, duration: 15),
+    ];
+    final options = [firstPhase, secondPhase, thirdPhase];
+    Random random = Random();
+    int randomIndex = random.nextInt(options.length);
+    final phases = options[randomIndex];
 
-    final session = ShowerSession(
+    final ShowerSession session = ShowerSession(
       phases: phases,
       date: DateTime.now(),
       totalDuration: phases.fold(0, (sum, phase) => sum + phase.duration),
+    interrupted: false,
     );
 
     Navigator.push(

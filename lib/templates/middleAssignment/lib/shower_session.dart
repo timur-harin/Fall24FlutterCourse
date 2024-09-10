@@ -17,6 +17,7 @@ class ShowerSession extends HiveObject {
     required this.phases,
     required this.date,
     required this.totalDuration,
+    required bool interrupted,
   });
 }
 

@@ -19,7 +19,7 @@ class ShowerSessionAdapter extends TypeAdapter<ShowerSession> {
     return ShowerSession(
       phases: (fields[0] as List).cast<TemperaturePhase>(),
       date: fields[1] as DateTime,
-      totalDuration: fields[2] as int,
+      totalDuration: fields[2] as int, interrupted: false,
     );
   }
 
