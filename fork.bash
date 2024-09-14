@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Remove all remotes containing 'fork' in their names
 for remote in $(git remote); do
   if [[ $remote == *"fork"* ]]; then
     echo "Removing remote: $remote"
@@ -9,6 +8,8 @@ for remote in $(git remote); do
 done
 
 git pull origin main
+
+git reset --hard 5dff470f232da331f32be8fa86d21da00101e6e1
 
 read -p "Enter the link to the fork repository: " fork_link
 
@@ -20,4 +21,4 @@ git stash
 
 git pull fork middleAssignment
 
-git stash pop
+
