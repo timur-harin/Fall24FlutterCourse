@@ -8,16 +8,22 @@ void main() {
 
   group('end-to-end test', () {
     testWidgets('tap on the floating action button, verify counter',
-            (tester) async {
-          await tester.pumpWidget(const MyApp());
+        (tester) async {
+      await tester.pumpWidget(const MyApp());
 
-          expect(find.text('0'), findsOneWidget);
+      expect(find.text('0'), findsOneWidget);
 
-          final fab = find.byKey(const ValueKey('increment_fab'));
-          await tester.tap(fab);
-          await tester.pumpAndSettle();
+      final fab = find.byKey(const ValueKey('increment_fab'));
+      await tester.tap(fab);
+      await tester.pumpAndSettle();
 
-          expect(find.text('1'), findsOneWidget);
-        });
+      expect(find.text('1'), findsOneWidget);
+
+      final fab2 = find.byKey(const ValueKey('increment_fab'));
+      await tester.tap(fab2);
+      await tester.pumpAndSettle();
+
+      expect(find.text('2'), findsOneWidget);
+    });
   });
 }
