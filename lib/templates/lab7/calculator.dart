@@ -1,4 +1,4 @@
-import 'dart:math';
+import 'dart:math' as math;
 
 class Calculator {
   int add(int a, int b) {
@@ -21,5 +21,7 @@ class Calculator {
     return a % b;
   }
 
-  // TODO add power function
+  num power(int a, int b) {
+    return math.pow(a, b);
+  }
 }
