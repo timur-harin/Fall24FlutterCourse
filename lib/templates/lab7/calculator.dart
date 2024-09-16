@@ -21,5 +21,11 @@ class Calculator {
     return a % b;
   }
 
-  // TODO add power function
+  int power(int a, int b) {
+    int resp = 1;
+    for (var i = 0; i < b; i++) {
+      resp *= a;
+    }
+    return resp;
+  }
 }
