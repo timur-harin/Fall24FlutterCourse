@@ -1,4 +1,3 @@
-// lib/counter_widget.dart
 import 'package:flutter/material.dart';
 
 class CounterWidget extends StatefulWidget {
@@ -26,7 +25,11 @@ class CounterWidgetState extends State<CounterWidget> {
           '$_counter',
           style: Theme.of(context).textTheme.headlineLarge,
         ),
-        // TODO add ElevatedButton to increment the counter with text 'Increment'
+        ElevatedButton(
+          key: const ValueKey('increment_button'),
+          onPressed: _incrementCounter,
+          child: const Text('Increment'),
+        ),
       ],
     );
   }
