@@ -7,20 +7,19 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   group('end-to-end test', () {
-    testWidgets('tap on the floating action button, verify counter',
-        (tester) async {
-      // TODO add pumpWidget with MyApp
+    testWidgets('tap on the floating action button, verify counter', (tester) async {
 
-      // TODO verify the counter starts at 0, so find the text '0' 
+      await tester.pumpWidget(const MyApp());
 
-      // TODO finds the floating action button by key in counter.dart
-      final fab = null;
+      expect(find.text('0'), findsOneWidget);
 
-      // TODO emulate a tap on the floating action button by testet.tab(fab)
+      final fab = find.byKey(const ValueKey('increment_fab'));
 
-      // TODO trigger a frame by calling tester.pumpAndSettle
+      await tester.tap(fab);
 
-      // TODO verify the counter increments by 1, so find the text '1'
+      await tester.pumpAndSettle();
+
+      expect(find.text('1'), findsOneWidget);
     });
   });
 }
