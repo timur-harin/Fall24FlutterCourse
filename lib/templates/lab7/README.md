@@ -1,24 +1,23 @@
-# Lab 7
+# Lab 6
 
-## Analyzer
+## Tests and widget implementation
 
-Add rules for analyzers in analysis_options.yaml to avoid infos and warnings in main.dart
+### Unit test 
 
-## Test
+TODOs in test/unit_test.dart and calculator.dart to test calculator
 
-Add widget test for main.dart and apply running this test in GitHub Actions
+### Mocking test
 
+TODOs in test/mocking_test.dart, album.dart and api_service,dart to check api
 
-## CI/CD
+### Widget test
 
-Add new yaml file to get dependencies, analyze, test, and deploy using GitHub actions - this web app
-Check on which branch you need to push to run the job
+TODOs in test/widget_test.dart and widget.dart to check text inside title 
 
-## Build 
+### Integration test
 
-Add new job to build windows application in windows machine using GitHub actions
+TODOs in integration_test/integration_test.dart and counter.dart to check apps behavior
 
-## Docker
+### Golden test
 
-Add needed lines for exsists Dockerfile as linux container for web app 
-
+TODOs in test/golden/counter_widget_test.dart and golden.dart to check visual appearance
