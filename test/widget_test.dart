@@ -3,10 +3,11 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   testWidgets('MyWidget has a title', (WidgetTester tester) async {
-    // TODO add pumpWidget with title
-   
-    // TODO add titleFinder with find.text
+    const title = 'Hello, Flutter!';
+    await tester.pumpWidget(MyWidget(title: title));
 
-    // TODO add expect with findsOneWidget
+    final titleFinder = find.text(title);
+    
+    expect(titleFinder, findsOneWidget);
   });
 }
