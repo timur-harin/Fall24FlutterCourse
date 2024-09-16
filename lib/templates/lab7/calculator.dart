@@ -22,4 +22,8 @@ class Calculator {
   }
 
   // TODO add power function
+
+  num power(num a, num b) {
+    return pow(a, b);
+  }
 }

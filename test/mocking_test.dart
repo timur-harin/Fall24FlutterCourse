@@ -12,6 +12,7 @@ import 'mocking_test.mocks.dart';
 @GenerateMocks([http.Client])
 void main() {
   // TODO add API creation
+  late ApiService _apiService = ApiService();
   group('fetchAlbum', () {
     test('returns an Album if the http call completes successfully', () async {
       final client = MockClient();
@@ -20,10 +21,11 @@ void main() {
               .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1')))
           .thenAnswer((_) async =>
           // TODO add checking response (http.Response) and code (200) check
-              http.Response());
+              http.Response('{"userId": 1, "id": 1, "title": "quidem molestiae enim"}', 200));
 
       // TODO add call to fetchAlbum
-      expect(await , isA<Album>());
+      final result = await _apiService.fetchAlbum(client);
+      expect(result, isA<Album>());
     });
 
     test('throws an exception if the http call completes with an error', () {
@@ -33,10 +35,10 @@ void main() {
               .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1')))
           .thenAnswer((_) async => 
           // TODO add checking response (http.Response) and code (404) check
-          http.Response());
+          http.Response('Not Found', 404));
 
       // TODO add call to fetchAlbum
-      expect(, throwsException);
+      expect(_apiService.fetchAlbum(client), throwsException);
     });
   });
 }
