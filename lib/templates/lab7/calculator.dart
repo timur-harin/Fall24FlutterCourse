@@ -20,6 +20,7 @@ class Calculator {
   int mod(int a, int b) {
     return a % b;
   }
-
-  // TODO add power function
+  int power(int a, int b) {
+    return pow(a, b).toInt();
+  }
 }
