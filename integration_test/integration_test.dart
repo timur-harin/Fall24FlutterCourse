@@ -8,19 +8,16 @@ void main() {
 
   group('end-to-end test', () {
     testWidgets('tap on the floating action button, verify counter',
-        (tester) async {
-      // TODO add pumpWidget with MyApp
+            (tester) async {
+          await tester.pumpWidget(const MyApp());
 
-      // TODO verify the counter starts at 0, so find the text '0' 
+          expect(find.text('0'), findsOneWidget);
 
-      // TODO finds the floating action button by key in counter.dart
-      final fab = null;
+          final fab = find.byKey(const ValueKey('increment_fab'));
+          await tester.tap(fab);
+          await tester.pumpAndSettle();
 
-      // TODO emulate a tap on the floating action button by testet.tab(fab)
-
-      // TODO trigger a frame by calling tester.pumpAndSettle
-
-      // TODO verify the counter increments by 1, so find the text '1'
-    });
+          expect(find.text('1'), findsOneWidget);
+        });
   });
 }
