@@ -6,37 +6,36 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'mocking_test.mocks.dart';
 
-
 // Do not forget to run generation for mocks
 // https://docs.flutter.dev/cookbook/testing/unit/mocking#:~:text=Add%20the%20annotation%20%40GenerateMocks(%5Bhttp.Client%5D)%20to%20the%20main%20function%20to%20generate%20a%20MockClient%20class%20with%20mockito.s
 @GenerateMocks([http.Client])
 void main() {
-  // TODO add API creation
+  late ApiService apiService;
+  late MockClient mockClient;
+
+  setUp(() {
+    apiService = ApiService();
+    mockClient = MockClient();
+  });
+
   group('fetchAlbum', () {
     test('returns an Album if the http call completes successfully', () async {
-      final client = MockClient();
+      when(mockClient.get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1')))
+          .thenAnswer((_) async => http.Response('{"userId": 1, "id": 1, "title": "Test Album"}', 200));
 
-      when(client
-              .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1')))
-          .thenAnswer((_) async =>
-          // TODO add checking response (http.Response) and code (200) check
-              http.Response());
+      final album = await apiService.fetchAlbum(mockClient);
 
-      // TODO add call to fetchAlbum
-      expect(await , isA<Album>());
+      expect(album, isA<Album>());
+      expect(album.id, 1);
+      expect(album.userId, 1);
+      expect(album.title, 'Test Album');
     });
 
-    test('throws an exception if the http call completes with an error', () {
-      final client = MockClient();
+    test('throws an exception if the http call completes with an error', () async {
+      when(mockClient.get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1')))
+          .thenAnswer((_) async => http.Response('Not Found', 404));
 
-      when(client
-              .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1')))
-          .thenAnswer((_) async => 
-          // TODO add checking response (http.Response) and code (404) check
-          http.Response());
-
-      // TODO add call to fetchAlbum
-      expect(, throwsException);
+      expect(() async => await apiService.fetchAlbum(mockClient), throwsException);
     });
   });
 }
