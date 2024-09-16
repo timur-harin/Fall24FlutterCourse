@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -25,30 +23,25 @@ class CounterPage extends StatefulWidget {
 class CounterPageState extends State<CounterPage> {
   int _counter = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  void _incrementCounter() => setState(() => ++_counter);
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Counter App'),
-      ),
-      body: Center(
-        child: Text(
-          '$_counter',
-          style: Theme.of(context).textTheme.bodyLarge,
+  Widget build(BuildContext context) =>
+      Scaffold(
+        appBar: AppBar(
+          title: const Text('Counter App'),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        // TODO add valueKey 
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-    );
-  }
+        body: Center(
+          child: Text(
+            '$_counter',
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          key: const ValueKey('increment'),
+          onPressed: _incrementCounter,
+          tooltip: 'Increment',
+          child: const Icon(Icons.add),
+        ),
+      );
 }

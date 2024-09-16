@@ -16,27 +16,21 @@ void main() {
     test('returns an Album if the http call completes successfully', () async {
       final client = MockClient();
 
-      when(client
-              .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1')))
+      when(client.get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1')))
           .thenAnswer((_) async =>
-          // TODO add checking response (http.Response) and code (200) check
-              http.Response());
+            http.Response('{"userId": 0, "id": 0, "title": "title"}', 200)
+          );
 
-      // TODO add call to fetchAlbum
-      expect(await , isA<Album>());
+      expect(await ApiService().fetchAlbum(client), isA<Album>());
     });
 
     test('throws an exception if the http call completes with an error', () {
       final client = MockClient();
 
-      when(client
-              .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1')))
-          .thenAnswer((_) async => 
-          // TODO add checking response (http.Response) and code (404) check
-          http.Response());
+      when(client.get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1')))
+          .thenAnswer((_) async => http.Response('Not Found', 404));
 
-      // TODO add call to fetchAlbum
-      expect(, throwsException);
+      expect(ApiService().fetchAlbum(client), throwsException);
     });
   });
 }
