@@ -10,8 +10,7 @@ class MyWidget extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          // TODO Add text title to test
-          title: Text(title),
+          title: Text(title, key: const ValueKey('app_title')),
         ),
       ),
     );
