@@ -26,7 +26,10 @@ class CounterWidgetState extends State<CounterWidget> {
           '$_counter',
           style: Theme.of(context).textTheme.headlineLarge,
         ),
-        // TODO add ElevatedButton to increment the counter with text 'Increment'
+        ElevatedButton(
+          onPressed: _incrementCounter,
+          child: const Text('Increment'),
+        ),
       ],
     );
   }

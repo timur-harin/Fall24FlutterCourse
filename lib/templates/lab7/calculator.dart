@@ -21,5 +21,7 @@ class Calculator {
     return a % b;
   }
 
-  // TODO add power function
+  num power(int a, int b) {
+    return pow(a, b);
+  }
 }

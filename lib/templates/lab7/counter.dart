@@ -44,7 +44,7 @@ class CounterPageState extends State<CounterPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        // TODO add valueKey 
+        key: ValueKey('increment_btn'),
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
