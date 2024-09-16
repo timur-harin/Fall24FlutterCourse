@@ -2,7 +2,7 @@
 
 ## Tests and widget implementation
 
-### Unit test 
+### Unit test
 
 TODOs in test/unit_test.dart and calculator.dart to test calculator
 

@@ -11,7 +11,7 @@ class MyWidget extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           // TODO Add text title to test
-          title: Text(title),
+          title: Text("This is test title"),
         ),
       ),
     );

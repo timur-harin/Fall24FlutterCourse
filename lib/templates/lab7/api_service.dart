@@ -7,13 +7,15 @@ class ApiService {
   Future<Album> fetchAlbum(http.Client client) async {
 
     // TODO get response using client from https://jsonplaceholder.typicode.com/albums/1
-    
+    final response = await client.get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
+
     // TODO add status check and throw exception
-    if (true) {
+    if (response.statusCode == 200) {
       // TODO add json parsing Album.fromJson
-      return Album.fromJson();
+      return Album.fromJson(json.decode(response.body));
     } else {
       // TODO Add throwing exception
+      throw Exception('Failed');
     }
   }
 }
