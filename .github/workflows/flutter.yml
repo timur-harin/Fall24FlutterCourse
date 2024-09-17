@@ -1,0 +1,54 @@
+name: Flutter CI
+
+on:
+  push:
+    branches:
+      - main
+      - feature/lab-8
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Flutter actions
+        uses: subosito/flutter-action@v1
+        with:
+          flutter-version: "2.2.3"
+
+      - name: Get dependencies
+        run: flutter pub get
+
+      - name: Run Analyzer
+        run: flutter analyze
+
+      - name: Run Tests
+        run: flutter test test/widget_test_lab_8.dart
+
+      - name: Build Web App
+        run: flutter build web --target=lib/templates/lab8/main.dart
+
+  windows-build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Flutter actions
+        uses: subosito/flutter-action@v1
+        with:
+          flutter-version: "2.2.3"
+
+      - name: Get dependencies
+        run: flutter pub get
+
+      - name: Run Analyzer
+        run: flutter analyze
+
+      - name: Run Tests
+        run: flutter test test/widget_test_lab_8.dart
+
+      - name: Build Windows App
+        run: flutter build windows --target=lib/templates/lab8/main.dart
