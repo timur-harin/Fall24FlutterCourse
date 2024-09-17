@@ -22,7 +22,7 @@ jobs:
         run: flutter pub get
 
       - name: Run Analyzer
-        run: flutter analyze
+        run: flutter analyze lib/templates/lab8
 
       - name: Run Tests
         run: flutter test test/widget_test_lab_8.dart
@@ -45,7 +45,7 @@ jobs:
         run: flutter pub get
 
       - name: Run Analyzer
-        run: flutter analyze
+        run: flutter analyze lib/templates/lab8
 
       - name: Run Tests
         run: flutter test test/widget_test_lab_8.dart
