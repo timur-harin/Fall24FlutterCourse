@@ -15,25 +15,23 @@ jobs:
     
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Install Flutter
       uses: subosito/flutter-action@v2
       with:
         channel: stable
-    
-    - name: Install Flutter GH Pages
-      uses: bluefireteam/flutter-gh-pages@v7
+        flutter-version: 3.22.2
     
     - name: Get dependencies
       run: flutter pub get
+      
+    - name: Test project
+      run: flutter test test/lab8/widgetTest.dart
 
     - name: Analyze code
       run: flutter analyze --no-fatal-warnings --no-fatal-infos lib/templates/lab8/main.dart
 
-    - name: Test project
-      run: flutter test
-    
     - name: Build release project
       run: flutter build web --release
 
