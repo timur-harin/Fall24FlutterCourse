@@ -3,10 +3,10 @@ name: Flutter Web CI/CD
 on:
   push:
     branches:
-      - main
+      - widget
   pull_request:
     branches:
-      - main
+      - widget
 
 jobs:
   build:
@@ -32,10 +32,3 @@ jobs:
 
       - name: Build Flutter Web
         run: flutter build web --release
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: build/web
-
