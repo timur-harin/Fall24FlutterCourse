@@ -1,12 +1,14 @@
-import 'package:fall_24_flutter_course/templates/lab7/widget.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:your_project/main.dart';
 
 void main() {
-  testWidgets('MyWidget has a title', (WidgetTester tester) async {
-    // TODO add pumpWidget with title
-   
-    // TODO add titleFinder with find.text
+  testWidgets('Test if Hello World is displayed', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      const ProviderScope(child: MaterialApp(home: MyHomePage())),
+    );
 
-    // TODO add expect with findsOneWidget
+    expect(find.text('Hello World!'), findsOneWidget);
   });
 }

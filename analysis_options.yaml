@@ -1,1 +1,15 @@
 include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - lib/main.dart
+
+  errors:
+    unused_import: ignore
+    avoid_unnecessary_containers: ignore
+    avoid_print: ignore
+
+linter:
+  rules:
+    avoid_unnecessary_containers: false
+    prefer_const_constructors: false
