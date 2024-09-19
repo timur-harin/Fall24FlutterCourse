@@ -1,0 +1,12 @@
+FROM cirrusci/flutter:3.10.0
+
+WORKDIR /app
+
+COPY . /app
+
+RUN flutter pub get
+RUN flutter build web
+
+EXPOSE 8080
+
+CMD ["flutter", "serve", "--web-port", "8080"]
