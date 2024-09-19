@@ -27,7 +27,7 @@ jobs:
       run: flutter pub get
     
     - name: Test project
-      run: flutter test
+      run: flutter test --name "lab8"
     
     - name: Build release project
       run: flutter build web
