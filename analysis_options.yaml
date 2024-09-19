@@ -1,1 +1,11 @@
 include: package:flutter_lints/flutter.yaml
+linter:
+  rules:
+    - avoid_print: true
+    - avoid_unnecessary_containers: true
+    - prefer_const_constructors:
+      - avoid-new: false
+    - prefer_const_literals:
+      - avoid-new: false
+    - prefer_conditional_expressions: true
+    - use_build_context_synchronously: true
