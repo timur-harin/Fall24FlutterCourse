@@ -11,6 +11,6 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.10.0'  # Укажи конкретную версию Flutter
+          flutter-version: '3.24.1'
       - run: flutter pub get
       - run: flutter test
