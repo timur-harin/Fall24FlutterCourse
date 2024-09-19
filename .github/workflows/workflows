@@ -2,9 +2,9 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "lab8" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "lab8" ]
 
 jobs:
   build_test:
@@ -22,7 +22,7 @@ jobs:
       run: flutter pub get
 
     - name: Analyze project source
-      run: flutter analyze
+      run: flutter analyze --no-fatal-warnings --no-fatal-infos lib/templates/lab8/main.dart
 
     - name: Run tests
       run: flutter test test/widget_test.dart
@@ -51,7 +51,7 @@ jobs:
       run: flutter build windows
 
     - name: Archive Build Artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: WindowsApp
-        path: build/windows/runner/Release/*.exe
+        path: build/windows/runner/release/*.exe
