@@ -30,6 +30,7 @@ dev_dependencies:
   freezed: ^2.5.2
   integration_test:
     sdk: flutter
+  test: ^1.25.7
 
 
 flutter:
