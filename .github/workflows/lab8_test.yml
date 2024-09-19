@@ -12,3 +12,4 @@ jobs:
           flutter-version: '3.24.1'
       - run: flutter pub get
       - run: flutter test
+      - run: flutter analyze lib/templates/lab8/
