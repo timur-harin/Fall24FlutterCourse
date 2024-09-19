@@ -11,16 +11,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: dart-lang/setup-dart@v1
-      - run: dart pub get
-      - run: dart analyze
+      - run: flutter pub get
+      - run: flutter analyze
 
   test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: dart-lang/setup-dart@v1
-      - run: dart pub get
-      - run: dart test
+      - run: flutter pub get
+      - run: flutter test
 
   build-web: # Build for web
     runs-on: ubuntu-latest
