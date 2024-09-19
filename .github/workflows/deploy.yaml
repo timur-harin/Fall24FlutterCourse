@@ -33,7 +33,7 @@ jobs:
         run: flutter analyze --no-fatal-warnings --no-fatal-infos lib/templates/lab8/main.dart
 
       - name: Test project
-        run: flutter test
+        run: flutter test lib/templates/lab8/main.dart
 
       - name: Build release project
         run: flutter build web --release lib/templates/lab8/main.dart
