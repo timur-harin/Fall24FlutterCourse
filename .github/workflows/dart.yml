@@ -7,7 +7,7 @@ name: flutter
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "lab8" ]
   pull_request:
     branches: [ "main" ]
 
