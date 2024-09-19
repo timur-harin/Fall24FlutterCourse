@@ -4,4 +4,4 @@ include: package:flutter_lints/flutter.yaml
 linter:
   rules:
     - prefer_const_constructors: false
-    - avoid_unnecessary_containers
+    - avoid_unnecessary_containers: false
