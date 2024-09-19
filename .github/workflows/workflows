@@ -50,8 +50,7 @@ jobs:
     - name: Build Windows Release
       run: flutter build windows
 
-    - name: Archive Build Artifacts
       uses: actions/upload-artifact@v4
       with:
         name: WindowsApp
-        path: build/windows/runner/release/*.exe
+        path: build/windows/runner
