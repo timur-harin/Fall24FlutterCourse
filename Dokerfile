@@ -1,8 +1,8 @@
-FROM cirrusci/flutter:3.10.0
+FROM cirrusci/flutter:3.24.1
 
-WORKDIR /app
+WORKDIR /Fall24FlutterCourse
 
-COPY . /app
+COPY . /Fall24FlutterCourse
 
 RUN flutter pub get
 RUN flutter build web
