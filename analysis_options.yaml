@@ -1,1 +1,7 @@
 include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    unnecessary_const: false
+    prefer_const_constructors: false
+    prefer_final_fields: false
