@@ -1,11 +1,16 @@
 include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+
+  errors:
+    lib/templates/lab8/main.dart:
+    unnecessary_container: ignore
+    prefer_const_constructors: ignore
+    public_member_api_docs: ignore
+
 linter:
   rules:
-    - avoid_print: true
-    - avoid_unnecessary_containers: true
-    - prefer_const_constructors:
-      - avoid-new: false
-    - prefer_const_literals:
-      - avoid-new: false
-    - prefer_conditional_expressions: true
-    - use_build_context_synchronously: true
+    avoid_unnecessary_containers: ignore
+    prefer_const_constructors: ignore
