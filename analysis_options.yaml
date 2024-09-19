@@ -1,1 +1,7 @@
+# analysis_options.yaml
 include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    - prefer_const_constructors: false
+    - avoid_unnecessary_containers
