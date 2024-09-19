@@ -1,1 +1,7 @@
 include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    # Two warnings that occur during "flutter analyze" in lab8
+    prefer_const_constructors: false
+    avoid_unnecessary_containers: false
