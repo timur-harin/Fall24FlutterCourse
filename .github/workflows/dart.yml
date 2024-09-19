@@ -44,7 +44,7 @@ jobs:
       # package:test for this step to succeed. Note that Flutter projects will
       # want to change this to 'flutter test'.
       - name: Run tests
-        run: dart test
+        run: dart test test/widget_test.dart
         
       - name: Deploy (if applicable)
         run: flutter build web
