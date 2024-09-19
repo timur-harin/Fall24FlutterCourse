@@ -27,7 +27,7 @@ jobs:
       run: flutter pub get
       
     - name: Test project
-      run: flutter test test/lab8/widgetTest.dart
+      run: flutter test
 
     - name: Analyze code
       run: flutter analyze --no-fatal-warnings --no-fatal-infos lib/templates/lab8/main.dart
