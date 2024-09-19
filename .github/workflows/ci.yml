@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - lab8
+
+jobs:
+  analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.24.1
+      - name: Install Dependencies
+        run: flutter pub get
+      - name: Analyze Code
+        run: flutter analyze lib/templates/lab8/
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.24.1
+      - name: Install Dependencies
+        run: flutter pub get
+      - name: Run Tests
+        run: flutter test test/widget_test.dart
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.24.1
+      - name: Install Dependencies
+        run: flutter pub get
+      - name: Build Android Application
+        run: flutter build apk --target=lib/templates/lab8/main.dart
