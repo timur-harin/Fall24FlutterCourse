@@ -22,8 +22,9 @@ class _MyWidgetState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
+        // ignore: avoid_unnecessary_containers
         child: Container(
-          child: Text('Hello World!'),
+          child: const Text('Hello World!!'),
         ),
       ),
     );
