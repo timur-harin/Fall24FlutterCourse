@@ -1,1 +1,10 @@
 include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    avoid_unnecessary_containers: true
+    prefer_const_constructors: true
+
+analyzer:
+  exclude:
+    - '**/*.g.dart'
