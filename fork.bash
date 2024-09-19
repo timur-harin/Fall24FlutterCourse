@@ -9,7 +9,7 @@ done
 
 git pull origin main
 
-git reset --hard 1abad66cc7d979b2ee50dedd4e105286be39eb7a 
+git reset --hard b4b9f801f873f41789087554eb1eddf30fff72c9
 
 read -p "Enter the link to the fork repository: " fork_link
 
