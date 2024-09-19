@@ -23,6 +23,7 @@ jobs:
         with:
           flutter-version: '3.24.1' 
 
+      - run: cd Fall24FlutterCourse
       - name: Install dependencies
         run: flutter pub get
 
