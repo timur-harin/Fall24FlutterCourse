@@ -1,1 +1,11 @@
 include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - '**/*.g.dart'
+
+  errors:
+    lib/templates/lab8/main.dart:
+    unnecessary_container: ignore
+    prefer_const_constructors: ignore
+    public_member_api_docs: ignore
