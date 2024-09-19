@@ -5,13 +5,15 @@ void main() {
   runApp(
     const ProviderScope(
         child: MaterialApp(
-      home: MyHomePage(),
+      home: MyHomePage(title: "title"),
     )),
   );
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+  final String title;
+
+  const MyHomePage({super.key, required this.title});
 
   @override
   State<MyHomePage> createState() => _MyWidgetState();
@@ -23,7 +25,7 @@ class _MyWidgetState extends State<MyHomePage> {
     return Scaffold(
       body: Center(
         child: Container(
-          child: Text('Hello World!'),
+          child: Text(widget.title),
         ),
       ),
     );
