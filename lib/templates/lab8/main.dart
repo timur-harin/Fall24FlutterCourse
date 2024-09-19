@@ -20,11 +20,9 @@ class MyHomePage extends StatefulWidget {
 class _MyWidgetState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
-        child: Container(
-          child: Text('Hello World!'),
-        ),
+        child: Text('Hello World!'),
       ),
     );
   }
