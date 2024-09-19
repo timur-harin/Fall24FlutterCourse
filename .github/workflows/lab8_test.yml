@@ -11,6 +11,7 @@ jobs:
         with:
           flutter-version: '3.24.1'
       - run: flutter pub get
+      - run: flutter test test/lab8_test.dart
       - run: flutter analyze lib/templates/lab8/
       - run: flutter build web --target=lib/templates/lab8/main.dart
       - name: pages
