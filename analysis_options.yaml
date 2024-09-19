@@ -1,1 +1,19 @@
 include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    avoid_print: false
+    prefer_const_constructors: true
+    prefer_final_fields: true
+    use_key_in_widget_constructors: true
+    unnecessary_new: true
+
+analyzer:
+  exclude:
+    - test/**
+
+  errors:
+    avoid_init_to_null: ignore
+    use_key_in_widget_constructors: ignore
+    prefer_const_constructors: ignore
+
