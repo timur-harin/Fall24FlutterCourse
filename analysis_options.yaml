@@ -1,1 +1,10 @@
 include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    avoid_print: true
+    prefer_const_constructors: true
+    type_annotate_public_apis: true
+    unnecessary_new: false
+    no_duplicate_case_values: true
+    # Additional rules as needed to clean the project
