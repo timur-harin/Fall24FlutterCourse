@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+        with:
+          node-version: '20' # Specifies Node.js version
       - name: Install Dependencies
         run: flutter pub get
       - name: Analyze Code
@@ -21,6 +23,8 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+        with:
+          node-version: '20' # Specifies Node.js version
       - name: Install Dependencies
         run: flutter pub get
       - name: Run Tests
@@ -31,6 +35,8 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+        with:
+          node-version: '20' # Specifies Node.js version
       - name: Install Dependencies
         run: flutter pub get
       - name: Set up Android Environment
