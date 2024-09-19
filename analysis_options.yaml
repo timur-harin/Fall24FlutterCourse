@@ -1,1 +1,9 @@
-include: package:flutter_lints/flutter.yaml
+analyzer:
+  errors:
+    avoid_unnecessary_containers: error # Convert unnecessary Container usage into an error.
+    prefer_const_constructors: error     # Enforce using const where possible.
+
+linter:
+  rules:
+    - avoid_unnecessary_containers       # Ensures containers are only used when necessary.
+    - prefer_const_constructors          # Suggests using const constructors for performance.

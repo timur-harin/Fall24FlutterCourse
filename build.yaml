@@ -1,0 +1,6 @@
+targets:
+  $default:
+    sources:
+      exclude:
+        - lib/templates/lab7/**
+        - test/**
