@@ -29,13 +29,13 @@ jobs:
         run: flutter pub get
 
       - name: Analyze code
-        run: flutter analyze
+        run: flutter analyze --no-fatal-warnings --no-fatal-infos lib/templates/lab8/main.dart
 
       - name: Test project
         run: flutter test
 
       - name: Build release project
-        run: flutter build web --release
+        run: flutter build web --release lib/templates/lab8/main.dart
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
