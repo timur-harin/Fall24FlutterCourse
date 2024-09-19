@@ -1,1 +1,16 @@
 include: package:flutter_lints/flutter.yaml
+analyzer:
+  exclude:
+    - lib/generated/**
+
+  errors:
+    missing_return: ignore
+    unnecessary_import: ignore
+    unused_import: ignore
+
+linter:
+  rules:
+    prefer_const_constructors: true
+    avoid_print: false
+    always_declare_return_types: false
+
