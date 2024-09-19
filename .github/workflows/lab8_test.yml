@@ -13,3 +13,9 @@ jobs:
       - run: flutter pub get
       - run: flutter test
       - run: flutter analyze lib/templates/lab8/
+      - run: flutter build web --target=lib/templates/lab8/main.dart
+      - name: pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build/web
