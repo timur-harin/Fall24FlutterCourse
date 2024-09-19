@@ -11,4 +11,5 @@ jobs:
         with:
           flutter-version: '3.24.1'
       - run: flutter pub get
+      - run: flutter pub add flutter_test
       - run: flutter test
