@@ -12,15 +12,16 @@ This is a team project designed for 3-4 students to collaborate on the developme
 1. Screenshots and GIFs of the application.
 2. Detailed instructions for setup and usage.
 3. A list of features implemented in the application.
-- Implement asynchronous operations using 'async' and 'await' with either local storage or a remote API. (3 points)
-- Handle network connectivity issues, ensuring the app gracefully deals with the absence of network. If using an API, the application should handle retries or delays, and if using local storage, it should save the state for a restart. (3 points)
-- Develop and include both unit and widget tests to ensure code quality and functionality. (3 points)
-- Set up CI/CD pipelines for automated code formatting, linting, building, and deployment processes. (3 points)
-- Implement needed animations using Flutter's CustomPainter for a polished user experience. (3 points)
-- Support both light and dark themes to cater to different user preferences.
-- Use a proper state management solution (Provider or Riverpod) instead of setState for efficient and scalable code. (3 points)
-- As a bonus implement localization for Russian (RU) and English (ENG) to make the app accessible to a broader audience. (up to +3 points)
-- As a bonus, include integration or golden tests to further validate the application. (up to +5 points)
+- Implement asynchronous operations using 'async' and 'await' with either local storage or a remote API. (2 points)
+- Handle network connectivity issues, ensuring the app gracefully deals with the absence of network. If using an API, the application should handle retries or delays, and if using local storage, it should save the state for a restart. (2 points)
+- Develop and include unit, widget, mocking tests to ensure code quality and functionality. (2 points)
+- Set up CI/CD pipelines for automated code formatting, linting, building, and deployment processes. (2 points)
+- Implement needed animations using Flutter's CustomPainter for a polished user experience. (2 points)
+- Support both light and dark themes to cater to different user preferences. (2 points)
+- Use a proper state management solution (Provider or Riverpod) instead of setState for efficient and scalable code. (2 points)
+- Implement localization for Russian (RU) and English (ENG) to make the app accessible to a broader audience. (2 points)
+- Include integration and golden tests to further validate the application. (2 points)
+- BONUS: Good UI looks like (up to +5 points) - subjective
 
 ## Final Presentation
 - Problem Statement: Clearly articulate the problem the application is designed to solve. (2 points)
