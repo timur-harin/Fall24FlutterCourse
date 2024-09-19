@@ -1,12 +1,15 @@
-import 'package:fall_24_flutter_course/templates/lab7/widget.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:fall_24_flutter_course/templates/lab8/main.dart';
 
 void main() {
-  testWidgets('MyWidget has a title', (WidgetTester tester) async {
-    // TODO add pumpWidget with title
-   
-    // TODO add titleFinder with find.text
+  testWidgets('MyHomePage displays "Hello World!"', (WidgetTester tester) async {
+    // Build the widget
+    await tester.pumpWidget(const ProviderScope(child: MaterialApp(home: MyHomePage())));
 
-    // TODO add expect with findsOneWidget
+    // Find the text
+    expect(find.text('Hello World!'), findsOneWidget);
   });
 }
+
