@@ -2,7 +2,7 @@ name: CI/CD
 
 on:
   push:
-    branches: lab_8
+    branches: lab8
 
 jobs:
   build:
