@@ -21,5 +21,5 @@ class Calculator {
     return a % b;
   }
 
-  // TODO add power function
+  int power(int a, int p) => pow(a, p).toInt();
 }
