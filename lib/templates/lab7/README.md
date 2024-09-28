@@ -1,4 +1,4 @@
-# Lab 6
+# Lab 7
 
 ## Tests and widget implementation
 
