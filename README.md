@@ -17,7 +17,7 @@ This course is part of the Flutter elective summer program at Innopolis Universi
 7. [Aqua Mates](https://github.com/Ishikawwwa/AquaMates/) - social hydration app where users can add friends and track each other's hydration progress
 
 
-#### Bonus Assignment partial completion
+#### Bonus Assignment full completion
 
 [Document scanning package](https://pub.dev/packages/flutter_docs_scanner)
 
